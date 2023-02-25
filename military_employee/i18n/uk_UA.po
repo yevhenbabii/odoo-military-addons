@@ -1,0 +1,99 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* military_employee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-23 23:22+0000\n"
+"PO-Revision-Date: 2023-01-24 01:23+0200\n"
+"Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__deserter
+msgid "Deserter"
+msgstr "Дезертир"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__display_name
+msgid "Display Name"
+msgstr "Відображувана Назва"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__disposal
+msgid "Disposal"
+msgstr "В Розпорядженні"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__duty
+msgid "Duty"
+msgstr "На Виконанні"
+
+#. module: military_employee
+#: model:ir.model,name:military_employee.model_hr_employee
+msgid "Employee"
+msgstr "Співробітник"
+
+#. module: military_employee
+#: model:ir.actions.act_window,name:military_employee.action_open_status_employee
+msgid "Employee Status"
+msgstr "Статус Співробітника"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__field
+msgid "Field"
+msgstr "ППД"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__hospital
+msgid "Hospital"
+msgstr "Шпиталь"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__hostage
+msgid "Hostage"
+msgstr "Полонений"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__id
+msgid "ID"
+msgstr "ID"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee____last_update
+msgid "Last Modified on"
+msgstr "Востаннє Змінено"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__missing
+msgid "Missing"
+msgstr "Безвісти"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__on_shield
+msgid "On Shield"
+msgstr "На Щиті"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__state
+#: model_terms:ir.ui.view,arch_db:military_employee.view_employee_template_search_status
+msgid "State"
+msgstr "Стан"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__trip
+msgid "Trip"
+msgstr "Відрядження"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__vocation
+msgid "Vocation"
+msgstr "Відпустка"

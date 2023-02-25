@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_department_tag_hr,access_hr_department_tag_hr,model_hr_department_tag,hr.group_hr_user,1,1,1,1
+access_hr_department_tag_emp,access_hr_department_tag_emp,model_hr_department_tag,base.group_user,1,0,0,0

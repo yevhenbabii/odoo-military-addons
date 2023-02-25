@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_rank_form" model="ir.ui.view">
+            <field name="name">military.rank.form</field>
+            <field name="model">military.rank</field>
+            <field name="arch" type="xml">
+                <form string="rank">
+                    <sheet>
+                        <group col="4">
+                            <field name="sequence"/>
+                            <field name="name"/>
+                            <field name="name_short"/>
+                            <field name="category"/>
+                            <field name="subcategory"/>
+                            <field name="nato_code"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_rank_tree" model="ir.ui.view">
+            <field name="name">military.rank.tree</field>
+            <field name="model">military.rank</field>
+            <field name="arch" type="xml">
+                <tree string="Military Ranks">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="name_short"/>
+                    <field name="category"/>
+                    <field name="subcategory"/>
+                    <field name="nato_code"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_rank_filter" model="ir.ui.view">
+            <field name="name">military.rank.search</field>
+            <field name="model">military.rank</field>
+            <field name="arch" type="xml">
+                <search string="Military Ranks">
+                    <field name="name" string="Military Rank"/>
+                    <field name="category"/>
+                    <field name="subcategory"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                </search>
+             </field>
+        </record>
+
+
+        <record id="hr_rank_tree_action" model="ir.actions.act_window">
+            <field name="name">Military Ranks</field>
+            <field name="res_model">military.rank</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem
+            id="menu_view_rank_form"
+            action="hr_rank_tree_action"
+            parent="hr.menu_human_resources_configuration"
+            sequence="2"
+        />
+
+        <record id="view_employee_form" model="ir.ui.view">
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//h1//field[@name='name']/.." position="after">
+                    <field
+                        name="rank"
+                    />
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="hr_employee_rank_kanban_view" model="ir.ui.view">
+            <field name="name">Employee Rank Kanban</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <ul>
+                        <li t-if="record.rank.raw_value" class="o_text_overflow"><field name="rank"/></li>
+                    </ul>
+                </field>
+                <field name="job_title" position="after">
+                    <ul><field name="mobile_phone"/></ul>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

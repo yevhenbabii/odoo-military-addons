@@ -1,0 +1,356 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* military_ranks
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-23 17:15+0000\n"
+"PO-Revision-Date: 2023-01-23 19:18+0200\n"
+"Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__active
+msgid "Active"
+msgstr "Активно"
+
+#. module: military_ranks
+#: model_terms:ir.ui.view,arch_db:military_ranks.view_rank_filter
+msgid "Archived"
+msgstr "Архівовано"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_310
+msgid "Brigade General"
+msgstr "бригадний генерал"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_220
+msgid "Captain"
+msgstr "капітан"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_230
+msgid "Captain of Justice"
+msgstr "капітан юстиції"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_240
+msgid "Captain of the medical service"
+msgstr "капітан медичної служби"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_hr_employee__rank_category
+#: model:ir.model.fields,field_description:military_ranks.field_hr_job__rank_category
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__category
+msgid "Category"
+msgstr "Категорія"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_140
+msgid "Chief Master Sergeant"
+msgstr "головний майстер-сержант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_300
+msgid "Colonel"
+msgstr "полковник"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_hr_employee__complete_name
+msgid "Complete Name"
+msgstr "Повна назва"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__create_uid
+msgid "Created by"
+msgstr "Створив"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__create_date
+msgid "Created on"
+msgstr "Створено"
+
+#. module: military_ranks
+#: model:ir.model.fields,help:military_ranks.field_hr_employee__rank
+msgid "Current serviceman military rank"
+msgstr "Поточне військове звання військовослужбовця"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__description
+msgid "Description"
+msgstr "Опис"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:military_ranks.field_hr_job__display_name
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__display_name
+msgid "Display Name"
+msgstr "Відображувана Назва"
+
+#. module: military_ranks
+#: model:ir.model,name:military_ranks.model_hr_employee
+msgid "Employee"
+msgstr "Співробітник"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_340
+msgid "General"
+msgstr "генерал"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_hr_employee__id
+#: model:ir.model.fields,field_description:military_ranks.field_hr_job__id
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__id
+msgid "ID"
+msgstr "ID"
+
+#. module: military_ranks
+#: model:ir.model,name:military_ranks.model_hr_job
+msgid "Job Position"
+msgstr "Посада"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_hr_job__rank
+msgid "Job Rank"
+msgstr "Звання за Посадою"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_150
+msgid "Junior Lieutenant"
+msgstr "молодший лейтенант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_155
+msgid "Junior Lieutenant of the medical service"
+msgstr "молодший лейтенант медичної служби"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_70
+msgid "Junior sergeant"
+msgstr "молодший сержант"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_hr_employee____last_update
+#: model:ir.model.fields,field_description:military_ranks.field_hr_job____last_update
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank____last_update
+msgid "Last Modified on"
+msgstr "Останні зміни"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__write_uid
+msgid "Last Updated by"
+msgstr "Востаннє Оновив"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__write_date
+msgid "Last Updated on"
+msgstr "Востаннє Оновлено"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_160
+msgid "Lieutenant"
+msgstr "лейтенант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_290
+msgid "Lieutenant Colonel"
+msgstr "підполковник"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_330
+msgid "Lieutenant General"
+msgstr "генерал-лейтенант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_170
+msgid "Lieutenant of Justice"
+msgstr "лейтенант юстиції"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_180
+msgid "Lieutenant of the medical service"
+msgstr "лейтенант медичної служби"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_250
+msgid "Major"
+msgstr "майор"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_320
+msgid "Major General"
+msgstr "генерал-майор"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_100
+msgid "Major Sergeant"
+msgstr "головний сержант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_260
+msgid "Major of Justice"
+msgstr "майор юстиції"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_280
+msgid "Major of the chaplain service"
+msgstr "майор капеланської служби"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_270
+msgid "Major of the medical service"
+msgstr "майор медичної служби"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_hr_employee__rank
+#: model_terms:ir.ui.view,arch_db:military_ranks.view_rank_filter
+msgid "Military Rank"
+msgstr "Військове Звання"
+
+#. module: military_ranks
+#: model:ir.actions.act_window,name:military_ranks.hr_rank_tree_action
+#: model:ir.model,name:military_ranks.model_military_rank
+#: model:ir.ui.menu,name:military_ranks.menu_view_rank_form
+#: model_terms:ir.ui.view,arch_db:military_ranks.view_rank_filter
+#: model_terms:ir.ui.view,arch_db:military_ranks.view_rank_tree
+msgid "Military Ranks"
+msgstr "Військові Звання"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_120
+msgid "Mаster Sergeant"
+msgstr "майстер-сержант"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__name
+msgid "Name"
+msgstr "Назва"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__nato_code
+msgid "Nato Rank Code"
+msgstr "Код НАТО"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_20
+msgid "Recruit"
+msgstr "рекрут"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_190
+msgid "Senior Lieutenant"
+msgstr "старший лейтенант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_200
+msgid "Senior Lieutenant of Justice"
+msgstr "старший лейтенант юстиції"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_210
+msgid "Senior Lieutenant of the medical service"
+msgstr "старший лейтенант медичної служби"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_130
+msgid "Senior Master Sergeant"
+msgstr "старший майстер-сержант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_90
+msgid "Senior sergeant"
+msgstr "старший сержант"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_50
+msgid "Senior soldier"
+msgstr "старший солдат"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_60
+msgid "Senior soldier of term service"
+msgstr "старший солдат строкової служби"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__sequence
+msgid "Sequence"
+msgstr "Нумерація"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_80
+msgid "Sergeant"
+msgstr "сержант"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__name_short
+msgid "Shortname"
+msgstr "Скорочення"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_30
+msgid "Soldier"
+msgstr "солдат"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_40
+msgid "Soldier of term service"
+msgstr "солдат строкової служби"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_110
+msgid "Staff Sergeant"
+msgstr "штаб-сержант"
+
+#. module: military_ranks
+#: model:ir.model.fields,field_description:military_ranks.field_military_rank__subcategory
+msgid "Subcategory"
+msgstr "Підкатегорія"
+
+#. module: military_ranks
+#: model:military.rank,name:military_ranks.rank_10
+msgid "UAF Employee"
+msgstr "працівник ЗСУ"
+
+#. module: military_ranks
+#: model:ir.model.fields.selection,name:military_ranks.selection__military_rank__subcategory__junior
+msgid "junior"
+msgstr "рядовий"
+
+#. module: military_ranks
+#: model:ir.model.fields.selection,name:military_ranks.selection__military_rank__subcategory__master
+msgid "master"
+msgstr "вищий"
+
+#. module: military_ranks
+#: model:ir.model.fields.selection,name:military_ranks.selection__military_rank__category__officer
+msgid "officer"
+msgstr "офіцерський"
+
+#. module: military_ranks
+#: model:ir.model.fields.selection,name:military_ranks.selection__military_rank__category__private
+msgid "private"
+msgstr "рядовий"
+
+#. module: military_ranks
+#: model_terms:ir.ui.view,arch_db:military_ranks.view_rank_form
+msgid "rank"
+msgstr "звання"
+
+#. module: military_ranks
+#: model:ir.model.fields.selection,name:military_ranks.selection__military_rank__subcategory__senior
+msgid "senior"
+msgstr "старший"
+
+#. module: military_ranks
+#: model:ir.model.fields.selection,name:military_ranks.selection__military_rank__category__sergeant
+msgid "sergeant"
+msgstr "сержантський"

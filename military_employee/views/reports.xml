@@ -1,0 +1,14 @@
+<odoo>
+
+    <data>
+
+        <menuitem id="combat_personnel_report" sequence="1"
+              name="Combat Personnel Report" parent="hr.hr_menu_hr_reports"/>
+
+        <record id="action_general_ledger" model="ir.actions.client">
+            <field name="name">Combat Personnel Report</field>
+            <field name="tag">cp</field>
+        </record>
+
+    </data>
+</odoo>

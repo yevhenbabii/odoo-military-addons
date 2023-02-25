@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="combat_personnel_xlsx" model="ir.actions.report">
+        <field name="name">Combat Personnel Report</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">military_employee.combat_personnel_xlsx</field>
+        <field name="report_file">military_employee.combat_personnel_xlsx</field>
+        <field name="print_report_name">'Combat_Personnel'</field>
+        <field name="binding_model_id" ref="military_employee.combat_personnel_report"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

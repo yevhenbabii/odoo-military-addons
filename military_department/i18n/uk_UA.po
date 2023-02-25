@@ -1,0 +1,137 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* military_department
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-23 20:53+0000\n"
+"PO-Revision-Date: 2023-01-23 22:54+0200\n"
+"Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__name_ablative
+msgid "Ablative Name"
+msgstr "Назва в Орудному Відмінку"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__name_accusative
+msgid "Accusative Name"
+msgstr "Назва в Знахідному Відмінку"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__active
+msgid "Active"
+msgstr "Активно"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__code
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__code
+msgid "Code"
+msgstr "Код"
+
+#. module: military_department
+#: model:ir.model.constraint,message:military_department.constraint_hr_department_tag_code_unique
+msgid "Code must be unique!"
+msgstr "Код повинен бути унікальним!"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__complete_name
+msgid "Complete Name"
+msgstr "Повна Назва"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__complete_name_genitive
+msgid "Complete Name Genitive"
+msgstr "Повна Назва в Родовому Відмінку"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__child_ids
+msgid "Contains"
+msgstr "Містить"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__create_uid
+msgid "Created by"
+msgstr "Створив"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__create_date
+msgid "Created on"
+msgstr "Створено"
+
+#. module: military_department
+#: model:ir.model,name:military_department.model_hr_department
+msgid "Department"
+msgstr "Підрозділ"
+
+#. module: military_department
+#: model:ir.model,name:military_department.model_hr_department_tag
+msgid "Department Tag"
+msgstr "Мітка"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__display_name
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__display_name
+msgid "Display Name"
+msgstr "Відображувана Назва"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__name_genitive
+msgid "Genitive Name"
+msgstr "Назва в Родовому Відмінку"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__id
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__id
+msgid "ID"
+msgstr "ID"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department____last_update
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag____last_update
+msgid "Last Modified on"
+msgstr "Востаннє Змінено"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__write_uid
+msgid "Last Updated by"
+msgstr "Востаннє Оновив"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__write_date
+msgid "Last Updated on"
+msgstr "Востаннє Оновлено"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__hierarchy_level
+msgid "Level"
+msgstr "Рівень Посади"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department_tag__name
+msgid "Name"
+msgstr "Назва"
+
+#. module: military_department
+#: model:ir.model.constraint,message:military_department.constraint_hr_department_tag_name_unique
+msgid "Name must be unique!"
+msgstr "Назва повинна бути унікальною!"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__sequence
+msgid "Sequence"
+msgstr "Нумерація"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__tag_ids
+msgid "Tags"
+msgstr "Теги"

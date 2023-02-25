@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_military_rank,access_military_rank,model_military_rank,hr.group_hr_manager,1,1,1,1

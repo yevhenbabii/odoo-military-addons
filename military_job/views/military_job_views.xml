@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_job_form" model="ir.ui.view">
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//h1//field[@name='name']/.." position="after">
+                <group>
+                    <field name="complete_name" string="Job Name" readonly="False"/>
+                    <field name="no_of_recruitment" string="Vacancies"/>
+                    <field name="no_of_employee" string="Number of Employees"/>
+                    <field name="expected_employees" string="Expected Employees"/>
+                    <field name="rank" string="Job Rank"/>
+                    <field name="mos" string="Job MOS code"/>
+                </group>
+            </xpath>
+            <notebook position="inside">
+                <page string="Employees" name="employees">
+                    <field name="employee_ids" nolabel="1">
+                        <tree>
+                            <field name="rank"/>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="view_job_filter" model="ir.ui.view">
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_job_filter"/>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="vacancies" string="Vacancies" domain="[('expected_employees', '>', 0)]"/>
+                <searchpanel>
+                    <field name="company_id"
+                           select="multi"
+                           groups="base.group_multi_company"
+                           icon="fa-building"
+                           enable_counters="1"/>
+                    <field name="department_id"
+                           limit="0"
+                           groups="base.group_multi_company"
+                           icon="fa-building"
+                           enable_counters="1"/>
+                    <field name="rank"
+                           select="multi"
+                           icon="fa-building"
+                           enable_counters="1"/>
+                    <field name="rank_category"
+                           select="multi"
+                           icon="fa-users"
+                           enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_department_form" model="ir.ui.view">
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form" />
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet" position="inside">
+                <notebook>
+                    <page string="Jobs" name="jobs">
+                        <field name="jobs_ids" nolabel="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="rank"/>
+                                <field name="mos"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Employees" name="employees">
+                        <field name="member_ids" nolabel="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="rank"/>
+                                <field name="job_title"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <field name="job_id" position="replace"/>
+            <field name="department_id" position="before">
+                    <field name="job_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

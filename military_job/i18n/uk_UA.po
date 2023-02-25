@@ -1,0 +1,81 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* military_job
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-23 20:56+0000\n"
+"PO-Revision-Date: 2023-02-06 23:45+0200\n"
+"Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job__display_name
+msgid "Display Name"
+msgstr "Відображувана Назва"
+
+#. module: military_job
+#: model_terms:ir.ui.view,arch_db:military_job.view_department_form
+#: model_terms:ir.ui.view,arch_db:military_job.view_job_form
+msgid "Employees"
+msgstr "Співробітники"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job__id
+msgid "ID"
+msgstr "ID"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job__mos
+#: model_terms:ir.ui.view,arch_db:military_job.view_job_form
+msgid "Job MOS code"
+msgstr "Код ВОС"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job__complete_name
+#: model_terms:ir.ui.view,arch_db:military_job.view_job_form
+msgid "Job Name"
+msgstr "Назва Посади"
+
+#. module: military_job
+#: model:ir.model,name:military_job.model_hr_job
+msgid "Job Position"
+msgstr "Посада"
+
+#. module: military_job
+#: model_terms:ir.ui.view,arch_db:military_job.view_job_form
+msgid "Job Rank"
+msgstr "Звання за Посадою"
+
+#. module: military_job
+#: model_terms:ir.ui.view,arch_db:military_job.view_department_form
+msgid "Jobs"
+msgstr "Штат"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job____last_update
+msgid "Last Modified on"
+msgstr "Востаннє Змінено"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job__hierarchy_level
+msgid "Level"
+msgstr "Рівень Посади"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job__payroll_grade
+msgid "Payroll Grade"
+msgstr "Оклад"
+
+#. module: military_job
+#: model:ir.model.fields,field_description:military_job.field_hr_job__sequence
+msgid "Sequence"
+msgstr "Нумерація"

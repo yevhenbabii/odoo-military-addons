@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field
+                    name="state"
+                    widget="statusbar"
+                    options="{'clickable': '1'}"
+                />
+            </header>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="no_label">1</attribute>
+                <attribute name="required">0</attribute>
+            </xpath>
+            <xpath expr="//h1//field[@name='name']/.." position="before">
+                <group>
+                    <field name="lastname" required="1"/>
+                    <field name="firstname" required="1"/>
+                    <field name="middlename" required="1"/>
+                    <!--field name="name_dative"/>
+                    <field name="name_accusative"/>
+                    <field name="name_ablative"/>
+                    <field name="name_locative"/>
+                    <field name="name_vocative"/-->
+                </group>
+            </xpath>
+            <page name="public" position="inside">
+                <group string="Conscription" sequence="1">
+                    <field name="conscription_place" domain="[('name', '=like', '%ТЦК%')]"/>
+                    <field name="conscription_date"/>
+                </group>
+            </page>
+            <field name="gender" position="attributes">
+                <required>1</required>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_open_status_employee">
+        <field name="name">Employee Status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[('state', '=', active_id)]</field>
+    </record>
+
+    <record id="hr_employee_kanban_view" model="ir.ui.view">
+            <field name="name">Military Employee Kanban</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="state" invisible="True"/>
+                </field>
+                <xpath expr="//kanban/templates/t/div" position="inside">
+                    <div t-attf-class="ribbon ribbon-top-right" >
+                        <span t-attf-class="ribbon-{{ record.state.raw_value }}">
+                            <t t-esc="record.state.value"/>
+                        </span>
+                    </div>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="view_employee_template_search_status" model="ir.ui.view">
+        <field name="name">hr.employee.search.status</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="state"/>
+                <filter string="State"
+                    name="state"
+                    domain="[]"
+                    context="{'group_by' : 'state'}"
+                />
+            <separator/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="employee_view_tree_inherit_employee_status_id">
+        <field name="name">hr.employee.tree</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="state" optional="hide"/>
+            </field>
+            <field name="company_id" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
+            <field name="work_phone" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
+            <field name="work_email" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="military_employee_search" model="ir.ui.view">
+        <field name="name">hr.employee.search</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <searchpanel position="replace">
+                <searchpanel>
+                    <field name="company_id"
+                           select="multi"
+                           groups="base.group_multi_company"
+                           icon="fa-building"
+                           enable_counters="1"/>
+                    <field name="department_id"
+                           limit="0"
+                           icon="fa-users"
+                           enable_counters="1"/>
+                    <field name="rank"
+                           select="multi"
+                           icon="fa-users"
+                           enable_counters="1"/>
+                    <field name="rank_category"
+                           select="multi"
+                           icon="fa-users"
+                           enable_counters="1"/>
+                    <field name="state"
+                           select="multi"
+                           icon="fa-users"
+                           enable_counters="1"/>
+                </searchpanel>
+            </searchpanel>
+        </field>
+    </record>
+
+    <!-- Calendar View -->
+
+    <!--record id="view_employee_calendar" model="ir.ui.view">
+        <field name="name">hr.employee.calendar</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <calendar string="Employees" date_start="birthday" color="state" hide_time="true" event_limit="5">
+                <field name="id" invisible="1"/>
+                <field name="name" string="Employee" avatar_field="avatar_128"/>
+            </calendar>
+        </field>
+    </record-->
+
+</odoo>

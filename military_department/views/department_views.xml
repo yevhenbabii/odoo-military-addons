@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="military_department_form" model="ir.ui.view">
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="complete_name" readonly="False"/>
+                <field name="name_genitive"/>
+                <field name="complete_name_genitive" readonly="False"/>
+                <field name="code"/>
+                <field name="level" invisible="True"/>
+            </field>
+            <field name="manager_id" position="attributes">
+                <domain>"[('department_id','=','active_id')]"</domain>
+            </field>
+        </field>
+    </record>
+
+    <record id="military_department_tree" model="ir.ui.view">
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree" />
+        <field name="arch" type="xml">
+            <field name="display_name" position="before">
+                <field name="sequence" widget="handle"/>
+                <field name="level" invisible="True"/>
+            </field>
+            <field name="display_name" position="after">
+                <field name="code" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="military_department_filter" model="ir.ui.view">
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="filter_domain">
+                    ['|', ('name','ilike',self), ('code','ilike',self)]
+                </attribute>
+            </field>
+            <search>
+                <searchpanel>
+                    <field name="company_id" select="multi" groups="base.group_multi_company" icon="fa-building" enable_counters="1"/>
+                    <field name="parent_id" icon="fa-users" enable_counters="1" limit="0"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+</odoo>

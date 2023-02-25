@@ -1,0 +1,36 @@
+id,sequence,category,subcategory,name,name_short,nato_code,description
+rank_10,10,,,UAF Employee,,,
+rank_20,20,private,junior,Recruit,р-т,OR-1,тимчасове звання до прийняття присяги
+rank_30,30,private,junior,Soldier,с-т,OR-2,рядовий
+rank_40,40,private,junior,Soldier of term service,с-т,OR-2,
+rank_50,50,private,junior,Senior soldier,ст с-т,OR-3,досвідчений солдат
+rank_60,60,private,junior,Senior soldier of term service,ст с-т,OR-3,
+rank_70,70,sergeant,junior,Junior sergeant,мол с-нт,OR-5,заступник командира відділення
+rank_80,80,sergeant,junior,Sergeant,с-нт,OR-6,командир відділення
+rank_90,90,sergeant,senior,Senior sergeant,ст с-нт,OR-7,головний сержант взводу
+rank_100,100,sergeant,senior,Major Sergeant,гол с-нт,OR-8,головний сержант роти
+rank_110,110,sergeant,senior,Staff Sergeant,шт с-нт,OR-91,головний сержант батальйону
+rank_120,120,sergeant,master,Mаster Sergeant,м-с-нт,OR-92,головний сержант бригади
+rank_130,130,sergeant,master,Senior Master Sergeant,ст ,OR-93,головний сержант роду військ
+rank_140,140,sergeant,master,Chief Master Sergeant,гол м-с-нт,OR-94,головний сержант роду військ
+rank_150,150,officer,junior,Junior Lieutenant,мол л-нт,OF-1a1,командир взводу
+rank_155,155,officer,junior,Junior Lieutenant of the medical service,мол л-нт,OF-1a1,
+rank_160,160,officer,junior,Lieutenant,л-нт,OF-1a2,командир взводу
+rank_170,170,officer,junior,Lieutenant of Justice,л-нт,,
+rank_180,180,officer,junior,Lieutenant of the medical service,л-нт,,
+rank_190,190,officer,junior,Senior Lieutenant,ст л-нт,OF-1b,командир взводу
+rank_200,200,officer,junior,Senior Lieutenant of Justice,ст л-нт,,
+rank_210,210,officer,junior,Senior Lieutenant of the medical service,ст л-нт,,
+rank_220,220,officer,junior,Captain,к-н,OF-2,командир роти
+rank_230,230,officer,junior,Captain of Justice,к-н,,
+rank_240,240,officer,junior,Captain of the medical service,к-н,,
+rank_250,250,officer,senior,Major,м-р,OF-3,заступник командира батальйону
+rank_260,260,officer,senior,Major of Justice,м-р,,
+rank_270,270,officer,senior,Major of the medical service,м-р,,
+rank_280,280,officer,senior,Major of the chaplain service,м-р,,
+rank_290,290,officer,senior,Lieutenant Colonel,пп-к,OF-4,командир батальйону
+rank_300,300,officer,senior,Colonel,п-к,OF-5,командир полку
+rank_310,310,officer,master,Brigade General,бр г-л,OF-6,командир бригади
+rank_320,320,officer,master,Major General,г-л/м-р,OF-7,командир дивізії
+rank_330,330,officer,master,Lieutenant General,г-л/л-нт,OF-8,командир корпусу
+rank_340,340,officer,master,General,г-л,OF-9,командир армії
