@@ -11,12 +11,12 @@
     "depends": ["hr",
                 "military_ranks",
                 "military_department",
-                "report_xlsx"
                 ],
-    "external_dependencies": {
-        "python": ["js2py"],
-        "javascript": ["shevchenko"],
-    },
+    "demo": ["demo/hr.employee.csv"],
+    # "external_dependencies": {
+    #     "python": ["js2py"],
+    #     "javascript": ["shevchenko"],
+    # },
     "data": ["views/employee_views.xml",
              "views/employee_pivot.xml",
              "views/assets.xml"
