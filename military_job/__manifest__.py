@@ -9,6 +9,7 @@
     "summary": "Military Jobs Improvements",
     "depends": ["hr", "military_ranks", "military_department"],
     "data": ["views/military_job_views.xml"],
-    "demo": ["demo/hr.job.csv", "demo/hr.employee.csv"],
+    "demo": ["demo/hr.job.csv",
+             "demo/hr.employee.csv"],
     "installable": True,
 }

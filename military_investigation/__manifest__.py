@@ -8,7 +8,7 @@
     #'maintainer': 'Botspot Infoware Pvt. Ltd.',
     'description': """ Configure Employee Rewards """,
     'version': '14.0',
-    'depends': ['military'],
+    'depends': [''],
     'data': [
               'security/ir.model.access.csv',
               #'wizard/employee_reward_wizard_view.xml',

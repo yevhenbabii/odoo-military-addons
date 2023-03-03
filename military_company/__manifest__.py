@@ -1,7 +1,7 @@
 {
-    "name": "Military",
+    "name": "Military Company",
     "summary": """
-        Military Data
+        Military Company Data
         """,
     "author": "Yevhen Babii",
     "website": "",
@@ -9,13 +9,12 @@
     "version": "1.0.2",
     "license": "Other proprietary",
     "depends": ["base",
-                "hr",
-                "mass_editing"],
+                "hr"
+    ],
     "data": [
         # "security/ir.model.access.csv",
         "views/res_company.xml"
     ],
     "demo":["demo/res.company.csv"],
-    "sequence": '1',
-    "application": "True"
+    "application": "False"
 }

@@ -7,7 +7,7 @@
     "license": "Other proprietary",
     "category": "Other",
     "summary": "Departments improvement in HR",
-    "depends": ["hr", "military"],
+    "depends": ["hr", "military_company"],
     "data": ["views/department_views.xml", "security/ir.model.access.csv"],
     "demo": [
         "demo/hr.department.tag.csv",

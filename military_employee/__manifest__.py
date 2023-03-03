@@ -8,7 +8,11 @@
     "category": "Other",
     "version": "14.0.2",
     "license": "Other proprietary",
-    "depends": ["base", "hr", "military_ranks", "military_department", "report_xlsx"],
+    "depends": ["hr",
+                "military_ranks",
+                "military_department",
+                "report_xlsx"
+                ],
     "external_dependencies": {
         "python": ["js2py"],
         "javascript": ["shevchenko"],
