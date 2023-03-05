@@ -95,7 +95,7 @@ class Department(models.Model):
                  "company_id.name_genitive")
     def _compute_complete_name(self):
         for dep in self:
-            if dep.parent_id.complete_name_genitive:
+            if dep.parent_id and dep.parent_id.complete_name_genitive:
                 dep.complete_name = "%s %s" % (dep.name,
                                                dep.parent_id.complete_name_genitive)
             else:

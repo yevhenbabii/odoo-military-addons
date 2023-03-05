@@ -1,5 +1,5 @@
 import logging
-import js2py
+# import js2py
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 

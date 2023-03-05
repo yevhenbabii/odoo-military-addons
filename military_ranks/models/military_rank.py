@@ -2,7 +2,6 @@ from odoo import models, fields, api
 
 
 class MilitaryRank(models.Model):
-
     _name = "military.rank"
     _description = "Military Ranks"
     _order = "sequence"
@@ -24,6 +23,7 @@ class MilitaryRank(models.Model):
     name_short = fields.Char(string="Shortname")
     nato_code = fields.Char(string="Nato Rank Code")
     description = fields.Text('Description')
+
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
@@ -55,8 +55,6 @@ class HrEmployee(models.Model):
                     emp.name)
             else:
                 emp.complete_name = emp.name
-
-from odoo import fields, models, api
 
 
 class Job(models.Model):

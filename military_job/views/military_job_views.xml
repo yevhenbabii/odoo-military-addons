@@ -7,23 +7,12 @@
             <xpath expr="//h1//field[@name='name']/.." position="after">
                 <group>
                     <field name="complete_name" string="Job Name" readonly="False"/>
-                    <field name="no_of_recruitment" string="Vacancies"/>
-                    <field name="no_of_employee" string="Number of Employees"/>
-                    <field name="expected_employees" string="Expected Employees"/>
+                    <field name="employee_id" string="Employee"/>
+                    <field name="temp_employee_id" string="Temporary Employee"/>
                     <field name="rank" string="Job Rank"/>
                     <field name="mos" string="Job MOS code"/>
                 </group>
             </xpath>
-            <notebook position="inside">
-                <page string="Employees" name="employees">
-                    <field name="employee_ids" nolabel="1">
-                        <tree>
-                            <field name="rank"/>
-                            <field name="name"/>
-                        </tree>
-                    </field>
-                </page>
-            </notebook>
         </field>
     </record>
 
@@ -32,7 +21,9 @@
         <field name="inherit_id" ref="hr.view_job_filter"/>
         <field name="arch" type="xml">
             <search>
-                <filter name="vacancies" string="Vacancies" domain="[('expected_employees', '>', 0)]"/>
+                !-- TODO correct filters
+                <filter name="hired" string="Hired" domain="[('hired', '!=', False)]"/>
+                <filter name="vacant" string="Vacant" domain="[('hired', '=', False)]"/>
                 <searchpanel>
                     <field name="company_id"
                            select="multi"

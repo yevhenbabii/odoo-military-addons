@@ -6,11 +6,11 @@
         <field name="arch" type="xml">
             <field name="partner_id" position="before">
                 <field name="code"/>
-                <field name="complete_name"/>
-                <field name="name_genitive"/>
-                <field name="name_dative"/>
-                <field name="public_name"/>
-                <field name="public_shortname"/>
+                <field name="complete_name" required="1"/>
+                <field name="name_genitive" required="1"/>
+                <field name="name_dative" required="1"/>
+                <field name="public_name" required="1"/>
+                <field name="public_shortname" required="1"/>
                 <field name="commandor"/>
             </field>
         </field>

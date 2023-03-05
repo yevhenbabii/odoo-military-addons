@@ -19,10 +19,10 @@ class Company(models.Model):
     public_name_genitive = fields.Char('Public Name Genitive', store=True)
     public_shortname = fields.Char('Public Shortname', store=True)
     code = fields.Char('Code', store=True)
-    commandor = fields.Many2one('hr.employee', 'Commandor')
-    # staff_chief = fields.Many2one('hr.employee', 'Chief of Staff')
-    # staff_dep_chief = fields.Many2one('hr.employee', 'Commandor')
-    # staff_dep_chief = fields.Many2one('hr.employee', 'Commandor')
+    commandor = fields.Many2one('hr.job', 'Commandor')
+    # staff_chief = fields.Many2one('hr.job', 'Chief of Staff')
+    # staff_dep_chief = fields.Many2one('hr.job', 'Commandor')
+    # staff_dep_chief = fields.Many2one('hr.job', 'Commandor')
 
     @api.depends("name", "code")
     def _compute_complete_name(self):

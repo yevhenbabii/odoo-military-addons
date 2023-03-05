@@ -8,7 +8,10 @@
     "category": "Other",
     "summary": "Departments improvement in HR",
     "depends": ["hr", "military_company"],
-    "data": ["views/department_views.xml", "security/ir.model.access.csv"],
+    "data": ["views/department_views.xml",
+             "security/ir.model.access.csv",
+             "data/hr.department.tag.csv"
+             ],
     "demo": [
         "demo/hr.department.tag.csv",
         "demo/hr.department.csv"
