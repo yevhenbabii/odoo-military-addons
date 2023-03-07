@@ -13,7 +13,6 @@
              "data/hr.department.tag.csv"
              ],
     "demo": [
-        "demo/hr.department.tag.csv",
         "demo/hr.department.csv"
     ],
     "installable": True,

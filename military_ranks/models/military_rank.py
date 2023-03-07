@@ -45,13 +45,13 @@ class HrEmployee(models.Model):
                                 compute='_compute_complete_name',
                                 store=True)
 
-    @api.depends("name", "rank", "complete_name")
+    @api.depends("name", "rank", "rank.name", "complete_name")
     def _compute_complete_name(self):
         for emp in self:
             emp.complete_name = emp.name
             if emp.rank:
                 emp.complete_name = '%s %s' % (
-                    emp.rank,
+                    emp.rank.name,
                     emp.name)
             else:
                 emp.complete_name = emp.name

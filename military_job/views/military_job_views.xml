@@ -7,7 +7,7 @@
             <xpath expr="//h1//field[@name='name']/.." position="after">
                 <group>
                     <field name="complete_name" string="Job Name" readonly="False"/>
-                    <field name="employee_id" string="Employee"/>
+                    <field name="employee_id" string="Employee" readonly="True"/>
                     <field name="temp_employee_id" string="Temporary Employee"/>
                     <field name="rank" string="Job Rank"/>
                     <field name="mos" string="Job MOS code"/>
@@ -16,14 +16,29 @@
         </field>
     </record>
 
+    <record id="view_hr_job_tree" model="ir.ui.view">
+        <field name="name">hr.job.tree</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="mos" optional="hide"/>
+                <field name="rank" optional="hide"/>
+                <field name="employee_id"/>
+            </field>
+            <field name="company_id" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
+        </field>
+    </record>
+
     <record id="view_job_filter" model="ir.ui.view">
         <field name="model">hr.job</field>
         <field name="inherit_id" ref="hr.view_job_filter"/>
         <field name="arch" type="xml">
             <search>
-                !-- TODO correct filters
-                <filter name="hired" string="Hired" domain="[('hired', '!=', False)]"/>
-                <filter name="vacant" string="Vacant" domain="[('hired', '=', False)]"/>
+                <filter name="hired" string="Hired" domain="[('employee_id', '!=', False)]"/>
+                <filter name="vacant" string="Vacant" domain="[('employee_id', '=', False)]"/>
                 <searchpanel>
                     <field name="company_id"
                            select="multi"
@@ -32,7 +47,7 @@
                            enable_counters="1"/>
                     <field name="department_id"
                            limit="0"
-                           groups="base.group_multi_company"
+                           groups="hr.group_hr_user"
                            icon="fa-building"
                            enable_counters="1"/>
                     <field name="rank"

@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
+
 # UPDATE_PARTNER_FIELDS = ["lastname", "firstname", "middlename", "user_id", "address_home_id"]
 
 
@@ -98,7 +99,8 @@ class HrEmployee(models.Model):
 
     def _prepare_vals_on_create(self, vals):
         if vals.get("firstname") or vals.get("lastname") or vals.get("middlename"):
-            vals["name"] = self._get_name(vals.get("lastname"), vals.get("firstname"), vals.get("middlename"))
+            vals["name"] = self._get_name(vals.get("lastname"), vals.get("firstname"),
+                                          vals.get("middlename"))
         elif vals.get("name"):
             vals["lastname"] = self.split_name(vals["name"])["lastname"]
             vals["firstname"] = self.split_name(vals["name"])["firstname"]

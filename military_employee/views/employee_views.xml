@@ -92,6 +92,7 @@
         <field name="priority">50</field>
         <field name="arch" type="xml">
             <field name="name" position="after">
+                <field name="rank"/>
                 <field name="state" optional="hide"/>
             </field>
             <field name="company_id" position="attributes">
