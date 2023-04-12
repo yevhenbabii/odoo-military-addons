@@ -12,7 +12,9 @@
         "military_company",
         "military_department",
         "military_job",
-        "military_employee"
+        "military_employee",
+        "military_rank",
+        "web_responsive",
         ],
     "sequence": '1',
     "application": True,

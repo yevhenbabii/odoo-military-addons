@@ -2,6 +2,8 @@ import logging
 # import js2py
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from dateutil.relativedelta import relativedelta
+import datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -12,6 +14,11 @@ _logger = logging.getLogger(__name__)
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
+    # temp_job_ids = fields.One2many('hr.job', 'temp_employee_id', string='Temporary Job Position', store=True)
+    # job_id = fields.Many2one('hr.job', string='Job Position',
+    #                          domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    # department_id = fields.Many2one(related="job_id.department_id", store=True, readonly=True)
+    # parent_id = fields.Many2one(related="department_id.manager_id", store=True, readonly=True)
     lastname = fields.Char("Last Name")
     firstname = fields.Char("First Name")
     middlename = fields.Char("Middlename")
@@ -21,6 +28,7 @@ class HrEmployee(models.Model):
          ("trip", "Trip"),
          ("vocation", "Vocation"),
          ("deserter", "Deserter"),
+         ("fugitive", "Fugitive"),
          ("hospital", "Hospital"),
          ("hostage", "Hostage"),
          ("missing", "Missing"),
@@ -34,6 +42,12 @@ class HrEmployee(models.Model):
     )
     conscription_place = fields.Many2one("res.partner", "Conscription Place")
     conscription_date = fields.Date("Conscription Date")
+    age = fields.Integer(string="Age", compute='_compute_age');
+
+    @api.depends("birthday")
+    def _compute_age(self):
+        for rec in self:
+            rec.age = relativedelta(datetime.date.today(), rec.birthday).years;
 
     # name_dative = fields.Char(compute="_get_declention", store="True", string="Name Dative")
 
@@ -76,12 +90,12 @@ class HrEmployee(models.Model):
     # class HrEmployee(models.Model):
     #     _inherit = "hr.employee"
 
-    @api.onchange("job_id", "department_id", "parent_id")
-    def _onchange_job(self):
-        if self.job_id or self.department_id or self.parent_id:
-            self.department_id = self.job_id.department_id
-            self.complete_name = self._compute_complete_name()
-            self.parent_id = self.department_id.manager_id
+    # @api.onchange("job_id", "department_id", "parent_id")
+    # def _onchange_job(self):
+    #     if self.job_id or self.department_id or self.parent_id:
+    #         self.department_id = self.job_id.department_id
+    #         self.complete_name = self._compute_complete_name()
+    #         self.parent_id = self.department_id.manager_id
 
     @api.depends("job_id")
     def _compute_job_title(self):

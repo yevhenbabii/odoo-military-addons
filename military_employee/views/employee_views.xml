@@ -38,6 +38,9 @@
             <field name="gender" position="attributes">
                 <required>1</required>
             </field>
+            <xpath expr="//field[@name='birthday']" position="after">
+                <field name="age" attrs="{'invisible': [('birthday','=', False)]}"/>
+            </xpath>
         </field>
     </record>
 
@@ -92,7 +95,7 @@
         <field name="priority">50</field>
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="rank"/>
+                <field name="rank_id"/>
                 <field name="state" optional="hide"/>
             </field>
             <field name="company_id" position="attributes">
@@ -123,7 +126,7 @@
                            limit="0"
                            icon="fa-users"
                            enable_counters="1"/>
-                    <field name="rank"
+                    <field name="rank_id"
                            select="multi"
                            icon="fa-users"
                            enable_counters="1"/>

@@ -6,12 +6,16 @@ class Job(models.Model):
     _display_name = "complete_name"
     _order = "level, sequence"
 
-    employee_ids = fields.One2many('hr.employee', 'job_id', string='Employees')
-    employee_id = fields.Many2one('hr.employee', string='Employee',
-                                  compute='compute_employee',
-                                  inverse='inverse_employee', store=True)
-    # employee_id = fields.Many2one(string="Employee", comodel_name="hr.employee", compute='_compute_employee', store=True)
-    temp_employee_id = fields.Many2one("hr.employee", string='Temporary Employee')
+    # TODO: check behaviour on archiving
+    active = fields.Boolean('Active', default=True, store=True, readonly=False)
+    # employee_id = fields.Many2one('hr.employee', string='Employee',
+    #                               compute='_compute_employee',
+    #                               inverse='_inverse_employee',
+    #                               store=True)
+    # contract_id = fields.Many2one(compute="_compute_contract", store=True, string="Contract")
+    # employee_id = fields.Many2one(compute="_compute_employee", store=True, string="Employee")
+    # contract_id = fields.Many2one("hr.contract", store=True, string="Contract")
+    # temp_employee_id = fields.Many2one("hr.employee", string='Temporary Employee')
     sequence = fields.Integer(default=1)
     level = fields.Integer('Level', store='True', related='department_id.level')
     complete_name = fields.Char(string='Job Name',
@@ -21,29 +25,24 @@ class Job(models.Model):
     mos = fields.Char(string="Job MOS code")
     payroll_grade = fields.Char(string="Payroll Grade")
 
-    @api.depends('employee_ids')
-    def compute_employee(self):
-        if len(self.employee_ids) > 0:
-            self.employee_id = self.employee_ids[0]
-
-    def inverse_employee(self):
-        if len(self.employee_ids) > 0:
-            # delete previous reference
-            employee = self.env['hr.employee'].browse(self.employee_ids[0].id)
-            employee.job_id = False
-        # set new reference
-        self.employee_id.job_id = self
-
     # @api.depends('employee_ids')
     # def _compute_employee(self):
-    #     for job in self:
-    #         job.employee_id = job.employee_ids.filtered(lambda x: x.id == job.id)
-    #             # self.env['hr.employee'].search([('id', '=', job.employee_ids.ids)], limit=1)
-    #
-    # def _search_employee(self, operator, value):
-    #     return [('employee_id', operator, value)]
+    #     if len(self.employee_ids) > 0:
+    #         self.employee_id = self.env['hr.employee'].browse(self.employee_ids[0].id)
 
-    # TODO fix complete_name
+    # @api.depends("employee_ids.job_id", "employee_ids.active")
+    # def _compute_employee(self):
+    #     if len(self.employee_ids) > 0:
+    #         self.employee_id = self.employee_ids[0]
+    #
+    # def _inverse_employee(self):
+    #     if len(self.employee_ids) > 0:
+    #         # delete previous reference
+    #         employee = self.env['hr.employee'].browse(self.employee_ids[0].id)
+    #         employee.employee_id = False
+    #         # set new reference
+    #         self.employee_id = self
+
     @api.depends("name", "department_id.complete_name_genitive", "company_id.name_genitive")
     def _compute_complete_name(self):
         for job in self:

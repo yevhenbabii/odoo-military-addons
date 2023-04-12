@@ -1,0 +1,612 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* military_rank
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-11 20:23+0000\n"
+"PO-Revision-Date: 2023-04-11 20:23+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: military_rank
+#: model:res.groups,comment:military_rank.group_rank_transfer
+msgid ""
+"\n"
+"            the user will be able to approve employee rank transfers\n"
+"        "
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_needaction
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__active
+msgid "Active"
+msgstr ""
+
+#. module: military_rank
+#: model:res.groups,name:military_rank.group_rank_transfer
+msgid "Approve Employee Rank Transfers"
+msgstr ""
+
+#. module: military_rank
+#: model_terms:ir.ui.view,arch_db:military_rank.view_rank_filter
+msgid "Archived"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_attachment_count
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_310
+msgid "Brigade General"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer__state__cancel
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__cancel
+msgid "Cancelled"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_220
+msgid "Captain"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_230
+msgid "Captain of Justice"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_240
+msgid "Captain of the medical service"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_employee__rank_category
+#: model:ir.model.fields,field_description:military_rank.field_hr_job__rank_category
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__category
+msgid "Category"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_140
+msgid "Chief Master Sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_300
+msgid "Colonel"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__company_id
+msgid "Company"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_employee__complete_name
+msgid "Complete Name"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer__state__confirm
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__confirm
+msgid "Confirmed"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__create_uid
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__create_uid
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__create_date
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__create_date
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_hr_employee__rank_id
+msgid "Current serviceman military rank"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__transfer_partner_id
+msgid "Customer"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__date
+msgid "Date"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_rank_transfer__date
+msgid "Date of transfer"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__description
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__description
+msgid "Description"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__dst_id
+msgid "Destination"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:military_rank.field_hr_job__display_name
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__display_name
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__display_name
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__done
+msgid "Done"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer__state__draft
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__date
+msgid "Effective Date"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model,name:military_rank.model_hr_employee
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__employee_id
+msgid "Employee"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_follower_ids
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_channel_ids
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_partner_ids
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__src_id
+msgid "From"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_340
+msgid "General"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_employee__id
+#: model:ir.model.fields,field_description:military_rank.field_hr_job__id
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__id
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__id
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__id
+msgid "ID"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_needaction
+#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_unread
+#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_needaction
+#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_has_error
+#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_is_follower
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model,name:military_rank.model_hr_job
+msgid "Job Position"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_job__rank_id
+msgid "Job Rank"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_150
+msgid "Junior Lieutenant"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_155
+msgid "Junior Lieutenant of the medical service"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_70
+msgid "Junior sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_employee____last_update
+#: model:ir.model.fields,field_description:military_rank.field_hr_job____last_update
+#: model:ir.model.fields,field_description:military_rank.field_military_rank____last_update
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer____last_update
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__write_uid
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__write_uid
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__write_date
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__write_date
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_160
+msgid "Lieutenant"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_290
+msgid "Lieutenant Colonel"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_330
+msgid "Lieutenant General"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_170
+msgid "Lieutenant of Justice"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_180
+msgid "Lieutenant of the medical service"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_main_attachment_id
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_250
+msgid "Major"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_320
+msgid "Major General"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_100
+msgid "Major Sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_260
+msgid "Major of Justice"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_280
+msgid "Major of the chaplain service"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_270
+msgid "Major of the medical service"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_has_error
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_ids
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_employee__rank_id
+#: model_terms:ir.ui.view,arch_db:military_rank.view_employee_form
+#: model_terms:ir.ui.view,arch_db:military_rank.view_rank_filter
+msgid "Military Rank"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.actions.act_window,name:military_rank.hr_rank_tree_action
+#: model:ir.model,name:military_rank.model_military_rank
+#: model:ir.ui.menu,name:military_rank.menu_view_rank_form
+#: model_terms:ir.ui.view,arch_db:military_rank.view_rank_filter
+#: model_terms:ir.ui.view,arch_db:military_rank.view_rank_tree
+msgid "Military Ranks"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_120
+msgid "Mаster Sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__name
+msgid "Name"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__nato_code
+msgid "Nato Rank Code"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_needaction_counter
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_has_error_counter
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_needaction_counter
+#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_has_error_counter
+#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_unread_counter
+#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__partner_id
+msgid "Order Author"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__number
+msgid "Order Number"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__pending
+msgid "Pending"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model,name:military_rank.model_rank_transfer
+msgid "Rank Transfer"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model,name:military_rank.model_rank_transfer_line
+msgid "Rank Transfer Line"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_20
+msgid "Recruit"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_190
+msgid "Senior Lieutenant"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_200
+msgid "Senior Lieutenant of Justice"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_210
+msgid "Senior Lieutenant of the medical service"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_130
+msgid "Senior Master Sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_90
+msgid "Senior sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_50
+msgid "Senior soldier"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_60
+msgid "Senior soldier of term service"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_80
+msgid "Sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__name_short
+msgid "Shortname"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_30
+msgid "Soldier"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_40
+msgid "Soldier of term service"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_110
+msgid "Staff Sergeant"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__state
+msgid "State"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__state
+msgid "Status"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__subcategory
+msgid "Subcategory"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__transfer_line
+msgid "Transfer Lines"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__transfer_id
+msgid "Transfer Reference"
+msgstr ""
+
+#. module: military_rank
+#: model:military.rank,name:military_rank.rank_10
+msgid "UAF Employee"
+msgstr ""
+
+#. module: military_rank
+#: code:addons/military_rank/models/rank_transfer.py:0
+#, python-format
+msgid ""
+"Unable to Delete Transfer!\n"
+"Transfer has been initiated. Either cancel the transfer or\n"
+"create another transfer to undo it."
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_unread
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_unread_counter
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: military_rank
+#: code:addons/military_rank/models/rank_transfer.py:0
+#, python-format
+msgid "You don't have the access rights to take this action."
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__military_rank__subcategory__junior
+msgid "junior"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__military_rank__subcategory__master
+msgid "master"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__military_rank__category__officer
+msgid "officer"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__military_rank__category__private
+msgid "private"
+msgstr ""
+
+#. module: military_rank
+#: model_terms:ir.ui.view,arch_db:military_rank.view_rank_form
+msgid "rank"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__military_rank__subcategory__senior
+msgid "senior"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields.selection,name:military_rank.selection__military_rank__category__sergeant
+msgid "sergeant"
+msgstr ""
