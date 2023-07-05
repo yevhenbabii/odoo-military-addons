@@ -1,4 +1,0 @@
-"id","sequence","name","parent_id/id","code"
-"base.main_company","0","В/Ч А1234","","А1234"
-"a2345","1","В/Ч А2345","base.main_company","А2345"
-"a3456","2","В/Ч А3456","base.main_company","А3456"
