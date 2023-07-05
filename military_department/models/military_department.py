@@ -26,7 +26,7 @@ class Department(models.Model):
     complete_name = fields.Char("Complete Name",
                                 compute="_compute_complete_name",
                                 store=True)
-    child_ids = fields.One2many("hr.department", "parent_id", "Contains")
+    # child_ids = fields.One2many("hr.department", "parent_id", "Contains")
     user_ids = fields.Many2many('res.users', 'hr_department_users_rel', 'did', 'user_id',
                                 string='Accepted Users')
     code = fields.Char("Code",

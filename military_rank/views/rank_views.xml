@@ -12,6 +12,7 @@
                             <field name="sequence"/>
                             <field name="name"/>
                             <field name="name_short"/>
+                            <field name="parent_id"/>
                             <field name="category"/>
                             <field name="subcategory"/>
                             <field name="nato_code"/>
@@ -31,6 +32,7 @@
                     <field name="sequence" widget="handle"/>
                     <field name="name"/>
                     <field name="name_short"/>
+                    <field name="parent_id"/>
                     <field name="category"/>
                     <field name="subcategory"/>
                     <field name="nato_code"/>

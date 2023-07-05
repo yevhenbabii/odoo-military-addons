@@ -14,6 +14,6 @@
         "security/ir.model.access.csv",
         "data/military.rank.csv",
         "views/rank_views.xml",
-        #"views/rank_transfer_view.xml"
+        "views/rank_transfer_view.xml"
     ],
 }

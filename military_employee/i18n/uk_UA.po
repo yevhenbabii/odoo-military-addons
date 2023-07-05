@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-23 23:22+0000\n"
-"PO-Revision-Date: 2023-01-24 01:23+0200\n"
+"POT-Creation-Date: 2023-04-19 20:09+0000\n"
+"PO-Revision-Date: 2023-04-19 23:19+0300\n"
 "Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
 "Language-Team: \n"
 "Language: uk_UA\n"
@@ -16,6 +16,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.2.2\n"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__age
+msgid "Age"
+msgstr "Вік"
+
+#. module: military_employee
+#: model_terms:ir.ui.view,arch_db:military_employee.view_employee_form
+msgid "Conscription"
+msgstr "Відомості про Призов"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__conscription_date
+msgid "Conscription Date"
+msgstr "Дата Призову"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__conscription_place
+msgid "Conscription Place"
+msgstr "Місце Призову"
 
 #. module: military_employee
 #: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__deserter
@@ -35,7 +55,7 @@ msgstr "В Розпорядженні"
 #. module: military_employee
 #: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__duty
 msgid "Duty"
-msgstr "На Виконанні"
+msgstr "В строю"
 
 #. module: military_employee
 #: model:ir.model,name:military_employee.model_hr_employee
@@ -43,14 +63,30 @@ msgid "Employee"
 msgstr "Співробітник"
 
 #. module: military_employee
-#: model:ir.actions.act_window,name:military_employee.action_open_status_employee
-msgid "Employee Status"
-msgstr "Статус Співробітника"
+#: model:ir.actions.act_window,name:military_employee.action_employee_report
+#: model:ir.ui.menu,name:military_employee.menu_employee_report
+msgid "Employee Report"
+msgstr ""
 
 #. module: military_employee
-#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__field
-msgid "Field"
-msgstr "ППД"
+#: model:ir.actions.act_window,name:military_employee.action_open_status_employee
+msgid "Employee Status"
+msgstr "Статус Військовослужбовця"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__firstname
+msgid "First Name"
+msgstr "Імʼя"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__fugitive
+msgid "Fugitive"
+msgstr "СЗЧ"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__holiday
+msgid "Holiday"
+msgstr "Відпустка"
 
 #. module: military_employee
 #: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__hospital
@@ -65,12 +101,22 @@ msgstr "Полонений"
 #. module: military_employee
 #: model:ir.model.fields,field_description:military_employee.field_hr_employee__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,field_description:military_employee.field_hr_employee____last_update
 msgid "Last Modified on"
 msgstr "Востаннє Змінено"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__lastname
+msgid "Last Name"
+msgstr "Прізвище"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__middlename
+msgid "Middlename"
+msgstr "По батькові"
 
 #. module: military_employee
 #: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__missing
@@ -92,8 +138,3 @@ msgstr "Стан"
 #: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__trip
 msgid "Trip"
 msgstr "Відрядження"
-
-#. module: military_employee
-#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__vocation
-msgid "Vocation"
-msgstr "Відпустка"

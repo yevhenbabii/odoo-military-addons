@@ -115,7 +115,7 @@ msgstr "Відображувана Назва"
 #. module: military
 #: model:ir.model,name:military.model_hr_employee
 msgid "Employee"
-msgstr "Співробітник"
+msgstr "Військовослужбовець"
 
 #. module: military
 #: model:ir.model,name:military.model_hr_employee_rank

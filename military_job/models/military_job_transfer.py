@@ -2,21 +2,26 @@ from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, UserError
 
 
-class RankTransfer(models.Model):
-    _name = "rank.transfer"
+class HrTransfer(models.Model):
+    _name = "hr.transfer"
     _inherit = ["mail.thread"]
-    _description = "Rank Transfer"
+    _description = "Employee Transfer"
     _rec_name = "date"
     _check_company_auto = True
+    _order = "date desc"
 
     number = fields.Char("Order Number", required=True, readonly=True, states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Draft'),
         ('cancel', 'Cancelled'),
         ('confirm', 'Confirmed'),
-        ('done', 'Done')],
+        ('done', 'Done'),
+    ],
         string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
-    date = fields.Date(string='Date', required=True, readonly=True, index=True,
+    date = fields.Date(string='Date',
+                       required=True,
+                       readonly=True,
+                       index=True,
                        states={'draft': [('readonly', False)]},
                        copy=False, default=fields.Date.today,
                        help="Date of transfer")
@@ -25,24 +30,17 @@ class RankTransfer(models.Model):
         states={'draft': [('readonly', False)]},
         required=True, change_default=True, index=True, tracking=1,
         domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
-    company_id = fields.Many2one(
-        string="Company",
-        comodel_name="res.company",
-        default=lambda self: self.env.company,
-        store=True,
-        readonly=True,
-    )
-    transfer_line = fields.One2many('rank.transfer.line', 'transfer_id',
+    transfer_line = fields.One2many('hr.transfer.line', 'transfer_id',
                                     string='Transfer Lines',
-                                    states={'cancel': [('readonly', True)],
-                                            'confirm': [('readonly', True)]},
+                                    states={'done': [('readonly', True)], 'confirm': [('readonly', True)]},
                                     copy=True, auto_join=True)
     description = fields.Text('Description')
+    company_id = fields.Many2one('res.company', 'Company', required=True, index=True, default=lambda self: self.env.company)
 
     def effective_date_in_future(self):
 
         for transfer in self:
-            if transfer.date >= fields.Date.today():
+            if transfer.date <= fields.Date.today():
                 return False
         return True
 
@@ -50,7 +48,7 @@ class RankTransfer(models.Model):
 
         if not self.env.context.get("force_delete", False):
             for transfer in self:
-                if transfer.state not in ["draft"]:
+                if transfer.state not in ["draft", "cancel"]:
                     raise UserError(
                         _(
                             "Unable to Delete Transfer!\n"
@@ -58,24 +56,24 @@ class RankTransfer(models.Model):
                             "create another transfer to undo it."
                         )
                     )
-        return super(RankTransfer, self).unlink()
+        return super(HrTransfer, self).unlink()
 
     def action_transfer(self):
 
         self.ensure_one()
         has_permission = self._check_permission_group(
-            "military_rank.group_rank_transfer"
+            "military_job.group_hr_transfer"
         )
         if has_permission and not self.effective_date_in_future():
             self.state_done()
         else:
-            self.write({"state": "confirm"})
+            self.write({"state": "pending"})
 
     def action_confirm(self):
 
         self.ensure_one()
         has_permission = self._check_permission_group(
-            "military_rank.group_rank_transfer"
+            "military_job.group_hr_transfer"
         )
         if has_permission:
             self.signal_confirm()
@@ -84,7 +82,7 @@ class RankTransfer(models.Model):
 
         self.ensure_one()
         has_permission = self._check_permission_group(
-            "military_rank.group_rank_transfer"
+            "military_job.group_hr_transfer"
         )
         if has_permission:
             self.write({"state": "cancel"})
@@ -101,44 +99,50 @@ class RankTransfer(models.Model):
         return True
 
     def state_confirm(self):
+
         for transfer in self:
+            # self._check_state(transfer.date)
             transfer.state = "confirm"
+
         return True
 
     def state_done(self):
+
         today = fields.Date.today()
+
         for transfer in self:
             if transfer.date <= today:
-                transfer.transfer_line.employee_id.rank_id = transfer.transfer_line.dst_id
+                transfer.transfer_line.employee_id.job_id = transfer.transfer_line.dst_id
                 transfer.state = "done"
-                # transfer.transfer_line.state = "done"
             else:
                 return False
+
         return True
 
     def signal_confirm(self):
 
         for transfer in self:
+            # self._check_state(transfer.date)
             # If the user is a member of 'approval' group, go straight to 'approval'
             if (
-                    self.user_has_groups("military_rank.group_rank_transfer")
+                    self.user_has_groups("military_job.group_hr_transfer")
                     and transfer.effective_date_in_future()
             ):
-                transfer.state = "confirm"
+                transfer.state = "pending"
             else:
                 transfer.state_confirm()
 
         return True
 
 
-class RankTransferLine(models.Model):
-    _name = "rank.transfer.line"
-    _inherit = ["mail.thread"]
-    _description = "Rank Transfer Line"
+class HrTransferLine(models.Model):
+    _name = "hr.transfer.line"
+    # _inherit = ["mail.thread"]
+    _description = "Employee Transfer Line"
     _rec_name = "date"
     _check_company_auto = True
 
-    transfer_id = fields.Many2one('rank.transfer',
+    transfer_id = fields.Many2one('hr.transfer',
                                   string='Transfer Reference',
                                   required=True,
                                   ondelete='cascade',
@@ -147,28 +151,11 @@ class RankTransferLine(models.Model):
                                           store=True,
                                           string='Customer',
                                           readonly=False)
-    date = fields.Date(
-        string="Effective Date",
-        related="transfer_id.date",
-    )
     state = fields.Selection(
-        selection=[
-            ("draft", "Draft"),
-            ("cancel", "Cancelled"),
-            ("confirm", "Confirmed"),
-            ("done", "Done"),
-        ],
-        related="transfer_id.state",
-        default="draft",
-        readonly=True,
-    )
-    company_id = fields.Many2one(
-        string="Company",
-        comodel_name="res.company",
-        default=lambda self: self.env.company,
-        store=True,
-        readonly=True,
-    )
+        related='transfer_id.state', string='Transfer Status', readonly=True, copy=False, store=True,
+        default='draft')
+    # TODO add temporary job option
+    # temp = fields.Boolean("Temporary Job", default=False)
     employee_id = fields.Many2one(
         string="Employee",
         comodel_name="hr.employee",
@@ -177,27 +164,72 @@ class RankTransferLine(models.Model):
         states={"draft": [("readonly", False)]},
         check_company=True,
     )
-    src_rank = fields.Char(
-        string="From Rank",
+    description = fields.Text(string='Description')
+    src_job = fields.Char(
+        string="From Job",
+        # comodel_name="hr.job",
+        # related="employee_id.job_id",
         compute="_compute_onchange_employee",
         store=True,
+        readonly=True,
+        # states={"draft": [("readonly", False)]},
+        # check_company=True,
+    )
+    src_department = fields.Char(
+        string="From Department",
+        compute="_compute_onchange_employee",
+        # related="src_id.department_id",
+        # comodel_name="hr.department",
+        store=True,
+        readonly=True,
+    )
+    dst_id = fields.Many2one(
+        string="Destination Job",
+        comodel_name="hr.job",
+        required=True,
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        check_company=True,
+    )
+    dst_department_id = fields.Many2one(
+        string="Destination Department",
+        related="dst_id.department_id",
+        comodel_name="hr.department",
+        store=True,
+        readonly=True,
+        check_company=True,
+    )
+    date = fields.Date(
+        string="Effective Date",
+        related="transfer_id.date",
+        required=True,
         readonly=True
     )
-    dst_rank = fields.Many2one(
-        string="Destination Rank",
-        comodel_name="military.rank",
-        default=lambda self: self.env.ref(
-            "employee_id.rank_id.parent_id", raise_if_not_found=False
-        ),
-        required=True,
+    company_id = fields.Many2one(
+        string="Company",
+        comodel_name="res.company",
+        default=lambda self: self.env.company,
         store=True,
-        states={"draft": [("readonly", False)]},
+        readonly=True,
     )
 
     @api.depends("employee_id")
     def _compute_onchange_employee(self):
         for transfer in self:
             if transfer.employee_id:
-                transfer.src_rank = transfer.employee_id.rank_id.display_name
+                transfer.src_job = transfer.employee_id.job_id.display_name
+                transfer.src_department = transfer.employee_id.department_id.display_name
             else:
-                transfer.src_rank = False
+                transfer.src_job = False
+                transfer.src_department = False
+
+    def _track_subtype(self, init_values):
+        self.ensure_one()
+        if "state" in init_values:
+            if self.state == "confirm":
+                return self.env.ref("hr_transfer_line.mt_alert_xfer_confirmed")
+            elif self.state == "pending":
+                return self.env.ref("hr_transfer_line.mt_alert_xfer_pending")
+            elif self.state == "done":
+                return self.env.ref("hr_transfer_line.mt_alert_xfer_done")
+        return super(HrTransferLine, self)._track_subtype(init_values)

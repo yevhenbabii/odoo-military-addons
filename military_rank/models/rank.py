@@ -23,6 +23,7 @@ class MilitaryRank(models.Model):
     name_short = fields.Char(string="Shortname")
     nato_code = fields.Char(string="Nato Rank Code")
     description = fields.Text('Description')
+    parent_id = fields.Many2one('military.rank', string='Parent Rank', store=True)
 
 
 class HrEmployee(models.Model):

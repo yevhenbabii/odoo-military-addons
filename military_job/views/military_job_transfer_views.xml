@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="rank_transfer_tree_view" model="ir.ui.view">
-        <field name="name">rank.transfer.tree</field>
-        <field name="model">rank.transfer</field>
+    <record id="hr_transfer_tree_view" model="ir.ui.view">
+        <field name="name">hr.transfer.tree</field>
+        <field name="model">hr.transfer</field>
         <field name="arch" type="xml">
-            <tree string="Rank Transfers">
+            <tree string="Employee Transfers">
                 <field name="date"/>
                 <field name="number"/>
                 <field name="partner_id"/>
@@ -14,11 +14,11 @@
         </field>
     </record>
 
-    <record id="rank_transfer_form_view" model="ir.ui.view">
-        <field name="name">rank.transfer.form</field>
-        <field name="model">rank.transfer</field>
+    <record id="hr_transfer_form_view" model="ir.ui.view">
+        <field name="name">hr.transfer.form</field>
+        <field name="model">hr.transfer</field>
         <field name="arch" type="xml">
-            <form string="Rank Transfer">
+            <form string="Employee Transfer">
                 <header>
                     <button
                         name="action_confirm"
@@ -26,7 +26,7 @@
                         states="draft"
                         string="Confirm"
                         class="oe_highlight"
-                        groups="military_rank.group_rank_transfer"
+                        groups="military_job.group_hr_transfer"
                     />
                     <button
                         name="action_transfer"
@@ -34,7 +34,7 @@
                         states="confirm"
                         string="Transfer"
                         class="oe_highlight"
-                        groups="military_rank.group_rank_transfer"
+                        groups="military_job.group_hr_transfer"
                     />
                     <button
                         name="action_cancel"
@@ -42,21 +42,19 @@
                         states="confirm,pending"
                         string="Cancel"
                         class="oe_highlight"
-                        groups="military_rank.group_rank_transfer"
+                        groups="military_job.group_hr_transfer"
                     />
-                    <field name="state" widget="statusbar" />
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <group>
-                        <group>
-                            <field name="number"/>
-                            <field name="date"/>
-                            <field name="partner_id"/>
-                            <field
+                        <field name="number"/>
+                        <field name="date"/>
+                        <field name="partner_id"/>
+                        <field
                                 name="company_id"
                                 groups="base.group_multi_company"
-                            />
-                        </group>
+                        />
                     </group>
                     <notebook>
                         <page string="Transfer Lines" name="transfer_lines">
@@ -72,8 +70,10 @@
                                     </control>
                                     <field name="company_id" invisible="1"/>
                                     <field name="employee_id"/>
-                                    <field name="src_rank"/>
-                                    <field name="dst_rank"/>
+                                    <field name="src_job"/>
+                                    <field name="src_department"/>
+                                    <field name="dst_id" domain="[('no_of_recruitment', '>', '0')]"/>
+                                    <field name="dst_department_id" />
                                     <field name="state" invisible="1"/>
                                 </tree>
                             </field>
@@ -88,16 +88,16 @@
         </field>
     </record>
 
-    <record id="open_rank_transfer" model="ir.actions.act_window">
-        <field name="name">Rank Transfers</field>
-        <field name="res_model">rank.transfer</field>
+    <record id="open_hr_transfer" model="ir.actions.act_window">
+        <field name="name">Job Transfers</field>
+        <field name="res_model">hr.transfer</field>
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem
-        id="menu_rank_transfer"
-        action="open_rank_transfer"
+        id="menu_hr_transfer"
+        action="open_hr_transfer"
         parent="hr.menu_human_resources_configuration"
-        sequence="3"
+        sequence="1"
     />
 
 </odoo>

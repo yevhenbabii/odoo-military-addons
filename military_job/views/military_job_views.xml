@@ -127,6 +127,12 @@
             <field name="department_id" position="before">
                     <field name="job_id" readonly="1"/>
             </field>
+            <field name="department_id" position="attributes">
+                <readonly>1</readonly>
+            </field>
+            <field name="parent_id" position="attributes">
+                <readonly>1</readonly>
+            </field>
         </field>
     </record>
 </odoo>

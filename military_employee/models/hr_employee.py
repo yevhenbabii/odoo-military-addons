@@ -14,40 +14,40 @@ _logger = logging.getLogger(__name__)
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
-    # temp_job_ids = fields.One2many('hr.job', 'temp_employee_id', string='Temporary Job Position', store=True)
-    # job_id = fields.Many2one('hr.job', string='Job Position',
-    #                          domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
-    # department_id = fields.Many2one(related="job_id.department_id", store=True, readonly=True)
-    # parent_id = fields.Many2one(related="department_id.manager_id", store=True, readonly=True)
-    lastname = fields.Char("Last Name")
-    firstname = fields.Char("First Name")
-    middlename = fields.Char("Middlename")
+    #temp_job_id = fields.Many2one('hr.job', 'temp_employee_id', string='Temporary Job Position', store=True)
+    job_id = fields.Many2one('hr.job', string='Job Position',
+                             domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    department_id = fields.Many2one(related="job_id.department_id", store=True, readonly=True)
+    parent_id = fields.Many2one(related="department_id.manager_id", store=True, readonly=True)
+    lastname = fields.Char("Last Name", tracking=True)
+    firstname = fields.Char("First Name", tracking=True)
+    middlename = fields.Char("Middlename", tracking=True)
     state = fields.Selection(
         [("field", "Field"),
          ("duty", "Duty"),
          ("trip", "Trip"),
-         ("vocation", "Vocation"),
+         ("holiday", "Holiday"),
          ("deserter", "Deserter"),
          ("fugitive", "Fugitive"),
+         ("refusal", "Refusal"),
          ("hospital", "Hospital"),
          ("hostage", "Hostage"),
          ("missing", "Missing"),
-         ("on_shield", "On Shield"),
-         ("disposal", "Disposal")],
+         ("on_shield", "On Shield")],
         required=True,
-        default="field",
+        default="duty",
         index=True,
         store=True,
         tracking=True
     )
-    conscription_place = fields.Many2one("res.partner", "Conscription Place")
-    conscription_date = fields.Date("Conscription Date")
-    age = fields.Integer(string="Age", compute='_compute_age');
+    conscription_place = fields.Many2one("res.partner", "Conscription Place", tracking=True)
+    conscription_date = fields.Date("Conscription Date", tracking=True)
+    age = fields.Integer(string="Age", compute='_compute_age')
 
     @api.depends("birthday")
     def _compute_age(self):
         for rec in self:
-            rec.age = relativedelta(datetime.date.today(), rec.birthday).years;
+            rec.age = relativedelta(datetime.date.today(), rec.birthday).years
 
     # name_dative = fields.Char(compute="_get_declention", store="True", string="Name Dative")
 
@@ -120,7 +120,7 @@ class HrEmployee(models.Model):
             vals["firstname"] = self.split_name(vals["name"])["firstname"]
             vals["middlename"] = self.split_name(vals["name"])["middlename"]
         else:
-            raise ValidationError(_("No name set."))
+            raise ValidationError(("No name set."))
 
     def _prepare_vals_on_write(self, vals):
         if "firstname" in vals or "lastname" in vals or "middlename" in vals:

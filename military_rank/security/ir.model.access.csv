@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_military_rank,access_military_rank,model_military_rank,hr.group_hr_manager,1,1,1,1
 access_rank_transfer,access_rank_transfer,model_rank_transfer,military_rank.group_rank_transfer,1,1,1,1
+access_rank_transfer_line,access_rank_transfer_line,model_rank_transfer_line,military_rank.group_rank_transfer,1,1,1,1

@@ -11,7 +11,11 @@
                 "military_rank",
                 "military_department"
                 ],
-    "data": ["views/military_job_views.xml"],
+    "data": [
+        "security/groups.xml",
+        "security/ir.model.access.csv",
+        "views/military_job_views.xml",
+        "views/military_job_transfer_views.xml"],
     "demo": ["demo/hr.job.csv"],
     "installable": True,
 }

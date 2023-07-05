@@ -43,6 +43,11 @@ class Job(models.Model):
     #         # set new reference
     #         self.employee_id = self
 
+    # Change sql constraint
+    _sql_constraints = [
+        ('name_company_uniq', 'unique(name, mos, company_id, department_id)', 'The name of the job position and MOS must be unique per department in company!'),
+    ]
+
     @api.depends("name", "department_id.complete_name_genitive", "company_id.name_genitive")
     def _compute_complete_name(self):
         for job in self:
