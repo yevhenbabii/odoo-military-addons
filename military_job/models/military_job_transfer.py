@@ -38,14 +38,12 @@ class HrTransfer(models.Model):
     company_id = fields.Many2one('res.company', 'Company', required=True, index=True, default=lambda self: self.env.company)
 
     def effective_date_in_future(self):
-
         for transfer in self:
             if transfer.date <= fields.Date.today():
                 return False
         return True
 
     def unlink(self):
-
         if not self.env.context.get("force_delete", False):
             for transfer in self:
                 if transfer.state not in ["draft", "cancel"]:
@@ -59,7 +57,6 @@ class HrTransfer(models.Model):
         return super(HrTransfer, self).unlink()
 
     def action_transfer(self):
-
         self.ensure_one()
         has_permission = self._check_permission_group(
             "military_job.group_hr_transfer"
@@ -70,7 +67,6 @@ class HrTransfer(models.Model):
             self.write({"state": "pending"})
 
     def action_confirm(self):
-
         self.ensure_one()
         has_permission = self._check_permission_group(
             "military_job.group_hr_transfer"
@@ -79,7 +75,6 @@ class HrTransfer(models.Model):
             self.signal_confirm()
 
     def action_cancel(self):
-
         self.ensure_one()
         has_permission = self._check_permission_group(
             "military_job.group_hr_transfer"
@@ -99,31 +94,39 @@ class HrTransfer(models.Model):
         return True
 
     def state_confirm(self):
-
         for transfer in self:
-            # self._check_state(transfer.date)
             transfer.state = "confirm"
-
         return True
 
     def state_done(self):
-
         today = fields.Date.today()
-
         for transfer in self:
             if transfer.date <= today:
                 transfer.transfer_line.employee_id.job_id = transfer.transfer_line.dst_id
                 transfer.state = "done"
             else:
                 return False
-
         return True
 
-    def signal_confirm(self):
+    # TODO rewrite resume line creation on job transfer confirmation
+    # @api.model
+    # def create_resume(self, vals_list):
+    #     res = super(HrTransfer, self).create(vals_list)
+    #     resume_lines_values = []
+    #     for transfer in res:
+    #         line_type = self.env.ref('hr_skills.resume_type_experience', raise_if_not_found=False)
+    #         resume_lines_values.append({
+    #             'employee_id': transfer.transfer_line.employee_id.id,
+    #             'name': transfer.transfer_line.employee_id.company_id.name or '',
+    #             'date_start': transfer.transfer_line.create_date.date(),
+    #             'description': transfer.transfer_line.dst_id.name or '',
+    #             'line_type_id': line_type and line_type.id,
+    #         })
+    #     self.env['hr.resume.line'].create(resume_lines_values)
+    #     return res
 
+    def signal_confirm(self):
         for transfer in self:
-            # self._check_state(transfer.date)
-            # If the user is a member of 'approval' group, go straight to 'approval'
             if (
                     self.user_has_groups("military_job.group_hr_transfer")
                     and transfer.effective_date_in_future()
@@ -131,13 +134,11 @@ class HrTransfer(models.Model):
                 transfer.state = "pending"
             else:
                 transfer.state_confirm()
-
         return True
 
 
 class HrTransferLine(models.Model):
     _name = "hr.transfer.line"
-    # _inherit = ["mail.thread"]
     _description = "Employee Transfer Line"
     _rec_name = "date"
     _check_company_auto = True

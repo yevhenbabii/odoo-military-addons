@@ -9,9 +9,10 @@
     "version": "14.0.2",
     "license": "Other proprietary",
     "depends": ["hr",
+                "hr_skills",
                 "military_rank",
                 "military_job",
-                "military_department",
+                "military_department"
                 ],
     "demo": ["demo/hr.employee.csv"],
     # "external_dependencies": {
