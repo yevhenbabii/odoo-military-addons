@@ -6,13 +6,13 @@
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="complete_name" readonly="False"/>
-                <field name="name_genitive"/>
-                <field name="complete_name_genitive" readonly="False"/>
+                <field name="name_gent"/>
+                <field name="complete_name_gent" readonly="False"/>
                 <field name="code"/>
                 <field name="level" invisible="True"/>
             </field>
             <field name="manager_id" position="attributes">
-                <domain>"[('department_id','=','active_id')]"</domain>
+                <domain>['|', ('department_id','=',active_id)]</domain>
             </field>
         </field>
     </record>

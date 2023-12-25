@@ -32,7 +32,7 @@
                         name="action_transfer"
                         type="object"
                         states="confirm"
-                        string="Transfer"
+                        string="Assign"
                         class="oe_highlight"
                         groups="military_job.group_hr_transfer"
                     />
@@ -41,6 +41,14 @@
                         type="object"
                         states="confirm,pending"
                         string="Cancel"
+                        class="oe_highlight"
+                        groups="military_job.group_hr_transfer"
+                    />
+                    <button
+                        name="action_draft"
+                        type="object"
+                        states="cancel"
+                        string="Draft"
                         class="oe_highlight"
                         groups="military_job.group_hr_transfer"
                     />
@@ -54,6 +62,11 @@
                         <field
                                 name="company_id"
                                 groups="base.group_multi_company"
+                        />
+                        <field
+                                name="company_id"
+                                invisible="1"
+                                groups="!base.group_multi_company"
                         />
                     </group>
                     <notebook>
@@ -72,7 +85,7 @@
                                     <field name="employee_id"/>
                                     <field name="src_job"/>
                                     <field name="src_department"/>
-                                    <field name="dst_id" domain="[('no_of_recruitment', '>', '0')]"/>
+                                    <field name="dst_id" domain="[('expected_employees', '>', '0')]"/>
                                     <field name="dst_department_id" />
                                     <field name="state" invisible="1"/>
                                 </tree>

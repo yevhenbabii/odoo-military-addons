@@ -4,68 +4,79 @@ from odoo import models, fields, api
 class MilitaryRank(models.Model):
     _name = "military.rank"
     _description = "Military Ranks"
+    _rec_name = "name"
     _order = "sequence asc"
     _avoid_quick_create = True
 
-    active = fields.Boolean('Active', default=True)
+    active = fields.Boolean("Active", default=True)
     sequence = fields.Integer(string="Sequence", required=True)
     name = fields.Char(string="Name", required=True, index=True, translate=True)
+    name_gent = fields.Char(string="Name Genitive",
+                            help="Name in genitive declention (Whom/What)",
+                            store=True,
+                            required=True)
+    name_datv = fields.Char(string="Name Dative",
+                            help="Name in dative declention (for Whom/ for What)",
+                            store=True,
+                            required=True)
+    name_ablt = fields.Char(string="Name Ablative",
+                            help="Name in ablative declention (by Whom/ by What)",
+                            store=True,
+                            required=True)
+
+    @api.depends('name')
+    def _get_declension(self):
+        declension_ua_model = self.env['declension.ua']
+        grammatical_cases = ['gent', 'datv', 'ablt']
+        for record in self:
+            inflected_fields = declension_ua_model.get_declension_fields(record, grammatical_cases)
+            for field, value in inflected_fields.items():
+                setattr(record, field, value)
+
     category = fields.Selection([
-        ('private', 'private'),
-        ('sergeant', 'sergeant'),
-        ('officer', 'officer')
+        ("private", "private"),
+        ("sergeant", "sergeant"),
+        ("officer", "officer")
     ], groups="hr.group_hr_manager")
     subcategory = fields.Selection([
-        ('junior', 'junior'),
-        ('senior', 'senior'),
-        ('master', 'master')
+        ("junior", "junior"),
+        ("senior", "senior"),
+        ("master", "master")
     ], groups="hr.group_hr_manager")
     name_short = fields.Char(string="Shortname")
     nato_code = fields.Char(string="Nato Rank Code")
-    description = fields.Text('Description')
-    parent_id = fields.Many2one('military.rank', string='Parent Rank', store=True)
+    description = fields.Text("Description")
+    parent_id = fields.Many2one("military.rank", string="Parent Rank", store=True)
 
 
 class HrEmployee(models.Model):
-    _inherit = 'hr.employee'
-    _display_name = 'complete_name'
-    _order = 'rank_id desc'
+    _inherit = "hr.employee"
+    _order = "rank_id desc"
 
-    rank_id = fields.Many2one('military.rank',
-                              string='Military Rank',
+    rank_id = fields.Many2one("military.rank",
+                              string="Military Rank",
                               groups="hr.group_hr_user",
-                              help='Current serviceman military rank')
+                              help="Current serviceman military rank",
+                              required=True,
+                              tracking=True,
+                              options="{no_create_edit:True','no_quick_create:True','no_create:True','no_open:True'}")
     rank_category = fields.Selection(
-        'Rank Category',
+        "Rank Category",
         index=True,
-        related='rank_id.category',
+        related="rank_id.category",
         compute_sudo=True,
         store=True,
         readonly=True)
-    complete_name = fields.Char('Complete Name',
-                                compute='_compute_complete_name',
-                                store=True)
-
-    @api.depends("name", "rank_id", "rank_id.name", "complete_name")
-    def _compute_complete_name(self):
-        for emp in self:
-            emp.complete_name = emp.name
-            if emp.rank_id:
-                emp.complete_name = '%s %s' % (
-                    emp.rank_id.name,
-                    emp.name)
-            else:
-                emp.complete_name = emp.name
 
 
 class Job(models.Model):
     _inherit = "hr.job"
     _display_name = "complete_name"
-    rank_id = fields.Many2one('military.rank', string="Job Rank")
+
+    rank_id = fields.Many2one("military.rank", string="Job Rank")
     rank_category = fields.Selection(
-        'Rank Category',
+        "Rank Category",
         index=True,
-        related='rank_id.category',
-        compute_sudo=True,
+        related="rank_id.category",
         store=True,
         readonly=True)

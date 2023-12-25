@@ -40,11 +40,20 @@ class Department(models.Model):
         recursive=True
     )
 
-    name_genitive = fields.Char("Genitive Name", store=True)
-    name_accusative = fields.Char("Accusative Name")
-    name_ablative = fields.Char("Ablative Name")
-    complete_name_genitive = fields.Char("Complete Name Genitive",
-                                         compute="_compute_complete_name_genitive",
+    name_gent = fields.Char(string="Name Genitive",
+                            compute="_get_declension",
+                            help="Name in genitive declention (Whom/What)",
+                            store=True)
+    name_datv = fields.Char(string="Name Dative",
+                            compute="_get_declension",
+                            help="Name in dative declention (for Whom/ for What)",
+                            store=True)
+    name_ablt = fields.Char(string="Name Ablative",
+                            compute="_get_declension",
+                            help="Name in ablative declention (by Whom/ by What)",
+                            store=True)
+    complete_name_gent = fields.Char("Complete Name Genitive",
+                                         compute="_compute_complete_name_gent",
                                          store=True,
                                          recursive=True
                                          )
@@ -67,7 +76,7 @@ class Department(models.Model):
                                                                      "company": dep.company_id.code}
             else:
                 name = "[%s] %s" % (dep.company_id.code, dep.complete_name.upper())
-            res.append((dep.id, name.upper()))
+            res.append((dep.id, name))
         return res
 
     @api.model
@@ -81,8 +90,7 @@ class Department(models.Model):
         departments = self.search(domain + args, limit=limit)
         return departments.name_get()
 
-    @api.depends("name", "name_genitive", "parent_id.complete_name_genitive",
-                 "company_id.name_genitive")
+    @api.depends("parent_id", "code")
     def _department_code(self):
         for dep in self:
             dep.code = dep.code
@@ -91,42 +99,51 @@ class Department(models.Model):
             else:
                 dep.code = dep.code
 
-    @api.depends("name", "name_genitive", "parent_id.complete_name_genitive",
-                 "company_id.name_genitive")
+    @api.depends("name", "name_gent", "parent_id.complete_name_gent",
+                 "company_id.name_gent")
     def _compute_complete_name(self):
         for dep in self:
-            if dep.parent_id and dep.parent_id.complete_name_genitive:
+            if dep.parent_id and dep.parent_id.complete_name_gent:
                 dep.complete_name = "%s %s" % (dep.name,
-                                               dep.parent_id.complete_name_genitive)
+                                               dep.parent_id.complete_name_gent)
             else:
-                dep.complete_name = "%s %s" % (dep.name, dep.company_id.name_genitive)
+                dep.complete_name = "%s %s" % (dep.name, dep.company_id.name_gent)
 
-    @api.depends("name_genitive",
-                 "parent_id.complete_name_genitive",
-                 "company_id.name_genitive")
-    def _compute_complete_name_genitive(self):
+    @api.depends("name_gent",
+                 "parent_id.complete_name_gent",
+                 "company_id.name_gent")
+    def _compute_complete_name_gent(self):
         for dep in self:
-            # dep.complete_name_genitive = dep.name_genitive
-            if not dep.name_genitive:
+            # dep.complete_name_gent = dep.name_gent
+            if not dep.name_gent:
                 if not dep.parent_id:
-                    dep.complete_name_genitive = dep.name_genitive
+                    dep.complete_name_gent = dep.name_gent
                 else:
-                    dep.complete_name_genitive = dep.parent_id.complete_name_genitive
+                    dep.complete_name_gent = dep.parent_id.complete_name_gent
             else:
-                if dep.parent_id and dep.parent_id.complete_name_genitive:
-                    dep.complete_name_genitive = "%s %s" % (
-                        dep.name_genitive,
-                        dep.parent_id.complete_name_genitive)
+                if dep.parent_id and dep.parent_id.complete_name_gent:
+                    dep.complete_name_gent = "%s %s" % (
+                        dep.name_gent,
+                        dep.parent_id.complete_name_gent)
                 else:
-                    dep.complete_name_genitive = "%s %s" % (dep.name_genitive,
-                                                            dep.company_id.name_genitive)
+                    dep.complete_name_gent = "%s %s" % (dep.name_gent,
+                                                            dep.company_id.name_gent)
 
-    @api.onchange("name", "name_genitive", "parent_id")
+    @api.onchange("name", "name_gent", "parent_id")
     def _onchange_department_name(self):
-        if self.name or self.parent_id or self.name_genitive:
+        if self.name or self.parent_id or self.name_gent:
             self._compute_complete_name()
-            self._compute_complete_name_genitive()
+            self._compute_complete_name_gent()
             self._department_code()
+
+    @api.depends('name')
+    def _get_declension(self):
+        declension_ua_model = self.env['declension.ua']
+        grammatical_cases = ['gent', 'datv', 'ablt']
+        for record in self:
+            inflected_fields = declension_ua_model.get_declension_fields(record, grammatical_cases)
+            for field, value in inflected_fields.items():
+                setattr(record, field, value)
 
 
 class HrEmployee(models.Model):

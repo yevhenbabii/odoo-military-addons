@@ -1,4 +1,4 @@
-id,sequence,tag_ids,parent_id/id,code,name,name_genitive
+id,sequence,tag_ids,parent_id/id,code,name,name_gent
 a1234-d001,3,Забезпечення,,Упр,управління,
 a1234-d002,4,Забезпечення,a1234-d001,,командування,
 a1234-d003,11,Забезпечення,a1234-d001,,юридична служба,юридичної служби

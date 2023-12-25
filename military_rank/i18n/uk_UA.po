@@ -4,18 +4,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 09:32+0000\n"
-"PO-Revision-Date: 2023-04-15 12:34+0300\n"
+"POT-Creation-Date: 2023-12-25 08:09+0000\n"
+"PO-Revision-Date: 2023-12-25 10:13+0200\n"
 "Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
 "Language-Team: \n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. module: military_rank
 #: model:res.groups,comment:military_rank.group_rank_transfer
@@ -25,7 +26,8 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            користувач матиме змогу підтверджувати присвоєння військових звань\n"
+"            користувач матиме змогу підтверджувати присвоєння військових "
+"звань\n"
 "        "
 
 #. module: military_rank
@@ -55,6 +57,11 @@ msgid "Archived"
 msgstr "Архівовано"
 
 #. module: military_rank
+#: model_terms:ir.ui.view,arch_db:military_rank.rank_transfer_form_view
+msgid "Assign"
+msgstr "Призначити"
+
+#. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_attachment_count
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_attachment_count
 msgid "Attachment Count"
@@ -72,7 +79,6 @@ msgstr "Скасувати"
 
 #. module: military_rank
 #: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer__state__cancel
-#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__cancel
 msgid "Cancelled"
 msgstr "Скасовано"
 
@@ -115,18 +121,12 @@ msgid "Company"
 msgstr "В/ч"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_hr_employee__complete_name
-msgid "Complete Name"
-msgstr "Повна Назва"
-
-#. module: military_rank
 #: model_terms:ir.ui.view,arch_db:military_rank.rank_transfer_form_view
 msgid "Confirm"
 msgstr "Підтвердити"
 
 #. module: military_rank
 #: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer__state__confirm
-#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__confirm
 msgid "Confirmed"
 msgstr "Підтверджено"
 
@@ -146,7 +146,6 @@ msgstr "Створено"
 
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_hr_employee__rank_id
-#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__src_id
 msgid "Current serviceman military rank"
 msgstr "Поточне військове звання військовослужбовця"
 
@@ -162,6 +161,7 @@ msgstr "Дата"
 
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_rank_transfer__date
+#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__date
 msgid "Date of transfer"
 msgstr "Дата Присвоєння"
 
@@ -172,13 +172,11 @@ msgid "Description"
 msgstr "Опис"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__dst_id
-msgid "Destination"
-msgstr "Призначення"
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__dst_rank
+msgid "Destination Rank"
+msgstr "Присвоєне Звання"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_hr_employee__display_name
-#: model:ir.model.fields,field_description:military_rank.field_hr_job__display_name
 #: model:ir.model.fields,field_description:military_rank.field_military_rank__display_name
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__display_name
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__display_name
@@ -186,13 +184,13 @@ msgid "Display Name"
 msgstr "Відображувана Назва"
 
 #. module: military_rank
-#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__done
+#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer__state__done
 msgid "Done"
 msgstr "Виконано"
 
 #. module: military_rank
 #: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer__state__draft
-#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__draft
+#: model_terms:ir.ui.view,arch_db:military_rank.rank_transfer_form_view
 msgid "Draft"
 msgstr "Чернетка"
 
@@ -214,21 +212,15 @@ msgid "Followers"
 msgstr "Підписники"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_channel_ids
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Підписники (Канали)"
-
-#. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_partner_ids
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Підписники (Партнери)"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__src_id
-msgid "From"
-msgstr "Від"
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__src_rank
+msgid "From Rank"
+msgstr "Попереднє Звання"
 
 #. module: military_rank
 #: model:military.rank,name:military_rank.rank_340
@@ -236,8 +228,12 @@ msgid "General"
 msgstr "генерал"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_hr_employee__id
-#: model:ir.model.fields,field_description:military_rank.field_hr_job__id
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__has_message
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_military_rank__id
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__id
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__id
@@ -246,9 +242,7 @@ msgstr ""
 
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_rank_transfer__message_needaction
-#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_unread
 #: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_needaction
-#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "Якщо відмічено, то нові повідомлення будуть потребувати вашої уваги."
 
@@ -286,12 +280,10 @@ msgstr "молодший лейтенант медичної служби"
 
 #. module: military_rank
 #: model:military.rank,name:military_rank.rank_70
-msgid "Junior sergeant"
+msgid "Junior Sergeant"
 msgstr "молодший сержант"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_hr_employee____last_update
-#: model:ir.model.fields,field_description:military_rank.field_hr_job____last_update
 #: model:ir.model.fields,field_description:military_rank.field_military_rank____last_update
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer____last_update
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line____last_update
@@ -412,6 +404,36 @@ msgid "Name"
 msgstr "Назва"
 
 #. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__name_ablt
+msgid "Name Ablative"
+msgstr "Назва в Орудному"
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__name_datv
+msgid "Name Dative"
+msgstr "Назва в Давальному"
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__name_gent
+msgid "Name Genitive"
+msgstr "Назва в Родовому"
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_military_rank__name_ablt
+msgid "Name in ablative declention (by Whom/ by What)"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_military_rank__name_datv
+msgid "Name in dative declention (for Whom/ for What)"
+msgstr ""
+
+#. module: military_rank
+#: model:ir.model.fields,help:military_rank.field_military_rank__name_gent
+msgid "Name in genitive declention (Whom/What)"
+msgstr ""
+
+#. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_military_rank__nato_code
 msgid "Nato Rank Code"
 msgstr "Код НАТО"
@@ -431,7 +453,7 @@ msgstr "Кількість помилок"
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_rank_transfer__message_needaction_counter
 #: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr "Кількість повідомлень, які потебують дії"
 
 #. module: military_rank
@@ -439,12 +461,6 @@ msgstr "Кількість повідомлень, які потебують д�
 #: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Кількість повідомлень з помилковою дставкою"
-
-#. module: military_rank
-#: model:ir.model.fields,help:military_rank.field_rank_transfer__message_unread_counter
-#: model:ir.model.fields,help:military_rank.field_rank_transfer_line__message_unread_counter
-msgid "Number of unread messages"
-msgstr "Кількість непрочитаних повідомлень"
 
 #. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__partner_id
@@ -457,9 +473,9 @@ msgid "Order Number"
 msgstr "Номер Наказу"
 
 #. module: military_rank
-#: model:ir.model.fields.selection,name:military_rank.selection__rank_transfer_line__state__pending
-msgid "Pending"
-msgstr "Очікує"
+#: model:ir.model.fields,field_description:military_rank.field_military_rank__parent_id
+msgid "Parent Rank"
+msgstr "Вище Звання"
 
 #. module: military_rank
 #: model:ir.model,name:military_rank.model_rank_transfer
@@ -506,12 +522,12 @@ msgstr "старший майстер-сержант"
 
 #. module: military_rank
 #: model:military.rank,name:military_rank.rank_90
-msgid "Senior sergeant"
+msgid "Senior Sergeant"
 msgstr "старший сержант"
 
 #. module: military_rank
 #: model:military.rank,name:military_rank.rank_50
-msgid "Senior soldier"
+msgid "Senior Soldier"
 msgstr "старший солдат"
 
 #. module: military_rank
@@ -550,12 +566,8 @@ msgid "Staff Sergeant"
 msgstr "штаб-сержант"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__state
-msgid "State"
-msgstr "Область"
-
-#. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__state
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__state
 msgid "Status"
 msgstr "Статус"
 
@@ -563,11 +575,6 @@ msgstr "Статус"
 #: model:ir.model.fields,field_description:military_rank.field_military_rank__subcategory
 msgid "Subcategory"
 msgstr "Підкатегорія"
-
-#. module: military_rank
-#: model_terms:ir.ui.view,arch_db:military_rank.rank_transfer_form_view
-msgid "Transfer"
-msgstr "Присвоєння"
 
 #. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__transfer_line
@@ -586,6 +593,7 @@ msgid "UAF Employee"
 msgstr "працівник ЗСУ"
 
 #. module: military_rank
+#. odoo-python
 #: code:addons/military_rank/models/rank_transfer.py:0
 #, python-format
 msgid ""
@@ -593,24 +601,16 @@ msgid ""
 "Transfer has been initiated. Either cancel the transfer or\n"
 "create another transfer to undo it."
 msgstr ""
+"Неможливо Видалити Присвоєнняr!\n"
+"Присвоєння вже було ініційовано. Скасуйте його, або\n"
+"створіть нове."
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_unread
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_unread
-msgid "Unread Messages"
-msgstr "Непрочитані повідомлення"
-
-#. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__message_unread_counter
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Кількість непрочитаних повідомлень"
-
-#. module: military_rank
+#. odoo-python
 #: code:addons/military_rank/models/rank_transfer.py:0
 #, python-format
 msgid "You don't have the access rights to take this action."
-msgstr "У Вас відсутні права доступу до цієї дії."
+msgstr "Відсутні права доступу до цієї дії."
 
 #. module: military_rank
 #: model:ir.model.fields.selection,name:military_rank.selection__military_rank__subcategory__junior

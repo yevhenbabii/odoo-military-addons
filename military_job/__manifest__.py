@@ -1,6 +1,6 @@
 {
     "name": "Military Job Data",
-    "version": "14.0.1",
+    "version": "1.0",
     "author": "Yevhen Babii",
     "maintainer": "Yevhen Babii",
     "website": "https://github.com/yevhenbabii",
@@ -8,8 +8,10 @@
     "category": "Human Resources",
     "summary": "Military Jobs Improvements",
     "depends": ["hr",
+                "hr_recruitment",
                 "military_rank",
-                "military_department"
+                "military_department",
+                "declension_ua"
                 ],
     "data": [
         "security/groups.xml",

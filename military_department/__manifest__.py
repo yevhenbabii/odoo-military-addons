@@ -1,15 +1,18 @@
 {
     "name": "Military Departments",
-    "version": "14.0.1.0.1",
+    "version": "1.0",
     "author": "Yevhen Babii",
     "maintainer": "Yevhen Babii",
     "website": "",
     "license": "Other proprietary",
     "category": "Other",
     "summary": "Departments improvement in HR",
-    "depends": ["hr", "military_company"],
-    "data": ["views/department_views.xml",
-             "security/ir.model.access.csv",
+    "depends": ["hr",
+                "military_company",
+                "declension_ua"],
+    "data": ["security/ir.model.access.csv",
+             "views/department_views.xml",
+             "report/staff_report.xml",
              "data/hr.department.tag.csv"
              ],
     "demo": [

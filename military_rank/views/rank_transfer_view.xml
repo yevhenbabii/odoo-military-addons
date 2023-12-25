@@ -9,6 +9,7 @@
                 <field name="date"/>
                 <field name="number"/>
                 <field name="partner_id"/>
+                <!--field name="company_id" groups="military_rank.group_rank_transfer"/-->
                 <field name="state"/>
             </tree>
         </field>
@@ -32,7 +33,7 @@
                         name="action_transfer"
                         type="object"
                         states="confirm"
-                        string="Transfer"
+                        string="Assign"
                         class="oe_highlight"
                         groups="military_rank.group_rank_transfer"
                     />
@@ -44,7 +45,15 @@
                         class="oe_highlight"
                         groups="military_rank.group_rank_transfer"
                     />
-                    <field name="state" widget="statusbar" />
+                    <button
+                        name="action_draft"
+                        type="object"
+                        states="cancel"
+                        string="Draft"
+                        class="oe_highlight"
+                        groups="military_rank.group_rank_transfer"
+                    />
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
                     <group>
@@ -54,7 +63,12 @@
                             <field name="partner_id"/>
                             <field
                                 name="company_id"
-                                groups="base.group_multi_company"
+                                groups="military_rank.group_rank_transfer"
+                            />
+                            <field
+                                name="company_id"
+                                invisible="1"
+                                groups="!military_rank.group_rank_transfer"
                             />
                         </group>
                     </group>

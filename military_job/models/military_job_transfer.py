@@ -29,7 +29,8 @@ class HrTransfer(models.Model):
         'res.partner', string='Order Author', readonly=True,
         states={'draft': [('readonly', False)]},
         required=True, change_default=True, index=True, tracking=1,
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        default=lambda self: self.env.company.partner_id)
     transfer_line = fields.One2many('hr.transfer.line', 'transfer_id',
                                     string='Transfer Lines',
                                     states={'done': [('readonly', True)], 'confirm': [('readonly', True)]},
@@ -79,13 +80,20 @@ class HrTransfer(models.Model):
             self.signal_confirm()
 
     def action_cancel(self):
-
         self.ensure_one()
         has_permission = self._check_permission_group(
             "military_job.group_hr_transfer"
         )
         if has_permission:
             self.write({"state": "cancel"})
+
+    def action_draft(self):
+        self.ensure_one()
+        has_permission = self._check_permission_group(
+            "military_job.group_hr_transfer"
+        )
+        if has_permission:
+            self.write({"state": "draft"})
 
     def _check_permission_group(self, group=None):
 

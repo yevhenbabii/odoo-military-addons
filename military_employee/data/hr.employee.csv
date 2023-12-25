@@ -1,4 +1,4 @@
-﻿id;job_id/id;rank_id;lastname;firstname;middlename;gender;identification_id;status;mobile;birthday
+﻿id;job_id/id;rank_id;last_name;first_name;middle_name;gender;identification_id;status;mobile;birthday
 2793739243;military_job.a1234-j0001;полковник;ГУСЕЙНАЛІЄВ;Валентин;Гурамович;male;2793739243;Field;0665709282;11.05.1991
 2041636219;military_job.a1234-j0002;підполковник;СТОЛЯРОВСЬКИЙ;Елшан;Миронович;male;2041636219;Vocation;0501485086;20.01.1978
 1523033647;military_job.a1234-j0003;капітан;ОДИНЕЦЬ;Георгій;Янович;male;1523033647;Field;0505445720;31.12.1984

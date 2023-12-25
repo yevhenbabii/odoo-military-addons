@@ -4,18 +4,28 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-23 20:53+0000\n"
-"PO-Revision-Date: 2023-01-23 22:54+0200\n"
+"POT-Creation-Date: 2023-12-24 10:33+0000\n"
+"PO-Revision-Date: 2023-12-24 12:35+0200\n"
 "Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
 "Language-Team: \n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: military_department
+#: model:ir.actions.report,print_report_name:military_department.hr_department_staff_report
+msgid ""
+"'Staff_%s_%s_%s' % (object.company_id.code or '', object.name.replace(\" "
+"\",\"_\") or '', time.strftime(\"%d_%m_%Y\"))"
+msgstr ""
+"‚Штат_%s_%s_%s‘ % (object.company_id.code or ‚‘, object.name.replace(« "
+"«,»_») or ‚‘, time.strftime(«%d_%m_%Y»))"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department__name_ablative
@@ -23,9 +33,9 @@ msgid "Ablative Name"
 msgstr "Назва в Орудному Відмінку"
 
 #. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department__name_accusative
-msgid "Accusative Name"
-msgstr "Назва в Знахідному Відмінку"
+#: model:ir.model.fields,field_description:military_department.field_hr_department__user_ids
+msgid "Accepted Users"
+msgstr "Прийняті користувачі"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department_tag__active
@@ -46,17 +56,12 @@ msgstr "Код повинен бути унікальним!"
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department__complete_name
 msgid "Complete Name"
-msgstr "Повна Назва"
+msgstr "Повна назва"
 
 #. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department__complete_name_genitive
+#: model:ir.model.fields,field_description:military_department.field_hr_department__complete_name_gent
 msgid "Complete Name Genitive"
 msgstr "Повна Назва в Родовому Відмінку"
-
-#. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department__child_ids
-msgid "Contains"
-msgstr "Містить"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department_tag__create_uid
@@ -69,6 +74,11 @@ msgid "Created on"
 msgstr "Створено"
 
 #. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__name_dative
+msgid "Dative Name"
+msgstr "Назва в Давальному Відмінку"
+
+#. module: military_department
 #: model:ir.model,name:military_department.model_hr_department
 msgid "Department"
 msgstr "Підрозділ"
@@ -79,24 +89,26 @@ msgid "Department Tag"
 msgstr "Мітка"
 
 #. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department__display_name
 #: model:ir.model.fields,field_description:military_department.field_hr_department_tag__display_name
 msgid "Display Name"
 msgstr "Відображувана Назва"
 
 #. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department__name_genitive
+#: model:ir.model,name:military_department.model_hr_employee
+msgid "Employee"
+msgstr "Військовослужбовець"
+
+#. module: military_department
+#: model:ir.model.fields,field_description:military_department.field_hr_department__name_gent
 msgid "Genitive Name"
 msgstr "Назва в Родовому Відмінку"
 
 #. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department__id
 #: model:ir.model.fields,field_description:military_department.field_hr_department_tag__id
 msgid "ID"
 msgstr "ID"
 
 #. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department____last_update
 #: model:ir.model.fields,field_description:military_department.field_hr_department_tag____last_update
 msgid "Last Modified on"
 msgstr "Востаннє Змінено"
@@ -112,14 +124,30 @@ msgid "Last Updated on"
 msgstr "Востаннє Оновлено"
 
 #. module: military_department
-#: model:ir.model.fields,field_description:military_department.field_hr_department__hierarchy_level
+#: model:ir.model.fields,field_description:military_department.field_hr_department__level
+#: model:ir.model.fields,field_description:military_department.field_hr_employee__department_level
 msgid "Level"
-msgstr "Рівень Посади"
+msgstr "Рівень Підрозділу"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department_tag__name
 msgid "Name"
 msgstr "Назва"
+
+#. module: military_department
+#: model:ir.model.fields,help:military_department.field_hr_department__name_ablative
+msgid "Name in ablative declention (by Whom/ by What)"
+msgstr "ПІБ в орудному відмінку (Ким/Чим)"
+
+#. module: military_department
+#: model:ir.model.fields,help:military_department.field_hr_department__name_dative
+msgid "Name in dative declention (for Whom/ for What)"
+msgstr "ПІБ в давальному відмінку (Кому/Чому)"
+
+#. module: military_department
+#: model:ir.model.fields,help:military_department.field_hr_department__name_gent
+msgid "Name in genitive declention (Whom/What)"
+msgstr "ПІБ в родовому відмінку (Кого/Чого)"
 
 #. module: military_department
 #: model:ir.model.constraint,message:military_department.constraint_hr_department_tag_name_unique
@@ -130,6 +158,11 @@ msgstr "Назва повинна бути унікальною!"
 #: model:ir.model.fields,field_description:military_department.field_hr_department__sequence
 msgid "Sequence"
 msgstr "Нумерація"
+
+#. module: military_department
+#: model:ir.actions.report,name:military_department.hr_department_staff_report
+msgid "Staff"
+msgstr "Штат"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department__tag_ids

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_employee_form5" model="ir.actions.report">
+        <field name="name">Certificate form 5</field>
+        <field name="model">hr.employee</field>
+        <field name="report_name">hr.employee_form5</field>
+        <field name="report_type">py3o</field>
+        <field name="py3o_filetype">docx</field>
+        <field name="print_report_name">'Довідка_Форма_5_%s' % (object.name).replace(' ', '_')</field>
+        <field name="module">military_employee</field>
+        <field name="py3o_template_fallback">report/form5.odt</field>
+        <!-- Add entry in "Print" drop-down list -->
+        <field name="binding_type">report</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+    </record>
+</odoo>

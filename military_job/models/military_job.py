@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 
 
 class Job(models.Model):
@@ -7,15 +7,30 @@ class Job(models.Model):
     _order = "level, sequence"
 
     # TODO: check behaviour on archiving
+    name = fields.Char(string='Job Position', required=True, index='trigram', translate=False)
+    name_gent = fields.Char(string="Name gent",
+                            compute="_get_declension",
+                            help="Name in gent declention (Whom/What)",
+                            store=True)
+    name_datv = fields.Char(string="Name Dative",
+                            compute="_get_declension",
+                            help="Name in dative declention (for Whom/ for What)",
+                            store=True)
+    name_ablt = fields.Char(string="Name Ablative",
+                            compute="_get_declension",
+                            help="Name in ablative declention (by Whom/ by What)",
+                            store=True)
+
+    @api.depends('name')
+    def _get_declension(self):
+        declension_ua_model = self.env['declension.ua']
+        grammatical_cases = ['gent', 'datv', 'ablt']
+        for record in self:
+            inflected_fields = declension_ua_model.get_declension_fields(record, grammatical_cases)
+            for field, value in inflected_fields.items():
+                setattr(record, field, value)
+
     active = fields.Boolean('Active', default=True, store=True, readonly=False)
-    # employee_id = fields.Many2one('hr.employee', string='Employee',
-    #                               compute='_compute_employee',
-    #                               inverse='_inverse_employee',
-    #                               store=True)
-    # contract_id = fields.Many2one(compute="_compute_contract", store=True, string="Contract")
-    # employee_id = fields.Many2one(compute="_compute_employee", store=True, string="Employee")
-    # contract_id = fields.Many2one("hr.contract", store=True, string="Contract")
-    # temp_employee_id = fields.Many2one("hr.employee", string='Temporary Employee')
     sequence = fields.Integer(default=1)
     level = fields.Integer('Level', store='True', related='department_id.level')
     complete_name = fields.Char(string='Job Name',
@@ -25,37 +40,20 @@ class Job(models.Model):
     mos = fields.Char(string="Job MOS code")
     payroll_grade = fields.Char(string="Payroll Grade")
 
-    # @api.depends('employee_ids')
-    # def _compute_employee(self):
-    #     if len(self.employee_ids) > 0:
-    #         self.employee_id = self.env['hr.employee'].browse(self.employee_ids[0].id)
-
-    # @api.depends("employee_ids.job_id", "employee_ids.active")
-    # def _compute_employee(self):
-    #     if len(self.employee_ids) > 0:
-    #         self.employee_id = self.employee_ids[0]
-    #
-    # def _inverse_employee(self):
-    #     if len(self.employee_ids) > 0:
-    #         # delete previous reference
-    #         employee = self.env['hr.employee'].browse(self.employee_ids[0].id)
-    #         employee.employee_id = False
-    #         # set new reference
-    #         self.employee_id = self
-
-    # Change sql constraint
+    # Change sql constraint to have multiple identical job names in one department
     _sql_constraints = [
-        ('name_company_uniq', 'unique(name, mos, company_id, department_id)', 'The name of the job position and MOS must be unique per department in company!'),
+        ('name_company_uniq', 'unique(name, mos, company_id, department_id)',
+         'The name of the job position and MOS must be unique per department in company!'),
     ]
 
-    @api.depends("name", "department_id.complete_name_genitive", "company_id.name_genitive")
+    @api.depends("name", "department_id.complete_name_gent", "company_id.name_gent")
     def _compute_complete_name(self):
         for job in self:
             job.complete_name = job.name
-            if job.name and job.department_id.complete_name_genitive:
-                job.complete_name = '%s %s' % (job.name, job.department_id.complete_name_genitive)
+            if job.name and job.department_id.complete_name_gent:
+                job.complete_name = '%s %s' % (job.name, job.department_id.complete_name_gent)
             else:
-                job.complete_name = '%s %s' % (job.name, job.company_id.name_genitive)
+                job.complete_name = '%s %s' % (job.name, job.company_id.name_gent)
 
     @api.onchange('name', 'department_id')
     def _onchange_name(self):
@@ -68,3 +66,43 @@ class Job(models.Model):
             name = job.complete_name
             res.append((job.id, name))
         return res
+
+    @api.depends('no_of_recruitment', 'employee_ids.job_id', 'employee_ids.active')
+    def _compute_employees(self):
+        employee_data = self.env['hr.employee']._read_group([('job_id', 'in', self.ids)],
+                                                            ['job_id'], ['job_id'])
+        result = dict((data['job_id'][0], data['job_id_count']) for data in employee_data)
+        for job in self:
+            job.no_of_employee = result.get(job.id, 0)
+            job.expected_employees = job.no_of_recruitment - result.get(job.id, 0)
+
+
+class HrEmployee(models.Model):
+    _inherit = 'hr.employee'
+
+    def _job_count(self):
+        for each in self:
+            job_ids = self.env['hr.transfer.line'].sudo().search(
+                [('employee_id', '=', each.id)])
+            each.job_count = len(job_ids)
+
+    def job_view(self):
+        self.ensure_one()
+        domain = [
+            ('employee_id', '=', self.id)]
+        return {
+            'name': _('Jobs'),
+            'domain': domain,
+            'res_model': 'hr.transfer.line',
+            'type': 'ir.actions.act_window',
+            'view_id': False,
+            'view_mode': 'tree',
+            # 'help': _('''<p class="oe_view_nocontent_create">
+            #                Click to assign new job
+            #             </p>'''),
+            'limit': 80,
+            'context': "{'employee_id': %s}" % self.id
+        }
+
+    job_count = fields.Integer(compute='_job_count',
+                               string='# Jobs')

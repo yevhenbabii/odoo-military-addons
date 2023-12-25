@@ -1,36 +1,37 @@
-id,parent_id,sequence,category,subcategory,name,name_short,nato_code,description
-rank_340,,340,officer,master,General,г-л,OF-9,командир армії
-rank_330,General,330,officer,master,Lieutenant General,г-л/л-нт,OF-8,командир корпусу
-rank_320,Lieutenant General,320,officer,master,Major General,г-л/м-р,OF-7,командир дивізії
-rank_310,Major General,310,officer,master,Brigade General,бр г-л,OF-6,командир бригади
-rank_300,Brigade General,300,officer,senior,Colonel,п-к,OF-5,командир полку
-rank_290,Colonel,290,officer,senior,Lieutenant Colonel,пп-к,OF-4,командир батальйону
-rank_280,Lieutenant Colonel,280,officer,senior,Major of the chaplain service,м-р,,
-rank_270,Major of the chaplain service,270,officer,senior,Major of the medical service,м-р,,
-rank_260,Major of the medical service,260,officer,senior,Major of Justice,м-р,,
-rank_250,Major of Justice,250,officer,senior,Major,м-р,OF-3,заступник командира батальйону
-rank_240,Major,240,officer,junior,Captain of the medical service,к-н,,
-rank_230,Captain of the medical service,230,officer,junior,Captain of Justice,к-н,,
-rank_220,Captain of Justice,220,officer,junior,Captain,к-н,OF-2,командир роти
-rank_210,Captain,210,officer,junior,Senior Lieutenant of the medical service,ст л-нт,,
-rank_200,Senior Lieutenant of the medical service,200,officer,junior,Senior Lieutenant of Justice,ст л-нт,,
-rank_190,Senior Lieutenant of Justice,190,officer,junior,Senior Lieutenant,ст л-нт,OF-1b,командир взводу
-rank_180,Senior Lieutenant,180,officer,junior,Lieutenant of the medical service,л-нт,,
-rank_170,Lieutenant of the medical service,170,officer,junior,Lieutenant of Justice,л-нт,,
-rank_160,Lieutenant of Justice,160,officer,junior,Lieutenant,л-нт,OF-1a2,командир взводу
-rank_155,Lieutenant,155,officer,junior,Junior Lieutenant of the medical service,мол л-нт,OF-1a1,
-rank_150,Junior Lieutenant of the medical service,150,officer,junior,Junior Lieutenant,мол л-нт,OF-1a1,командир взводу
-rank_140,Junior Lieutenant,140,sergeant,master,Chief Master Sergeant,гол м-с-нт,OR-94,головний сержант роду військ
-rank_130,Chief Master Sergeant,130,sergeant,master,Senior Master Sergeant,ст ,OR-93,головний сержант роду військ
-rank_120,Senior Master Sergeant,120,sergeant,master,Mаster Sergeant,м-с-нт,OR-92,головний сержант бригади
-rank_110,Mаster Sergeant,110,sergeant,senior,Staff Sergeant,шт с-нт,OR-91,головний сержант батальйону
-rank_100,Staff Sergeant,100,sergeant,senior,Major Sergeant,гол с-нт,OR-8,головний сержант роти
-rank_90,Major Sergeant,90,sergeant,senior,Senior sergeant,ст с-нт,OR-7,головний сержант взводу
-rank_80,Senior sergeant,80,sergeant,junior,Sergeant,с-нт,OR-6,командир відділення
-rank_70,Sergeant,70,sergeant,junior,Junior sergeant,мол с-нт,OR-5,заступник командира відділення
-rank_60,Junior sergeant,60,private,junior,Senior soldier of term service,ст с-т,OR-3,
-rank_50,Senior soldier of term service,50,private,junior,Senior soldier,ст с-т,OR-3,досвідчений солдат
-rank_40,Senior soldier,40,private,junior,Soldier of term service,с-т,OR-2,
-rank_30,Soldier of term service,30,private,junior,Soldier,с-т,OR-2,рядовий
-rank_20,Soldier,20,private,junior,Recruit,р-т,OR-1,тимчасове звання до прийняття присяги
-rank_10,Recruit,10,,,UAF Employee,,,
+id,parent_id,sequence,category,subcategory,name,name_gent,name_datv,name_ablt,name_short,nato_code,description
+rank_340,,340,officer,master,General,генерала,генералу	,генералом,г-л,OF-9,командир армії
+rank_330,General,330,officer,master,Lieutenant General,генерал-лейтенанта,генерал-лейтенанту,генерал-лейтенантом,г-л/л-нт,OF-8,командир корпусу
+rank_320,Lieutenant General,320,officer,master,Major General,генерал-майора,генерал-майору,генерал-майором,г-л/м-р,OF-7,командир дивізії
+rank_310,Major General,310,officer,master,Brigade General,бригадного генерала,бригадному генералу,бригадним генералом,бр г-л,OF-6,командир бригади
+rank_300,Brigade General,300,officer,senior,Colonel,полковника,полковнику,полковником,п-к,OF-5,командир полку
+rank_290,Colonel,290,officer,senior,Lieutenant Colonel,підполковника,підполковнику,підполковником,пп-к,OF-4,командир батальйону
+rank_280,,280,officer,senior,Major of the chaplain service,майора капеланської служби,майору капеланської служби,майором капеланської служби,м-р,,
+rank_270,,270,officer,senior,Major of the medical service,майора медичної служби,майору медичної служби,майором медичної служби,м-р,,
+rank_260,,260,officer,senior,Major of Justice,майора юстиції,майору юстиції,майором юстиції,м-р,,
+rank_250,Lieutenant Colonel,250,officer,senior,Major,майора,майору,майором,м-р,OF-3,заступник командира батальйону
+rank_240,Major of the medical service,240,officer,junior,Captain of the medical service,капітана медичної служби,капітану медичної служби,капітаном медичної служби,к-н,,
+rank_230,Major of Justice,230,officer,junior,Captain of Justice,капітана юстиції,капітану юстиції,капітаном юстиції,к-н,,
+rank_220,Major,220,officer,junior,Captain,капітана,капітану,капітаном,к-н,OF-2,командир роти
+rank_210,Captain of the medical service,210,officer,junior,Senior Lieutenant of the medical service,старшого лейтенанта медичної служби,старшому лейтенанту медичної служби,старшим лейтенантом медичної служби,ст л-нт,,
+rank_200,Captain of Justice,200,officer,junior,Senior Lieutenant of Justice,старшого лейтенанта юстиції,старшому лейтенанту юстиції,старшим лейтенантом юстиції,ст л-нт,,
+rank_190,Captain,190,officer,junior,Senior Lieutenant,старшого лейтенанта,старшому лейтенанту,старшим лейтенантом,ст л-нт,OF-1b,командир взводу
+rank_180,Senior Lieutenant of the medical service,180,officer,junior,Lieutenant of the medical service,лейтенанта медичної служби,лейтенанту медичної служби,лейтенантом медичної служби,л-нт,,
+rank_170,Senior Lieutenant of Justice,170,officer,junior,Lieutenant of Justice,лейтенанта юстиції,лейтенанту юстиції,лейтенантом юстиції,л-нт,,
+rank_160,Senior Lieutenant,160,officer,junior,Lieutenant,лейтенанта,лейтенанту,лейтенантом,л-нт,OF-1a2,командир взводу
+rank_155,Lieutenant of the medical service,155,officer,junior,Junior Lieutenant of the medical service,молодшого лейтенанта медичної служби,молодшому лейтенанту медичної служби,молодшим лейтенантом медичної служби,мол л-нт,OF-1a1,
+rank_150,Lieutenant,150,officer,junior,Junior Lieutenant,молодшого лейтенанта,молодшому лейтенанту,молодшим лейтенантом,мол л-нт,OF-1a1,командир взводу
+rank_140,Junior Lieutenant,140,sergeant,master,Chief Master Sergeant,головного майстер-сержанта,головному майстер-сержанту,головним майстер-сержантом,гол м-с-нт,OR-94,головний сержант роду військ
+rank_130,Chief Master Sergeant,130,sergeant,master,Senior Master Sergeant,старшого майстер-сержанта,старшому майстер-сержанту,старшим майстер-сержантом,ст ,OR-93,головний сержант роду військ
+rank_120,Senior Master Sergeant,120,sergeant,master,Mаster Sergeant,майстер-сержанта,майстер-сержанту,майстер-сержантом,м-с-нт,OR-92,головний сержант бригади
+rank_110,Mаster Sergeant,110,sergeant,senior,Staff Sergeant,штаб-сержанта,штаб-сержанту,штаб-сержантом,шт с-нт,OR-91,головний сержант батальйону
+rank_100,Staff Sergeant,100,sergeant,senior,Major Sergeant,головного сержанта,головному сержанту,головним сержантом,гол с-нт,OR-8,головний сержант роти
+rank_90,Major Sergeant,90,sergeant,senior,Senior Sergeant,старшого сержанта,старшому сержанту,старшим сержантом,ст с-нт,OR-7,головний сержант взводу
+rank_80,Senior Sergeant,80,sergeant,junior,Sergeant,сержанта,сержанту,сержантом,с-нт,OR-6,командир відділення
+rank_70,Sergeant,70,sergeant,junior,Junior Sergeant,молодшого сержанта,молодшому сержанту,молодшим сержантом,мол с-нт,OR-5,заступник командира відділення
+rank_60,Junior Sergeant,60,private,junior,Senior soldier of term service,старшого солдата строкової служби,старшому солдату строкової служби,старшим солдатом строкової служби,ст с-т,OR-3,
+rank_50,Junior Sergeant,50,private,junior,Senior Soldier,старшого солдата,старшому солдату,старшим солдатом,ст с-т,OR-3,досвідчений солдат
+rank_40,Senior soldier of term service,40,private,junior,Soldier of term service,солдата строкової служби,солдату строкової служби,солдатом строкової служби,с-т,OR-2,
+rank_30,Senior Soldier,30,private,junior,Soldier,солдата,солдату,солдатом,с-т,OR-2,рядовий
+rank_20,Soldier,20,private,junior,Recruit,рекрута,рекруту,рекрутом,р-т,OR-1,тимчасове звання до прийняття присяги
+rank_10,Recruit,10,,,UAF Employee,працівника ЗСУ,працівнику ЗСУ,працівником ЗСУ,,,
+,,,,,,,

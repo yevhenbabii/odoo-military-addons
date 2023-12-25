@@ -7,8 +7,9 @@
             <field name="partner_id" position="before">
                 <field name="code"/>
                 <field name="complete_name" required="1"/>
-                <field name="name_genitive" required="1"/>
-                <field name="name_dative" required="1"/>
+                <field name="name_gent" readonly="0" required="1"/>
+                <field name="name_datv" readonly="0" required="1"/>
+                <field name="name_ablt" readonly="0" required="1"/>
                 <field name="public_name" required="1"/>
                 <field name="public_shortname" required="1"/>
                 <field name="commandor"/>

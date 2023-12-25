@@ -6,7 +6,7 @@
     "author": "Yevhen Babii",
     "website": "",
     "category": "Other",
-    "version": "1.0.2",
+    "version": "1.0",
     "license": "Other proprietary",
     "depends": ["base",
                 "hr"

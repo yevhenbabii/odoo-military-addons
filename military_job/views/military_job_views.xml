@@ -18,16 +18,15 @@
                     <field name="expected_employees"/>
                 </group>
             </xpath>
-            <xpath expr="/form/sheet/notebook" position="inside">
+            <!--xpath expr="/form/sheet/notebook" position="inside">
                 <page string="Employees" name="employees">
                     <field name="employee_ids" nolabel="1">
                         <tree>
-                            <field name="name"/>
-                            <field name="rank_id"/>
+                            <field name="complete_name"/>
                         </tree>
                     </field>
                 </page>
-            </xpath>
+            </xpath-->
         </field>
     </record>
 
@@ -48,12 +47,12 @@
 
     <record id="view_job_filter" model="ir.ui.view">
         <field name="model">hr.job</field>
-        <field name="inherit_id" ref="hr.view_job_filter"/>
+        <field name="inherit_id" ref="hr_recruitment.hr_job_search_view"/>
         <field name="arch" type="xml">
-            <search>
+            <xpath expr="//searchpanel" position="replace">
                 <filter name="hired" string="Hired" domain="[('employee_ids', '!=', False)]"/>
                 <filter name="vacant" string="Vacant" domain="[('employee_ids', '=', False)]"/>
-                <searchpanel>
+                <searchpanel position="replace">
                     <field name="company_id"
                            select="multi"
                            groups="base.group_multi_company"
@@ -73,7 +72,8 @@
                            icon="fa-users"
                            enable_counters="1"/>
                 </searchpanel>
-            </search>
+
+            </xpath>
         </field>
     </record>
 
@@ -81,11 +81,11 @@
         <field name="model">hr.department</field>
         <field name="inherit_id" ref="hr.view_department_form" />
         <field name="arch" type="xml">
-            <!--field name="manager_id" position="attributes">
+            <field name="manager_id" position="attributes">
                 <attribute name="domain">
-                    ['|', ('department_id','=',self)]
+                    [('department_id','=',active_id)]
                 </attribute>
-            </field-->
+            </field>
             <xpath expr="/form/sheet" position="inside">
                 <notebook>
                     <page string="Departments" name="departments">
@@ -123,9 +123,10 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="arch" type="xml">
+            <field name="id" invisible="1"/>
             <field name="job_id" position="replace"/>
             <field name="department_id" position="before">
-                    <field name="job_id" readonly="1"/>
+                    <field name="job_id" attrs="{'readonly': [('id', '!=', False)]}"/>
             </field>
             <field name="department_id" position="attributes">
                 <readonly>1</readonly>
@@ -133,6 +134,19 @@
             <field name="parent_id" position="attributes">
                 <readonly>1</readonly>
             </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_employee_job_inherit_form_view">
+        <field name="name">hr.employee.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button class="oe_stat_button" name="job_view" type="object" icon="fa-list-ol">
+                    <field string="Jobs" name="job_count" widget="statinfo"/>
+                </button>
+            </div>
         </field>
     </record>
 </odoo>

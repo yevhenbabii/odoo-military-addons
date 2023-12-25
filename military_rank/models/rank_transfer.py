@@ -6,7 +6,7 @@ class RankTransfer(models.Model):
     _name = "rank.transfer"
     _inherit = ["mail.thread"]
     _description = "Rank Transfer"
-    _rec_name = "date"
+    _rec_name = "number"
     _check_company_auto = True
 
     number = fields.Char("Order Number", required=True, readonly=True, states={'draft': [('readonly', False)]})
@@ -61,7 +61,6 @@ class RankTransfer(models.Model):
         return super(RankTransfer, self).unlink()
 
     def action_transfer(self):
-
         self.ensure_one()
         has_permission = self._check_permission_group(
             "military_rank.group_rank_transfer"
@@ -72,7 +71,6 @@ class RankTransfer(models.Model):
             self.write({"state": "confirm"})
 
     def action_confirm(self):
-
         self.ensure_one()
         has_permission = self._check_permission_group(
             "military_rank.group_rank_transfer"
@@ -81,7 +79,6 @@ class RankTransfer(models.Model):
             self.signal_confirm()
 
     def action_cancel(self):
-
         self.ensure_one()
         has_permission = self._check_permission_group(
             "military_rank.group_rank_transfer"
@@ -89,8 +86,15 @@ class RankTransfer(models.Model):
         if has_permission:
             self.write({"state": "cancel"})
 
-    def _check_permission_group(self, group=None):
+    def action_draft(self):
+        self.ensure_one()
+        has_permission = self._check_permission_group(
+            "military_rank.group_rank_transfer"
+        )
+        if has_permission:
+            self.write({"state": "draft"})
 
+    def _check_permission_group(self, group=None):
         for transfer in self:
             if group and not transfer.user_has_groups(group):
                 raise AccessError(
@@ -109,7 +113,7 @@ class RankTransfer(models.Model):
         today = fields.Date.today()
         for transfer in self:
             if transfer.date <= today:
-                transfer.transfer_line.employee_id.rank_id = transfer.transfer_line.dst_id
+                transfer.transfer_line.employee_id.rank_id = transfer.transfer_line.dst_rank
                 transfer.state = "done"
                 # transfer.transfer_line.state = "done"
             else:
@@ -117,7 +121,6 @@ class RankTransfer(models.Model):
         return True
 
     def signal_confirm(self):
-
         for transfer in self:
             # If the user is a member of 'approval' group, go straight to 'approval'
             if (
@@ -177,27 +180,42 @@ class RankTransferLine(models.Model):
         states={"draft": [("readonly", False)]},
         check_company=True,
     )
-    src_rank = fields.Char(
+    src_rank = fields.Many2one(
         string="From Rank",
-        compute="_compute_onchange_employee",
+        comodel_name="military.rank",
+        # related="employee_id.rank_id",
+        compute="_compute_rank",
         store=True,
         readonly=True
     )
     dst_rank = fields.Many2one(
         string="Destination Rank",
         comodel_name="military.rank",
-        default=lambda self: self.env.ref(
-            "employee_id.rank_id.parent_id", raise_if_not_found=False
-        ),
-        required=True,
+        # TODO fix default value to src_rank.parent_id
+        # default=lambda self: self.env.ref(
+        #     "src_rank.parent_id", raise_if_not_found=False
+        # ),
+        # compute="_compute_rank",
         store=True,
+        required=True,
+        readonly=True,
         states={"draft": [("readonly", False)]},
     )
 
     @api.depends("employee_id")
-    def _compute_onchange_employee(self):
-        for transfer in self:
-            if transfer.employee_id:
-                transfer.src_rank = transfer.employee_id.rank_id.display_name
-            else:
-                transfer.src_rank = False
+    def _compute_rank(self):
+        if self.employee_id.rank_id:
+            self.src_rank = self.employee_id.rank_id
+            # self.dst_rank = self.employee_id.rank_id.parent_id
+        else:
+            self.src_rank = False
+            # self.dst_rank = False
+
+    @api.onchange("employee_id")
+    def _onchange_employee(self):
+        if self.employee_id:
+            self.src_rank = self.employee_id.rank_id
+            self.dst_rank = self.employee_id.rank_id.parent_id
+        # else:
+        #     self.src_rank = False
+        #     self.dst_rank = False

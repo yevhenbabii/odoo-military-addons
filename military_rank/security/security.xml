@@ -33,7 +33,11 @@
         <field name="category_id" ref="base.module_category_human_resources" />
         <field
             name="implied_ids"
-            eval="[(4, ref('hr.group_hr_manager')), (4, ref('base.group_system'))]"
+            eval="[
+                (4, ref('hr.group_hr_manager')),
+                (4, ref('base.group_system')),
+                (4, ref('base.group_multi_company'))
+                ]"
         />
         <field name="users" eval="[(4, ref('base.user_root'))]" />
         <field name="comment">

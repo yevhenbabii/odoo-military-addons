@@ -74,8 +74,9 @@
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form" />
             <field name="arch" type="xml">
+                <field name="id" invisible="1"/>
                 <xpath expr="//h1//field[@name='name']/.." position="after">
-                    <field name="rank_id" string="Military Rank" readonly="True"/>
+                    <field name="rank_id" placeholder="Military Rank" widget="selection" attrs="{'readonly': [('id', '!=', False)]}"/>
                 </xpath>
             </field>
         </record>
@@ -93,6 +94,19 @@
                 </field>
                 <field name="job_title" position="after">
                     <ul><field name="mobile_phone"/></ul>
+                </field>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="employee_view_tree_inherit_rank_id">
+            <field name="name">hr.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="rank_id" optional="hide"/>
                 </field>
             </field>
         </record>

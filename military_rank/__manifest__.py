@@ -6,7 +6,7 @@
     "author": "Yevhen Babii",
     "website": "https://github.com/yevhenbabii",
     "category": "Other",
-    "version": "14.0.1",
+    "version": "1.0",
     "license": "Other proprietary",
     "depends": ["hr"],
     "data": [

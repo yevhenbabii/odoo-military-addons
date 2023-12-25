@@ -5,8 +5,9 @@
       <excludeFolder url="file://$USER_HOME$/odoo-military/data" />
     </content>
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.8 (odoo-military) (2)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (odoo16-python310) (3)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="odoo-16" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />

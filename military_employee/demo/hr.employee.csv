@@ -1,4 +1,4 @@
-id,job_id/id,rank_id/id,name,lastname,firstname,middlename,gender,identification_id,state,mobile_phone,birthday
+id,job_id/id,rank_id/id,name,last_name,first_name,middle_name,gender,identification_id,state,mobile_phone,birthday
 2039636059,military_job.a1234-j0001,military_rank.rank_300,СОВА Кирил Айигович,СОВА,Кирил,Айигович,male,2039636059,Field,0664038254,1989-03-01
 1911552731,military_job.a1234-j0002,military_rank.rank_290,ПЕРЕПІЛКА Георгій Шефкетович,ПЕРЕПІЛКА,Георгій,Шефкетович,male,1911552731,Holiday,0636277489,1978-09-13
 1943573073,military_job.a1234-j0003,military_rank.rank_220,ГРУШЕВСЬКИЙ Прокоп Русланович,ГРУШЕВСЬКИЙ,Прокоп,Русланович,male,1943573073,Field,0669610702,1991-06-30

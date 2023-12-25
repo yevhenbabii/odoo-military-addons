@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <!-- TODO add blood info to employee form-->
 
     <record id="view_employee_form" model="ir.ui.view">
         <field name="model">hr.employee</field>
@@ -12,35 +13,77 @@
                     options="{'clickable': '1'}"
                 />
             </header>
+            <xpath expr="//h1//field[@name='name']/.." position="after">
+                <group>
+                    <field name="last_name" required="1"/>
+                    <field name="first_name" required="1"/>
+                    <field name="middle_name" required="1"/>
+                    <field name="complete_name"/>
+                </group>
+            </xpath>
+            <xpath expr="//h1//field[@name='name']/.." position="after">
+                <group>
+                    <field name="service_type" required="1"/>
+                </group>
+            </xpath>
             <xpath expr="//field[@name='name']" position="attributes">
                 <attribute name="readonly">1</attribute>
                 <attribute name="no_label">1</attribute>
                 <attribute name="required">0</attribute>
             </xpath>
-            <xpath expr="//h1//field[@name='name']/.." position="before">
-                <group>
-                    <field name="lastname" required="1"/>
-                    <field name="firstname" required="1"/>
-                    <field name="middlename" required="1"/>
-                    <!--field name="name_dative"/>
-                    <field name="name_accusative"/>
-                    <field name="name_ablative"/>
-                    <field name="name_locative"/>
-                    <field name="name_vocative"/-->
-                </group>
+
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='job_title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='work_phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='work_email']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
             <page name="public" position="inside">
                 <group string="Conscription" sequence="1">
-                    <field name="conscription_place" domain="[('name', '=like', '%ТЦК%')]"/>
+                    <field name="conscription_place" domain="['|', '|', ('name', '=like', '%ЦК%'), ('name', '=like', '%частина%'), ('name', '=like', '%військовий%')]"/>
                     <field name="conscription_date"/>
                 </group>
             </page>
-            <field name="gender" position="attributes">
-                <required>1</required>
-            </field>
             <xpath expr="//field[@name='birthday']" position="after">
                 <field name="age" attrs="{'invisible': [('birthday','=', False)]}"/>
             </xpath>
+            <xpath expr="//separator[@name='has_work_permit']" position="replace"/>
+            <xpath expr="//field[@name='visa_no']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='permit_no']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='visa_expire']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='work_permit_expiration_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='work_permit_name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='has_work_permit']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[@name='div_km_home_work']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <notebook>
+                <page name="declention" string="Name Declention" groups="hr.group_hr_user">
+                    <group>
+                        <field name="name_gent" readonly="0"/>
+                        <field name="name_datv" readonly="0"/>
+                        <field name="name_ablt" readonly="0"/>
+                    </group>
+                </page>
+            </notebook>
         </field>
     </record>
 
@@ -88,23 +131,44 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="employee_view_tree_inherit_employee_status_id">
+    <record model="ir.ui.view" id="employee_view_tree_inherit_employee">
         <field name="name">hr.employee.tree</field>
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_tree"/>
         <field name="priority">50</field>
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="rank_id"/>
+                <field name="service_type" optional="hide"/>
+                <field name="last_name" optional="hide"/>
+                <field name="first_name" optional="hide"/>
+                <field name="middle_name" optional="hide"/>
                 <field name="state" optional="hide"/>
             </field>
+            <!--field name="name" position="before">
+                    <field name="rank_id" optional="hide"/>
+            </field-->
+            <field name="work_phone" position="before">
+                <field name="mobile_phone" optional="hide"/>
+            </field>
+            <field name="activity_ids" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
+            <field name="job_id" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
             <field name="company_id" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
+            <field name="department_id" position="attributes">
                 <attribute name="optional">"hide"</attribute>
             </field>
             <field name="work_phone" position="attributes">
                 <attribute name="optional">"hide"</attribute>
             </field>
             <field name="work_email" position="attributes">
+                <attribute name="optional">"hide"</attribute>
+            </field>
+            <field name="activity_date_deadline" position="attributes">
                 <attribute name="optional">"hide"</attribute>
             </field>
         </field>

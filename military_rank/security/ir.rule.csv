@@ -1,2 +1,0 @@
-"id","name","model_id","domain_force","groups"
-"department_record_rule","See only His Patients","model_military_rank","[ ('user_id.employee_id.department_id','='‚user.id)]","eval="[(4, refl group hospital doctor*))]"
