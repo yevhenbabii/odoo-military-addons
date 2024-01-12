@@ -24,8 +24,8 @@ msgid ""
 "'Staff_%s_%s_%s' % (object.company_id.code or '', object.name.replace(\" "
 "\",\"_\") or '', time.strftime(\"%d_%m_%Y\"))"
 msgstr ""
-"‚Штат_%s_%s_%s‘ % (object.company_id.code or ‚‘, object.name.replace(« "
-"«,»_») or ‚‘, time.strftime(«%d_%m_%Y»))"
+"'Штат_%s_%s_%s' % (object.company_id.code or '', object.name.replace(\" "
+"\",\"_\") or '', time.strftime(\"%d_%m_%Y\"))"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department__name_ablative
@@ -56,7 +56,7 @@ msgstr "Код повинен бути унікальним!"
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department__complete_name
 msgid "Complete Name"
-msgstr "Повна назва"
+msgstr "Повна Назва"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department__complete_name_gent

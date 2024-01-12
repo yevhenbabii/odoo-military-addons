@@ -107,6 +107,7 @@
         <field name="res_model">rank.transfer</field>
         <field name="view_mode">tree,form</field>
     </record>
+
     <menuitem
         id="menu_rank_transfer"
         action="open_rank_transfer"

@@ -16,8 +16,13 @@
     "website": "Website",
     "license": "Other proprietary",
     "external_dependencies": {
-        "python": ["pymorphy2",
-                   "pymorphy2_dicts_uk"],
+        "python": ["pymorphy3",
+                   "pymorphy3-dicts-uk",
+                   # "pymorphy2", # In case of using pymorphy2 library
+                   # "pymorphy2_dicts_uk",
+                   "js2py",
+                   ],
+        "javascript": ["shevchenko"],
     },
     "installable": True,
     "auto_install": True

@@ -1,5 +1,5 @@
 from odoo import api, models
-import pymorphy2
+import pymorphy3
 
 
 class DeclensionUA(models.AbstractModel):
@@ -8,7 +8,7 @@ class DeclensionUA(models.AbstractModel):
 
     @api.model
     def _compute_inflected_field(self, value, grammatical_case):
-        morph = pymorphy2.MorphAnalyzer(lang='uk')
+        morph = pymorphy3.MorphAnalyzer(lang='uk')
         if isinstance(value, str):
             words = value.split()
             inflected_words = []

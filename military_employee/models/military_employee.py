@@ -11,7 +11,9 @@ UPDATE_PARTNER_FIELDS = ["name", "user_id", "address_home_id"]
 
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
-    # _rec_name = "complete_name"  # ToDo try to implement
+    _rec_name = "complete_name"
+    _rec_names_search = ["name", "complete_name"]
+    _avoid_quick_create = True
 
     job_id = fields.Many2one('hr.job', string='Job Position',
                              domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
@@ -33,6 +35,7 @@ class HrEmployee(models.Model):
          ("trip", "Trip"),
          ("holiday", "Holiday"),
          ("deserter", "Deserter"),
+         ("guard", "Guard"),
          ("fugitive", "Fugitive"),
          ("refusal", "Refusal"),
          ("hospital", "Hospital"),
@@ -67,21 +70,7 @@ class HrEmployee(models.Model):
     complete_name = fields.Char("Complete Name",
                                 compute="_compute_complete_name",
                                 store=True,
-                                tracking=True)
-
-    @api.depends("name", "rank_id", "job_title")
-    def _compute_complete_name(self):
-        for record in self:
-            rank = record.rank_id.name if record.rank_id else ''
-            name = record.name if record.name else ''
-            job = record.job_title[0].lower() + record.job_title[1:] if record.job_title else ''
-            record.complete_name = f"{rank} {name} {job}" if any([rank, name, job]) else ""
-
-    @api.depends("birthday")
-    def _compute_age(self):
-        for rec in self:
-            rec.age = relativedelta(datetime.date.today(), rec.birthday).years
-
+                                default="Noname")
     name_gent = fields.Char(string="Name Genitive",
                             compute="_get_declension",
                             help="Name in genitive declention (Whom/What)",
@@ -133,6 +122,28 @@ class HrEmployee(models.Model):
                                    help="Middle name in ablative declention (by Whom/ by What)",
                                    store=True)
 
+    @api.model
+    def _compute_complete_name(self, rank_id, name, job_title):
+        rank = self.rank_id.name if rank_id else ''
+        job = job_title[0].lower() + job_title[1:] if job_title else ''
+        return " ".join(p for p in (rank, name, job) if p)
+    # def _compute_complete_name(self):
+    #     if self.rank_id:
+    #         rank = self.rank_id.name
+    #     else:
+    #         rank = ''
+    #     if self.job_id:
+    #         job = self.job_title[0].lower() + self.job_title[1:]
+    #     else:
+    #         job = ''
+    #     name = self.name
+    #     return " ".join(p for p in (rank, name, job) if p)
+
+    @api.depends("birthday")
+    def _compute_age(self):
+        for rec in self:
+            rec.age = relativedelta(datetime.date.today(), rec.birthday).years
+
     @api.depends('name', 'first_name', 'middle_name', 'last_name')
     def _get_declension(self):
         declension_ua_model = self.env['declension.ua']
@@ -140,42 +151,49 @@ class HrEmployee(models.Model):
         for record in self:
             inflected_fields = declension_ua_model.get_declension_fields(record, grammatical_cases)
             for field, value in inflected_fields.items():
-                setattr(record, field, value)
+                setattr(record, field, value.title())
 
     @api.model
     def _get_name(self, last_name, first_name, middle_name):
         return " ".join(p for p in (last_name, first_name, middle_name) if p)
+    # def _get_name(self):
+    #     return " ".join(p for p in (self.last_name, self.first_name, self.middle_name) if p)
 
-    @api.onchange("last_name", "first_name", "middle_name")
-    def _onchange_name(self):
-        self.last_name = self.last_name.title() if self.last_name else ''
-        self.first_name = self.first_name.title() if self.first_name else ''
-        self.middle_name = self.middle_name.title() if self.middle_name else ''
+    @api.onchange("last_name", "first_name", "middle_name", "name", "rank_id", "job_title")
+    def _onchange(self):
+        # self.last_name = self.last_name.title() if self.last_name else ''
+        # self.first_name = self.first_name.title() if self.first_name else ''
+        # self.middle_name = self.middle_name.title() if self.middle_name else ''
         self.name = self._get_name(self.last_name, self.first_name, self.middle_name)
+        self.complete_name = self._compute_complete_name(self.rank_id.name, self.name, self.job_title)
 
-    def _prepare_vals_on_create(self, vals):
-        if any([vals.get(field) for field in ["first_name", "last_name", "middle_name"]]):
-            vals["name"] = self._get_name(vals.get("last_name"), vals.get("first_name"),
-                                          vals.get("middle_name"))
+    def _prepare_vals(self, vals):
+        # if any([vals.get(field) for field in ["first_name", "last_name", "middle_name"]]):
+        if not vals.get("name"):
+            last_name = vals.get("last_name", self.last_name)
+            first_name = vals.get("first_name", self.first_name)
+            middle_name = vals.get("middle_name", self.middle_name)
+            # vals["name"] = self._get_name(vals.get("last_name"), vals.get("first_name"), vals.get("middle_name"))
+            vals["name"] = self._get_name(last_name, first_name, middle_name)
         else:
-            raise ValidationError("No name set on create.")
+            raise ValidationError("No name set.")
+        if not vals.get("complete_name"):
+            name = vals.get("name", self.name)
+            rank = vals.get("rank_id", self.rank_id.name)
+            job_title = vals.get("job_title", self.job_title)
+            # vals["complete_name"] = self._compute_complete_name(vals.get("rank_id"), vals.get("name"), vals.get("job_title"))
+            vals["complete_name"] = self._compute_complete_name(rank, name, job_title)
+        else:
+            raise ValidationError("No complete name set.")
 
-    def _prepare_vals_on_write(self, vals):
-        if any([vals.get(field) for field in ["first_name", "last_name", "middle_name"]]):
-            # last_name = vals.get("last_name", self.last_name)
-            # first_name = vals.get("first_name", self.first_name)
-            # middle_name = vals.get("middle_name", self.middle_name)
-            vals["name"] = self._get_name(self.last_name, self.first_name, self.middle_name)
-        # else:
-        #     raise ValidationError("No name set on write.")
-
-    @api.model
-    def create(self, vals):
-        self._prepare_vals_on_create(vals)
-        res = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self._prepare_vals(vals)
+        res = super().create(vals_list)
         return res
 
     def write(self, vals):
-        self._prepare_vals_on_write(vals)
+        self._prepare_vals(vals)
         res = super().write(vals)
         return res

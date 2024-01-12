@@ -99,7 +99,7 @@
         </record>
 
 
-        <record model="ir.ui.view" id="employee_view_tree_inherit_rank_id">
+        <!--record model="ir.ui.view" id="employee_view_tree_inherit_rank_id">
             <field name="name">hr.employee.tree</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_tree"/>
@@ -109,7 +109,7 @@
                     <field name="rank_id" optional="hide"/>
                 </field>
             </field>
-        </record>
+        </record-->
 
     </data>
 </odoo>

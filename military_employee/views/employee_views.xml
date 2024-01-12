@@ -18,8 +18,11 @@
                     <field name="last_name" required="1"/>
                     <field name="first_name" required="1"/>
                     <field name="middle_name" required="1"/>
-                    <field name="complete_name"/>
+                    <field name="complete_name" widget="CopyClipboardChar"/>
                 </group>
+                <!--group>
+                    <field name="complete_name" widget="CopyClipboardChar"/>
+                </group-->
             </xpath>
             <xpath expr="//h1//field[@name='name']/.." position="after">
                 <group>
@@ -75,8 +78,14 @@
             <xpath expr="//div[@name='div_km_home_work']" position="attributes">
                     <attribute name="invisible">1</attribute>
             </xpath>
+            <!--xpath expr="//field[@name='study_school']/.." position="after">
+                <group name="blood" string="Blod Group">
+                    <field name="blood_type_ab"/>
+                    <field name="blood_type_rh"/>
+                </group>
+            </xpath-->
             <notebook>
-                <page name="declention" string="Name Declention" groups="hr.group_hr_user">
+                <page name="declension" string="Name Declension" groups="hr.group_hr_user">
                     <group>
                         <field name="name_gent" readonly="0"/>
                         <field name="name_datv" readonly="0"/>
@@ -119,6 +128,9 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_filter" />
         <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="complete_name"/>
+            </field>
             <field name="name" position="after">
                 <field name="state"/>
                 <filter string="State"
@@ -144,9 +156,12 @@
                 <field name="middle_name" optional="hide"/>
                 <field name="state" optional="hide"/>
             </field>
-            <!--field name="name" position="before">
+            <field name="name" position="before">
                     <field name="rank_id" optional="hide"/>
-            </field-->
+            </field>
+            <field name="name" position="attributes">
+                    <attribute name="optional">"hide"</attribute>
+            </field>
             <field name="work_phone" position="before">
                 <field name="mobile_phone" optional="hide"/>
             </field>

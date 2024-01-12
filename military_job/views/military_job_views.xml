@@ -18,15 +18,16 @@
                     <field name="expected_employees"/>
                 </group>
             </xpath>
-            <!--xpath expr="/form/sheet/notebook" position="inside">
+            <xpath expr="/form/sheet/notebook" position="inside">
                 <page string="Employees" name="employees">
                     <field name="employee_ids" nolabel="1">
                         <tree>
-                            <field name="complete_name"/>
+                            <field name="rank_id"/>
+                            <field name="name"/>
                         </tree>
                     </field>
                 </page>
-            </xpath-->
+            </xpath>
         </field>
     </record>
 
@@ -102,7 +103,7 @@
                                 <field name="name"/>
                                 <field name="rank_id"/>
                                 <field name="mos"/>
-                                <field name="employee_ids"/>
+                                <field name="employee_ids" widget="many2many_tags"/>
                             </tree>
                         </field>
                     </page>
@@ -129,7 +130,7 @@
                     <field name="job_id" attrs="{'readonly': [('id', '!=', False)]}"/>
             </field>
             <field name="department_id" position="attributes">
-                <readonly>1</readonly>
+                <readonly>[('id', '!=', False)]</readonly>
             </field>
             <field name="parent_id" position="attributes">
                 <readonly>1</readonly>

@@ -13,6 +13,7 @@
     "data": ["security/ir.model.access.csv",
              "views/department_views.xml",
              "report/staff_report.xml",
+             "report/bchs.xml",
              "data/hr.department.tag.csv"
              ],
     "demo": [

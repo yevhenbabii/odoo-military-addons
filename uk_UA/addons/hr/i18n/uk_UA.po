@@ -891,7 +891,7 @@ msgstr "Email"
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "Emergency"
-msgstr "Терміновий"
+msgstr "Терміновий Контакт"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_departure_wizard__employee_id
@@ -1022,7 +1022,7 @@ msgstr "Військовослужбовець(і)"
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_tree
 #: model_terms:ir.ui.view,arch_db:hr.view_partner_tree2
 msgid "Employees"
-msgstr "Військовослужбовці"
+msgstr "Персонал"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_partner__employees_count
@@ -1586,7 +1586,7 @@ msgstr "Мій профіль"
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_search
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_filter
 msgid "My Team"
-msgstr "Моя команда"
+msgstr "Моя Команда"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_contract_type__name
@@ -1891,7 +1891,7 @@ msgstr "Друк значка"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 msgid "Private Address"
-msgstr "Приватна адреса"
+msgstr "Приватна Адреса"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_users__private_city
@@ -1906,7 +1906,7 @@ msgstr "Приватний Контакт"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_users__private_country_id
 msgid "Private Country"
-msgstr "Приватна країна"
+msgstr "Приватна Країна"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__private_email
@@ -1918,7 +1918,7 @@ msgstr "Приватний Email"
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "Private Information"
-msgstr "Приватна Інформація"
+msgstr "Особиста Інформація"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__phone
@@ -2098,7 +2098,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr.field_hr_contract_type__sequence
 #: model:ir.model.fields,field_description:hr.field_hr_departure_reason__sequence
 msgid "Sequence"
-msgstr "Послідовність"
+msgstr "Нумерація"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form

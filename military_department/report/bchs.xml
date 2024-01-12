@@ -2,25 +2,18 @@
 <odoo>
 
     <record id="hr_department_staff_report" model="ir.actions.report">
-        <field name="name">Staff</field>
+        <field name="name">BCHS</field>
         <field name="model">hr.department</field>
-        <field name="report_name">hr.department_staff</field>
+        <field name="report_name">hr.department_bchs</field>
         <field name="report_type">py3o</field>
         <field name="py3o_filetype">xls</field>
         <field name="py3o_multi_in_one">1</field>
-        <field name="print_report_name">'Staff_%s_%s_%s' % (object.company_id.code or '', object.name.replace(" ","_") or '', time.strftime("%d_%m_%Y"))</field>
+        <field name="print_report_name">'Bchs_%s_%s_%s' % (object.company_id.code or '', object.name.replace(" ","_") or '', time.strftime("%d_%m_%Y"))</field>
         <field name="module">military_department</field>
-        <field name="py3o_template_fallback">report/staff_report.ods</field>
+        <field name="py3o_template_fallback">report/bchs.ods</field>
         <!-- Add entry in "Print" drop-down list -->
         <field name="binding_type">report</field>
         <field name="binding_model_id" ref="hr.model_hr_department"/>
     </record>
 
-    <!--menuitem
-            id="menu_employee_report"
-            name="Staff Report"
-            action="hr_department_staff_report"
-            parent="hr.hr_menu_hr_reports"
-            sequence="1"
-    /-->
 </odoo>

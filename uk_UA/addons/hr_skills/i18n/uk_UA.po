@@ -38,7 +38,7 @@ msgstr "Класичний"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__company_id
 msgid "Company"
-msgstr "Компанія"
+msgstr "В/ч"
 
 #. module: hr_skills
 #. odoo-javascript
@@ -154,22 +154,22 @@ msgstr "Звіт навичок співробітника"
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_report_view_search
 msgid "Employees with Skills"
-msgstr "Співробітники з навичками"
+msgstr "З Навичками"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_report_view_search
 msgid "Employees without Skills"
-msgstr "Співробітники без навичок"
+msgstr "Без Навичок"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_log_view_search
 msgid "Group By"
-msgstr "Групувати за"
+msgstr "Групування"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_skill_view_search
 msgid "Group By..."
-msgstr "Групувати за..."
+msgstr "Групування..."
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__id
@@ -335,12 +335,12 @@ msgstr "Пошук навичок"
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__sequence
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__sequence
 msgid "Sequence"
-msgstr "Послідовність"
+msgstr "Нумерація"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.employee_skill_level_view_tree
 msgid "Set Default"
-msgstr "Встановити за замовчуванням"
+msgstr "Встановити Типовим"
 
 #. module: hr_skills
 #: model:ir.model,name:hr_skills.model_hr_skill
@@ -360,7 +360,7 @@ msgstr "Навички"
 #: model:ir.actions.server,name:hr_skills.action_open_skills_log_department
 #: model:ir.actions.server,name:hr_skills.action_open_skills_log_employee
 msgid "Skill History Report"
-msgstr "Звіт історії навичок"
+msgstr "Історія Навичок"
 
 #. module: hr_skills
 #: model:ir.model,name:hr_skills.model_hr_skill_level

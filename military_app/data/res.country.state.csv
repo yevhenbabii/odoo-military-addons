@@ -1,5 +1,5 @@
-"id","name","code",country_id:id
-"state_ua_11","АРК",11,base.ua
+"id","name","code",country_id/id
+state_ua_11,"АРК",11,base.ua
 "state_ua_23","Вінницька",23,base.ua
 "state_ua_24","Волинська",24,base.ua
 state_ua_04,Дніпропетровська,04,base.ua

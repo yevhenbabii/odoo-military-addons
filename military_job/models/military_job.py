@@ -8,7 +8,7 @@ class Job(models.Model):
 
     # TODO: check behaviour on archiving
     name = fields.Char(string='Job Position', required=True, index='trigram', translate=False)
-    name_gent = fields.Char(string="Name gent",
+    name_gent = fields.Char(string="Name Genitive",
                             compute="_get_declension",
                             help="Name in gent declention (Whom/What)",
                             store=True)

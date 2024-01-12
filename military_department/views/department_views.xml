@@ -6,7 +6,9 @@
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="complete_name" readonly="False"/>
-                <field name="name_gent"/>
+                <field name="name_gent" readonly="False"/>
+                <field name="name_datv" readonly="False"/>
+                <field name="name_ablt" readonly="False"/>
                 <field name="complete_name_gent" readonly="False"/>
                 <field name="code"/>
                 <field name="level" invisible="True"/>

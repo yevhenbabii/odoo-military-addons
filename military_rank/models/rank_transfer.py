@@ -6,24 +6,46 @@ class RankTransfer(models.Model):
     _name = "rank.transfer"
     _inherit = ["mail.thread"]
     _description = "Rank Transfer"
-    _rec_name = "number"
+    _rec_name = "complete_name"
     _check_company_auto = True
 
-    number = fields.Char("Order Number", required=True, readonly=True, states={'draft': [('readonly', False)]})
+    number = fields.Char("Order Number", required=True, readonly=True,
+                         states={'draft': [('readonly', False)]})
+    complete_name = fields.Char("Complete Name",
+                                compute="_compute_complete_name",
+                                store=True,
+                                tracking=True,
+                                default="Noname")
     state = fields.Selection([
         ('draft', 'Draft'),
         ('cancel', 'Cancelled'),
         ('confirm', 'Confirmed'),
         ('done', 'Done')],
-        string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
-    date = fields.Date(string='Date', required=True, readonly=True, index=True,
+        string='Status',
+        readonly=True,
+        copy=False,
+        index=True,
+        tracking=3,
+        default='draft'
+    )
+    date = fields.Date(string='Date',
+                       required=True,
+                       readonly=True,
+                       index=True,
                        states={'draft': [('readonly', False)]},
-                       copy=False, default=fields.Date.today,
-                       help="Date of transfer")
+                       copy=False,
+                       default=fields.Date.today,
+                       help="Date of transfer"
+                       )
     partner_id = fields.Many2one(
-        'res.partner', string='Order Author', readonly=True,
+        'res.partner',
+        string='Order Author',
+        readonly=True,
         states={'draft': [('readonly', False)]},
-        required=True, change_default=True, index=True, tracking=1,
+        required=True,
+        change_default=True,
+        index=True,
+        tracking=1,
         domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
     company_id = fields.Many2one(
         string="Company",
@@ -39,6 +61,14 @@ class RankTransfer(models.Model):
                                     copy=True, auto_join=True)
     description = fields.Text('Description')
 
+    @api.depends("number", "partner_id", "date")
+    def _compute_complete_name(self):
+        for rec in self:
+            number = rec.number if rec.number else ''
+            partner = rec.partner_id.name if rec.partner_id else ''
+            date = rec.date.strftime("%d.%m.%Y") if rec.date else ''
+            rec.complete_name = "Order from %s # %s %s" % (date, number, partner)
+
     def effective_date_in_future(self):
 
         for transfer in self:
@@ -47,7 +77,6 @@ class RankTransfer(models.Model):
         return True
 
     def unlink(self):
-
         if not self.env.context.get("force_delete", False):
             for transfer in self:
                 if transfer.state not in ["draft"]:
@@ -109,6 +138,17 @@ class RankTransfer(models.Model):
             transfer.state = "confirm"
         return True
 
+    def signal_confirm(self):
+        for transfer in self:
+            if (
+                    self.user_has_groups("military_rank.group_rank_transfer")
+                    and transfer.effective_date_in_future()
+            ):
+                transfer.state = "confirm"
+            else:
+                transfer.state_confirm()
+        return True
+
     def state_done(self):
         today = fields.Date.today()
         for transfer in self:
@@ -118,19 +158,6 @@ class RankTransfer(models.Model):
                 # transfer.transfer_line.state = "done"
             else:
                 return False
-        return True
-
-    def signal_confirm(self):
-        for transfer in self:
-            # If the user is a member of 'approval' group, go straight to 'approval'
-            if (
-                    self.user_has_groups("military_rank.group_rank_transfer")
-                    and transfer.effective_date_in_future()
-            ):
-                transfer.state = "confirm"
-            else:
-                transfer.state_confirm()
-
         return True
 
 
@@ -154,17 +181,7 @@ class RankTransferLine(models.Model):
         string="Effective Date",
         related="transfer_id.date",
     )
-    state = fields.Selection(
-        selection=[
-            ("draft", "Draft"),
-            ("cancel", "Cancelled"),
-            ("confirm", "Confirmed"),
-            ("done", "Done"),
-        ],
-        related="transfer_id.state",
-        default="draft",
-        readonly=True,
-    )
+    state = fields.Selection(string="State", related="transfer_id.state")
     company_id = fields.Many2one(
         string="Company",
         comodel_name="res.company",

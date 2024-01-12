@@ -53,10 +53,10 @@ class Department(models.Model):
                             help="Name in ablative declention (by Whom/ by What)",
                             store=True)
     complete_name_gent = fields.Char("Complete Name Genitive",
-                                         compute="_compute_complete_name_gent",
-                                         store=True,
-                                         recursive=True
-                                         )
+                                     compute="_compute_complete_name_gent",
+                                     store=True,
+                                     recursive=True
+                                     )
 
     @api.depends("level", "parent_id.level")
     def _compute_level(self):
@@ -127,7 +127,7 @@ class Department(models.Model):
                         dep.parent_id.complete_name_gent)
                 else:
                     dep.complete_name_gent = "%s %s" % (dep.name_gent,
-                                                            dep.company_id.name_gent)
+                                                        dep.company_id.name_gent)
 
     @api.onchange("name", "name_gent", "parent_id")
     def _onchange_department_name(self):

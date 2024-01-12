@@ -14,7 +14,7 @@
         "military_job",
         "military_employee",
         "military_rank",
-        "web_responsive",
+        #"web_responsive",
         ],
     "data": ["data/res.country.state.csv",
              ],

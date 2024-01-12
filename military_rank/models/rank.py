@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class MilitaryRank(models.Model):
@@ -58,15 +58,9 @@ class HrEmployee(models.Model):
                               groups="hr.group_hr_user",
                               help="Current serviceman military rank",
                               required=True,
-                              tracking=True,
-                              options="{no_create_edit:True','no_quick_create:True','no_create:True','no_open:True'}")
-    rank_category = fields.Selection(
-        "Rank Category",
-        index=True,
-        related="rank_id.category",
-        compute_sudo=True,
-        store=True,
-        readonly=True)
+                              tracking=True
+                              )
+    rank_category = fields.Selection(related="rank_id.category", string="Rank Category", store=True)
 
 
 class Job(models.Model):
@@ -74,9 +68,4 @@ class Job(models.Model):
     _display_name = "complete_name"
 
     rank_id = fields.Many2one("military.rank", string="Job Rank")
-    rank_category = fields.Selection(
-        "Rank Category",
-        index=True,
-        related="rank_id.category",
-        store=True,
-        readonly=True)
+    rank_category = fields.Selection(related="rank_id.category", string="Rank Category", store=True)

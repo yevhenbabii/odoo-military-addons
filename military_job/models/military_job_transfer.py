@@ -1,34 +1,59 @@
 from odoo import _, api, fields, models
+from datetime import datetime
 from odoo.exceptions import AccessError, UserError
+
+# ToDo:
+# Add job verification procedures:
+#     - job should be available for assignment (filter)
+#     - verify on assignment that job expected employee is not < 0
 
 
 class HrTransfer(models.Model):
     _name = "hr.transfer"
     _inherit = ["mail.thread"]
     _description = "Employee Transfer"
-    _rec_name = "date"
+    _rec_name = "complete_name"
     _check_company_auto = True
     _order = "date desc"
 
-    number = fields.Char("Order Number", required=True, readonly=True, states={'draft': [('readonly', False)]})
+    number = fields.Char("Order Number",
+                         required=True,
+                         readonly=True,
+                         states={'draft': [('readonly', False)]})
+    complete_name = fields.Char("Complete Name",
+                                compute="_compute_complete_name",
+                                store=True,
+                                tracking=True,
+                                default="Noname")
     state = fields.Selection([
         ('draft', 'Draft'),
         ('cancel', 'Cancelled'),
         ('confirm', 'Confirmed'),
         ('done', 'Done'),
     ],
-        string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
+        string='Status',
+        readonly=True,
+        copy=False,
+        index=True,
+        default='draft',
+        tracking=3)
     date = fields.Date(string='Date',
                        required=True,
                        readonly=True,
                        index=True,
                        states={'draft': [('readonly', False)]},
-                       copy=False, default=fields.Date.today,
+                       copy=False,
+                       default=fields.Date.today,
                        help="Date of transfer")
     partner_id = fields.Many2one(
-        'res.partner', string='Order Author', readonly=True,
+        'res.partner',
+        string='Order Author',
+        readonly=True,
         states={'draft': [('readonly', False)]},
-        required=True, change_default=True, index=True, tracking=1,
+        required=True,
+        change_default=True,
+        index=True,
+        tracking=1,
         domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         default=lambda self: self.env.company.partner_id)
     transfer_line = fields.One2many('hr.transfer.line', 'transfer_id',
@@ -36,12 +61,23 @@ class HrTransfer(models.Model):
                                     states={'done': [('readonly', True)], 'confirm': [('readonly', True)]},
                                     copy=True, auto_join=True)
     description = fields.Text('Description')
-    company_id = fields.Many2one('res.company', 'Company', required=True, index=True, default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company',
+                                 'Company',
+                                 required=True,
+                                 index=True,
+                                 default=lambda self: self.env.company)
 
-    def effective_date_in_future(self):
+    @api.depends("number", "partner_id", "date")
+    def _compute_complete_name(self):
+        for rec in self:
+            number = rec.number if rec.number else ''
+            partner = rec.partner_id.name if rec.partner_id else ''
+            date = rec.date.strftime("%d.%m.%Y") if rec.date else ''
+            rec.complete_name = "Order from %s # %s %s" % (date, number, partner)
 
+    def effective_date_in_past(self):
         for transfer in self:
-            if transfer.date <= fields.Date.today():
+            if transfer.date >= fields.Date.today():
                 return False
         return True
 
@@ -65,10 +101,10 @@ class HrTransfer(models.Model):
         has_permission = self._check_permission_group(
             "military_job.group_hr_transfer"
         )
-        if has_permission and not self.effective_date_in_future():
+        if has_permission and self.effective_date_in_past():
             self.state_done()
         else:
-            self.write({"state": "pending"})
+            self.write({"state": "done"})
 
     def action_confirm(self):
 
@@ -107,39 +143,36 @@ class HrTransfer(models.Model):
         return True
 
     def state_confirm(self):
-
         for transfer in self:
             # self._check_state(transfer.date)
             transfer.state = "confirm"
-
         return True
 
     def state_done(self):
-
         today = fields.Date.today()
-
         for transfer in self:
             if transfer.date <= today:
                 transfer.transfer_line.employee_id.job_id = transfer.transfer_line.dst_id
                 transfer.state = "done"
             else:
-                return False
-
+                raise UserError(
+                    _(
+                        "Transfer date should be before today!"
+                    )
+                )
         return True
 
     def signal_confirm(self):
-
         for transfer in self:
             # self._check_state(transfer.date)
             # If the user is a member of 'approval' group, go straight to 'approval'
             if (
                     self.user_has_groups("military_job.group_hr_transfer")
-                    and transfer.effective_date_in_future()
+                    and transfer.effective_date_in_past()
             ):
-                transfer.state = "pending"
+                transfer.state = "confirm"
             else:
                 transfer.state_confirm()
-
         return True
 
 
@@ -160,8 +193,12 @@ class HrTransferLine(models.Model):
                                           string='Customer',
                                           readonly=False)
     state = fields.Selection(
-        related='transfer_id.state', string='Transfer Status', readonly=True, copy=False, store=True,
-        default='draft')
+        related='transfer_id.state',
+        string='Transfer Status',
+        readonly=True,
+        copy=False,
+        store=True,
+    )
     # TODO add temporary job option
     # temp = fields.Boolean("Temporary Job", default=False)
     employee_id = fields.Many2one(
@@ -236,8 +273,8 @@ class HrTransferLine(models.Model):
         if "state" in init_values:
             if self.state == "confirm":
                 return self.env.ref("hr_transfer_line.mt_alert_xfer_confirmed")
-            elif self.state == "pending":
-                return self.env.ref("hr_transfer_line.mt_alert_xfer_pending")
+            elif self.state == "confirm":
+                return self.env.ref("hr_transfer_line.mt_alert_xfer_confirm")
             elif self.state == "done":
                 return self.env.ref("hr_transfer_line.mt_alert_xfer_done")
         return super(HrTransferLine, self)._track_subtype(init_values)

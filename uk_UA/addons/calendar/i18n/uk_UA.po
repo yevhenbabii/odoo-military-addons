@@ -1277,7 +1277,7 @@ msgstr "Редагувати повторювану подію"
 #: model:ir.model.fields,field_description:calendar.field_calendar_attendee__email
 #: model:ir.model.fields.selection,name:calendar.selection__calendar_alarm__alarm_type__email
 msgid "Email"
-msgstr "Ел. пошта"
+msgstr "Email"
 
 #. module: calendar
 #: model:calendar.alarm,name:calendar.alarm_mail_1
