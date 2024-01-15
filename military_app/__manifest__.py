@@ -11,14 +11,14 @@
     "depends": [
         "military_company",
         "military_department",
+        "military_rank",
         "military_job",
         "military_employee",
-        "military_rank",
-        #"web_responsive",
         ],
     "data": ["data/res.country.state.csv",
              ],
     "sequence": '1',
     "application": True,
-    "auto_install": True
+    "auto_install": True,
+    "installable": True,
 }

@@ -1,6 +1,6 @@
 from odoo import _, api, fields, models
-from datetime import datetime
 from odoo.exceptions import AccessError, UserError
+
 
 # ToDo:
 # Add job verification procedures:
@@ -58,7 +58,8 @@ class HrTransfer(models.Model):
         default=lambda self: self.env.company.partner_id)
     transfer_line = fields.One2many('hr.transfer.line', 'transfer_id',
                                     string='Transfer Lines',
-                                    states={'done': [('readonly', True)], 'confirm': [('readonly', True)]},
+                                    states={'done': [('readonly', True)],
+                                            'confirm': [('readonly', True)]},
                                     copy=True, auto_join=True)
     description = fields.Text('Description')
     company_id = fields.Many2one('res.company',
@@ -77,8 +78,12 @@ class HrTransfer(models.Model):
 
     def effective_date_in_past(self):
         for transfer in self:
-            if transfer.date >= fields.Date.today():
-                return False
+            if transfer.date > fields.Date.today():
+                raise UserError(
+                    _(
+                        "Transfer date should be before today!"
+                    )
+                )
         return True
 
     def unlink(self):
@@ -95,25 +100,19 @@ class HrTransfer(models.Model):
                     )
         return super(HrTransfer, self).unlink()
 
-    def action_transfer(self):
-
+    def action_done(self):
         self.ensure_one()
-        has_permission = self._check_permission_group(
-            "military_job.group_hr_transfer"
-        )
+        has_permission = self._check_permission_group("military_job.group_hr_transfer")
         if has_permission and self.effective_date_in_past():
             self.state_done()
         else:
             self.write({"state": "done"})
 
     def action_confirm(self):
-
         self.ensure_one()
-        has_permission = self._check_permission_group(
-            "military_job.group_hr_transfer"
-        )
+        has_permission = self._check_permission_group("military_job.group_hr_transfer")
         if has_permission:
-            self.signal_confirm()
+            self.state_confirm()
 
     def action_cancel(self):
         self.ensure_one()
@@ -144,7 +143,6 @@ class HrTransfer(models.Model):
 
     def state_confirm(self):
         for transfer in self:
-            # self._check_state(transfer.date)
             transfer.state = "confirm"
         return True
 
@@ -152,7 +150,8 @@ class HrTransfer(models.Model):
         today = fields.Date.today()
         for transfer in self:
             if transfer.date <= today:
-                transfer.transfer_line.employee_id.job_id = transfer.transfer_line.dst_id
+                for transfer_line in transfer.transfer_line:
+                    transfer_line.employee_id.job_id = transfer_line.dst_job_id
                 transfer.state = "done"
             else:
                 raise UserError(
@@ -164,8 +163,6 @@ class HrTransfer(models.Model):
 
     def signal_confirm(self):
         for transfer in self:
-            # self._check_state(transfer.date)
-            # If the user is a member of 'approval' group, go straight to 'approval'
             if (
                     self.user_has_groups("military_job.group_hr_transfer")
                     and transfer.effective_date_in_past()
@@ -178,7 +175,6 @@ class HrTransfer(models.Model):
 
 class HrTransferLine(models.Model):
     _name = "hr.transfer.line"
-    # _inherit = ["mail.thread"]
     _description = "Employee Transfer Line"
     _rec_name = "date"
     _check_company_auto = True
@@ -200,7 +196,7 @@ class HrTransferLine(models.Model):
         store=True,
     )
     # TODO add temporary job option
-    # temp = fields.Boolean("Temporary Job", default=False)
+    temp = fields.Boolean("Temporary Job", default=False)
     employee_id = fields.Many2one(
         string="Employee",
         comodel_name="hr.employee",
@@ -208,37 +204,41 @@ class HrTransferLine(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         check_company=True,
+        # domain="[('id', 'not in', transfer_line.mapped('employee_id').ids)]",
+        # domain=lambda self: self._get_employee_domain(),
+        # domain=[('forum_id', 'in', self.mapped.ids)],
+        # domain=lambda self: [('id', 'not in', self.forum_id.ids)],
+
+        # domain=lambda self: [('id', 'not in', self.mapped('employee_id').ids)],
     )
     description = fields.Text(string='Description')
-    src_job = fields.Char(
+    src_job_id = fields.Many2one(
         string="From Job",
-        # comodel_name="hr.job",
-        # related="employee_id.job_id",
+        comodel_name="hr.job",
         compute="_compute_onchange_employee",
         store=True,
         readonly=True,
-        # states={"draft": [("readonly", False)]},
-        # check_company=True,
+        check_company=True,
     )
-    src_department = fields.Char(
+    src_department_id = fields.Many2one(
         string="From Department",
         compute="_compute_onchange_employee",
-        # related="src_id.department_id",
-        # comodel_name="hr.department",
+        comodel_name="hr.department",
         store=True,
         readonly=True,
     )
-    dst_id = fields.Many2one(
+    dst_job_id = fields.Many2one(
         string="Destination Job",
         comodel_name="hr.job",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
         check_company=True,
+        domain="[('expected_employees', '>', 0)]",
     )
     dst_department_id = fields.Many2one(
         string="Destination Department",
-        related="dst_id.department_id",
+        related="dst_job_id.department_id",
         comodel_name="hr.department",
         store=True,
         readonly=True,
@@ -262,19 +262,8 @@ class HrTransferLine(models.Model):
     def _compute_onchange_employee(self):
         for transfer in self:
             if transfer.employee_id:
-                transfer.src_job = transfer.employee_id.job_id.display_name
-                transfer.src_department = transfer.employee_id.department_id.display_name
+                transfer.src_job_id = transfer.employee_id.job_id
+                transfer.src_department_id = transfer.employee_id.department_id
             else:
-                transfer.src_job = False
-                transfer.src_department = False
-
-    def _track_subtype(self, init_values):
-        self.ensure_one()
-        if "state" in init_values:
-            if self.state == "confirm":
-                return self.env.ref("hr_transfer_line.mt_alert_xfer_confirmed")
-            elif self.state == "confirm":
-                return self.env.ref("hr_transfer_line.mt_alert_xfer_confirm")
-            elif self.state == "done":
-                return self.env.ref("hr_transfer_line.mt_alert_xfer_done")
-        return super(HrTransferLine, self)._track_subtype(init_values)
+                transfer.src_job_id = False
+                transfer.src_department_id = False

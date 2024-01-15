@@ -11,7 +11,7 @@
                    (for example name_datv)
                    3. Your field should 
                    """,
-    "category": "Category",
+    "category": "Tools",
     "author": "Yevhen Babii",
     "website": "Website",
     "license": "Other proprietary",
@@ -20,9 +20,9 @@
                    "pymorphy3-dicts-uk",
                    # "pymorphy2", # In case of using pymorphy2 library
                    # "pymorphy2_dicts_uk",
-                   "js2py",
+                   # "js2py", # TODO: Test and implement shevchenko-js library
                    ],
-        "javascript": ["shevchenko"],
+        # "javascript": ["shevchenko"], # TODO: Test and implement shevchenko-js library
     },
     "installable": True,
     "auto_install": True

@@ -134,7 +134,7 @@ msgid "Destination Department"
 msgstr ""
 
 #. module: military_job
-#: model:ir.model.fields,field_description:military_job.field_hr_transfer_line__dst_id
+#: model:ir.model.fields,field_description:military_job.field_hr_transfer_line__dst_job
 msgid "Destination Job"
 msgstr ""
 

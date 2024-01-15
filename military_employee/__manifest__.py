@@ -5,7 +5,7 @@
         """,
     "author": "Yevhen Babii",
     "website": "",
-    "category": "Other",
+    "category": "Human Resources/Employees",
     "version": "1.0",
     "license": "Other proprietary",
     "depends": ["hr",

@@ -140,7 +140,7 @@ msgid "Destination Department"
 msgstr "В Підрозділ"
 
 #. module: military_job
-#: model:ir.model.fields,field_description:military_job.field_hr_transfer_line__dst_id
+#: model:ir.model.fields,field_description:military_job.field_hr_transfer_line__dst_job
 msgid "Destination Job"
 msgstr "На Посаду"
 
@@ -434,7 +434,7 @@ msgid ""
 "Transfer has been initiated. Either cancel the transfer or\n"
 "create another transfer to undo it."
 msgstr ""
-"Неможливо Видалити Присвоєнняr!\n"
+"Неможливо Видалити Присвоєння!\n"
 "Присвоєння вже було ініційовано. Скасуйте його, або\n"
 "створіть нове."
 

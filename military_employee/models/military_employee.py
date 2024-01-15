@@ -12,6 +12,7 @@ UPDATE_PARTNER_FIELDS = ["name", "user_id", "address_home_id"]
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
     _rec_name = "complete_name"
+    _display_name = "complete_name"
     _rec_names_search = ["name", "complete_name"]
     _avoid_quick_create = True
 
@@ -68,8 +69,9 @@ class HrEmployee(models.Model):
         ],
     )
     complete_name = fields.Char("Complete Name",
-                                compute="_compute_complete_name",
+                                # compute="_get_complete_name",
                                 store=True,
+                                readonly=True,
                                 default="Noname")
     name_gent = fields.Char(string="Name Genitive",
                             compute="_get_declension",
@@ -123,21 +125,14 @@ class HrEmployee(models.Model):
                                    store=True)
 
     @api.model
-    def _compute_complete_name(self, rank_id, name, job_title):
-        rank = self.rank_id.name if rank_id else ''
+    def _get_complete_name(self, rank_id, name, job_title):
         job = job_title[0].lower() + job_title[1:] if job_title else ''
-        return " ".join(p for p in (rank, name, job) if p)
-    # def _compute_complete_name(self):
-    #     if self.rank_id:
-    #         rank = self.rank_id.name
-    #     else:
-    #         rank = ''
-    #     if self.job_id:
-    #         job = self.job_title[0].lower() + self.job_title[1:]
-    #     else:
-    #         job = ''
-    #     name = self.name
-    #     return " ".join(p for p in (rank, name, job) if p)
+        return " ".join(p for p in (rank_id.name, name, job) if p)
+
+    @api.depends("rank_id", "name", "job_title")
+    def _compute_complete_name(self, rank_id, name, job_title):
+        for rec in self:
+            rec.complete_name = rec._get_complete_name(rank_id, name, job_title)
 
     @api.depends("birthday")
     def _compute_age(self):
@@ -156,33 +151,26 @@ class HrEmployee(models.Model):
     @api.model
     def _get_name(self, last_name, first_name, middle_name):
         return " ".join(p for p in (last_name, first_name, middle_name) if p)
-    # def _get_name(self):
-    #     return " ".join(p for p in (self.last_name, self.first_name, self.middle_name) if p)
 
     @api.onchange("last_name", "first_name", "middle_name", "name", "rank_id", "job_title")
     def _onchange(self):
-        # self.last_name = self.last_name.title() if self.last_name else ''
-        # self.first_name = self.first_name.title() if self.first_name else ''
-        # self.middle_name = self.middle_name.title() if self.middle_name else ''
         self.name = self._get_name(self.last_name, self.first_name, self.middle_name)
-        self.complete_name = self._compute_complete_name(self.rank_id.name, self.name, self.job_title)
+        self.complete_name = self._get_complete_name(self.rank_id, self.name, self.job_title)
 
     def _prepare_vals(self, vals):
-        # if any([vals.get(field) for field in ["first_name", "last_name", "middle_name"]]):
         if not vals.get("name"):
-            last_name = vals.get("last_name", self.last_name)
-            first_name = vals.get("first_name", self.first_name)
-            middle_name = vals.get("middle_name", self.middle_name)
+            # last_name = vals.get("last_name", self.last_name)
+            # first_name = vals.get("first_name", self.first_name)
+            # middle_name = vals.get("middle_name", self.middle_name)
+            # vals["name"] = self._get_name(last_name, first_name, middle_name)
+            vals["name"] = self._get_name(self.last_name, self.first_name, self.middle_name)
             # vals["name"] = self._get_name(vals.get("last_name"), vals.get("first_name"), vals.get("middle_name"))
-            vals["name"] = self._get_name(last_name, first_name, middle_name)
         else:
             raise ValidationError("No name set.")
         if not vals.get("complete_name"):
             name = vals.get("name", self.name)
-            rank = vals.get("rank_id", self.rank_id.name)
             job_title = vals.get("job_title", self.job_title)
-            # vals["complete_name"] = self._compute_complete_name(vals.get("rank_id"), vals.get("name"), vals.get("job_title"))
-            vals["complete_name"] = self._compute_complete_name(rank, name, job_title)
+            vals["complete_name"] = self._get_complete_name(self.rank_id, name, job_title)
         else:
             raise ValidationError("No complete name set.")
 

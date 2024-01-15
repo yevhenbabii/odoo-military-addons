@@ -1,0 +1,2 @@
+pymorphy3
+pymorphy3-dicts-uk

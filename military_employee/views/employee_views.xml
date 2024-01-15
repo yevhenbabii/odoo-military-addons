@@ -20,9 +20,6 @@
                     <field name="middle_name" required="1"/>
                     <field name="complete_name" widget="CopyClipboardChar"/>
                 </group>
-                <!--group>
-                    <field name="complete_name" widget="CopyClipboardChar"/>
-                </group-->
             </xpath>
             <xpath expr="//h1//field[@name='name']/.." position="after">
                 <group>

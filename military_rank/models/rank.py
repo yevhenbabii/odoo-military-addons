@@ -10,7 +10,7 @@ class MilitaryRank(models.Model):
 
     active = fields.Boolean("Active", default=True)
     sequence = fields.Integer(string="Sequence", required=True)
-    name = fields.Char(string="Name", required=True, index=True, translate=True)
+    name = fields.Char(string="Name", store=True, required=True, index=True, translate=True)
     name_gent = fields.Char(string="Name Genitive",
                             help="Name in genitive declention (Whom/What)",
                             store=True,

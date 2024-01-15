@@ -29,7 +29,7 @@
                         groups="military_job.group_hr_transfer"
                     />
                     <button
-                        name="action_transfer"
+                        name="action_done"
                         type="object"
                         states="confirm"
                         string="Assign"
@@ -83,9 +83,10 @@
                                     </control>
                                     <field name="company_id" invisible="1"/>
                                     <field name="employee_id"/>
-                                    <field name="src_job"/>
-                                    <field name="src_department"/>
-                                    <field name="dst_id" domain="[('expected_employees', '>', '0')]"/>
+                                    <field name="src_job_id"/>
+                                    <field name="src_department_id"/>
+                                    <field name="temp" string="Temporary Job"/>
+                                    <field name="dst_job_id" domain="[('expected_employees', '>', 0)]"/>
                                     <field name="dst_department_id" />
                                     <field name="state" invisible="1"/>
                                 </tree>
