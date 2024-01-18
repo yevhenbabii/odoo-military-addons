@@ -13,9 +13,13 @@ class DeclensionUA(models.AbstractModel):
             words = value.split()
             inflected_words = []
             for word in words:
-                parsed_word = morph.parse(word)[0].inflect({grammatical_case})
-                if parsed_word is not None:
-                    inflected_words.append(parsed_word.word)
+                # Check if the word contains any numeric characters
+                if any(char.isdigit() for char in word):
+                    inflected_words.append(word)
+                else:
+                    parsed_word = morph.parse(word)[0].inflect({grammatical_case})
+                    if parsed_word is not None:
+                        inflected_words.append(parsed_word.word)
             return ' '.join(inflected_words)
         else:
             return value
