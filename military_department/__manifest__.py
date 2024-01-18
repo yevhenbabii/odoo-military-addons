@@ -7,15 +7,18 @@
     "license": "Other proprietary",
     "category": "Other",
     "summary": "Departments improvement in HR",
-    "depends": ["hr",
-                "military_company",
-                "declension_ua"],
+    "depends": [
+        "hr",
+        "military_company",
+        "declension_ua"
+    ],
     "data": ["security/ir.model.access.csv",
              "views/department_views.xml",
              "report/staff_report.xml",
              "report/bchs.xml",
              "data/hr.department.tag.csv"
              ],
+    "sequence": '0',
     "demo": [
         "demo/hr.department.csv"
     ],

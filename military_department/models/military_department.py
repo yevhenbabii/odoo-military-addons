@@ -23,13 +23,9 @@ class Department(models.Model):
 
     sequence = fields.Integer(default=1)
     tag_ids = fields.Many2many("hr.department.tag", 'hr_department_tag_rel', string="Tags")
-    complete_name = fields.Char("Complete Name",
-                                compute="_compute_complete_name",
-                                store=True)
-    # child_ids = fields.One2many("hr.department", "parent_id", "Contains")
     user_ids = fields.Many2many('res.users', 'hr_department_users_rel', 'did', 'user_id',
                                 string='Accepted Users')
-    code = fields.Char("Code",
+    code = fields.Char(string="Code",
                        compute="_department_code",
                        store=True,
                        readonly=False)
@@ -42,15 +38,15 @@ class Department(models.Model):
 
     name_gent = fields.Char(string="Name Genitive",
                             compute="_get_declension",
-                            help="Name in genitive declention (Whom/What)",
+                            help="Name in genitive declension (Whom/What)",
                             store=True)
     name_datv = fields.Char(string="Name Dative",
                             compute="_get_declension",
-                            help="Name in dative declention (for Whom/ for What)",
+                            help="Name in dative declension (for Whom/for What)",
                             store=True)
     name_ablt = fields.Char(string="Name Ablative",
                             compute="_get_declension",
-                            help="Name in ablative declention (by Whom/ by What)",
+                            help="Name in ablative declension (by Whom/by What)",
                             store=True)
     complete_name_gent = fields.Char("Complete Name Genitive",
                                      compute="_compute_complete_name_gent",
@@ -114,7 +110,6 @@ class Department(models.Model):
                  "company_id.name_gent")
     def _compute_complete_name_gent(self):
         for dep in self:
-            # dep.complete_name_gent = dep.name_gent
             if not dep.name_gent:
                 if not dep.parent_id:
                     dep.complete_name_gent = dep.name_gent
@@ -144,6 +139,43 @@ class Department(models.Model):
             inflected_fields = declension_ua_model.get_declension_fields(record, grammatical_cases)
             for field, value in inflected_fields.items():
                 setattr(record, field, value)
+
+    total_employee = fields.Integer(string='Total Employee',
+                                    compute='_compute_total_employee',
+                                    store=True,
+                                    recursive=True
+                                    )
+    total_staff = fields.Integer(string='Total Staff',
+                                 compute='_compute_total_employee',
+                                 store=True,
+                                 recursive=True
+                                 )
+    total_vacant = fields.Integer(string='Total Vacant',
+                                  compute='_compute_total_employee',
+                                  store=True,
+                                  recursive=True
+                                  )
+
+    @api.depends('member_ids', 'child_ids.total_employee', 'jobs_ids.no_of_recruitment',
+                 'jobs_ids.expected_employees', 'child_ids.total_staff', 'child_ids.total_vacant')
+    def _compute_total_employee(self):
+        for department in self:
+            total_employee = len(department.member_ids)
+            total_staff = 0
+            total_vacant = 0
+
+            for sub_department in department.child_ids:
+                total_employee += sub_department.total_employee
+                total_staff += sub_department.total_staff
+                total_vacant += sub_department.total_vacant
+
+            for job in department.jobs_ids:
+                total_staff += job.no_of_recruitment
+                total_vacant += job.expected_employees
+
+            department.total_employee = total_employee
+            department.total_staff = total_staff
+            department.total_vacant = total_vacant
 
 
 class HrEmployee(models.Model):

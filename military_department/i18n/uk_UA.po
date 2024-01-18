@@ -136,17 +136,17 @@ msgstr "Назва"
 
 #. module: military_department
 #: model:ir.model.fields,help:military_department.field_hr_department__name_ablative
-msgid "Name in ablative declention (by Whom/ by What)"
+msgid "Name in ablative declension (by Whom/ by What)"
 msgstr "ПІБ в орудному відмінку (Ким/Чим)"
 
 #. module: military_department
 #: model:ir.model.fields,help:military_department.field_hr_department__name_dative
-msgid "Name in dative declention (for Whom/ for What)"
+msgid "Name in dative declension (for Whom/ for What)"
 msgstr "ПІБ в давальному відмінку (Кому/Чому)"
 
 #. module: military_department
 #: model:ir.model.fields,help:military_department.field_hr_department__name_gent
-msgid "Name in genitive declention (Whom/What)"
+msgid "Name in genitive declension (Whom/What)"
 msgstr "ПІБ в родовому відмінку (Кого/Чого)"
 
 #. module: military_department

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="hr_department_staff_report" model="ir.actions.report">
+    <record id="hr_department_bchs_report" model="ir.actions.report">
         <field name="name">BCHS</field>
         <field name="model">hr.department</field>
         <field name="report_name">hr.department_bchs</field>
