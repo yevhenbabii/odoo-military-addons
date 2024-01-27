@@ -18,6 +18,7 @@
         "security/ir.model.access.csv",
         "views/military_job_views.xml",
         "views/military_job_transfer_views.xml"],
+    "sequence": '0',
     "demo": ["demo/hr.job.csv"],
     "installable": True,
 }

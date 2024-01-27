@@ -73,7 +73,6 @@
                            icon="fa-users"
                            enable_counters="1"/>
                 </searchpanel>
-
             </xpath>
         </field>
     </record>
@@ -87,22 +86,16 @@
                     [('department_id','=',active_id)]
                 </attribute>
             </field>
-            <xpath expr="/form/sheet" position="inside">
-                <notebook>
-                    <page string="Departments" name="departments">
-                        <field name="child_ids" nolabel="1">
-                            <tree>
-                                <field name="name"/>
-                                <field name="manager_id"/>
-                            </tree>
-                        </field>
-                    </page>
+            <page name="departments" position="after">
                     <page string="Jobs" name="jobs">
                         <field name="jobs_ids" nolabel="1">
                             <tree>
                                 <field name="name"/>
                                 <field name="rank_id"/>
                                 <field name="mos"/>
+                                <field name="no_of_recruitment" sum="Total Staff"/>
+                                <field name="no_of_employee" sum="Total Employees"/>
+                                <field name="expected_employees" sum="Total Vacancies"/>
                                 <field name="employee_ids" widget="many2many_tags"/>
                             </tree>
                         </field>
@@ -116,8 +109,7 @@
                             </tree>
                         </field>
                     </page>
-                </notebook>
-            </xpath>
+            </page>
         </field>
     </record>
     <record id="view_employee_form" model="ir.ui.view">
@@ -126,8 +118,9 @@
         <field name="arch" type="xml">
             <field name="id" invisible="1"/>
             <field name="job_id" position="replace"/>
-            <field name="department_id" position="before">
+            <field name="mobile_phone" position="after">
                     <field name="job_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                    <field name="job_transfer_id"/>
             </field>
             <field name="department_id" position="attributes">
                 <readonly>[('id', '!=', False)]</readonly>
@@ -150,4 +143,9 @@
             </div>
         </field>
     </record>
+    <menuitem
+            id="menu_hr_job_tree"
+            action="hr.action_hr_job"
+            parent="hr.menu_hr_root"
+            groups="hr.group_hr_user"/>
 </odoo>

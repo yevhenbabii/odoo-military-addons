@@ -5,20 +5,21 @@ class Job(models.Model):
     _inherit = "hr.job"
     _display_name = "complete_name"
     _order = "level, sequence"
+    _avoid_quick_create = True
 
     # TODO: check behaviour on archiving
     name = fields.Char(string='Job Position', required=True, index='trigram', translate=False)
     name_gent = fields.Char(string="Name Genitive",
                             compute="_get_declension",
-                            help="Name in gent declention (Whom/What)",
+                            help="Name in genitive declension (Whom/What)",
                             store=True)
     name_datv = fields.Char(string="Name Dative",
                             compute="_get_declension",
-                            help="Name in dative declention (for Whom/ for What)",
+                            help="Name in dative declension (for Whom/ for What)",
                             store=True)
     name_ablt = fields.Char(string="Name Ablative",
                             compute="_get_declension",
-                            help="Name in ablative declention (by Whom/ by What)",
+                            help="Name in ablative declension (by Whom/ by What)",
                             store=True)
 
     @api.depends('name')

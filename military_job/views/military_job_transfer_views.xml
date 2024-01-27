@@ -83,11 +83,11 @@
                                     </control>
                                     <field name="company_id" invisible="1"/>
                                     <field name="employee_id"/>
+                                    <field name="dst_job_id" placeholder="Leave empty to put at the desposal of commander" domain="[('expected_employees', '>', 0)]" options="{'no_quick_create': True}"/>
+                                    <field name="temp" widget="boolean_toggle"/>
+                                    <field name="dst_department_id"/>
                                     <field name="src_job_id"/>
                                     <field name="src_department_id"/>
-                                    <field name="temp" string="Temporary Job"/>
-                                    <field name="dst_job_id" domain="[('expected_employees', '>', 0)]"/>
-                                    <field name="dst_department_id" />
                                     <field name="state" invisible="1"/>
                                 </tree>
                             </field>

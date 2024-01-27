@@ -1,11 +1,11 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import AccessError, UserError
+from odoo.exceptions import ValidationError, AccessError, UserError
 
 
 # ToDo:
 # Add job verification procedures:
 #     - job should be available for assignment (filter)
-#     - verify on assignment that job expected employee is not < 0
+#     - verify on assignment that job expected employee is >= 0
 
 
 class HrTransfer(models.Model):
@@ -60,7 +60,10 @@ class HrTransfer(models.Model):
                                     string='Transfer Lines',
                                     states={'done': [('readonly', True)],
                                             'confirm': [('readonly', True)]},
-                                    copy=True, auto_join=True)
+                                    copy=True,
+                                    auto_join=True
+                                    )
+    employee_ids = fields.Many2many('hr.transfer.line', 'employee_id')
     description = fields.Text('Description')
     company_id = fields.Many2one('res.company',
                                  'Company',
@@ -74,7 +77,7 @@ class HrTransfer(models.Model):
             number = rec.number if rec.number else ''
             partner = rec.partner_id.name if rec.partner_id else ''
             date = rec.date.strftime("%d.%m.%Y") if rec.date else ''
-            rec.complete_name = "Order from %s # %s %s" % (date, number, partner)
+            rec.complete_name = "Наказ %s від %s №%s" % (partner, date, number)
 
     def effective_date_in_past(self):
         for transfer in self:
@@ -146,6 +149,7 @@ class HrTransfer(models.Model):
             transfer.state = "confirm"
         return True
 
+    # TODO Apply check of assigned transfers to avoid expected_employees < 0
     def state_done(self):
         today = fields.Date.today()
         for transfer in self:
@@ -204,11 +208,11 @@ class HrTransferLine(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         check_company=True,
-        # domain="[('id', 'not in', transfer_line.mapped('employee_id').ids)]",
+        # TODO Apply filter to exclude allready added employees
+        # domain=lambda self: [('id', 'not in', self._origin.ids)],
         # domain=lambda self: self._get_employee_domain(),
-        # domain=[('forum_id', 'in', self.mapped.ids)],
-        # domain=lambda self: [('id', 'not in', self.forum_id.ids)],
-
+        # domain=[('id', 'not in', ids)],
+        # domain=lambda self: [('id', 'not in', self._get_employee_domain())],
         # domain=lambda self: [('id', 'not in', self.mapped('employee_id').ids)],
     )
     description = fields.Text(string='Description')
@@ -267,3 +271,71 @@ class HrTransferLine(models.Model):
             else:
                 transfer.src_job_id = False
                 transfer.src_department_id = False
+
+    # @api.model
+    # def create(self, values):
+    #     # Check if expected_employees is >= 0
+    #     if 'dst_job_id' in values and values.get('dst_job_id'):
+    #         destination_job = self.env['hr.job'].browse(values['dst_job_id'])
+    #         new_expected_employees = values.get('new_expected_employees',
+    #                                             destination_job.expected_employees)
+    #         if new_expected_employees < 0:
+    #             raise ValidationError(
+    #                 "Expected Employees for the destination job must be greater than or equal to 0.")
+    #
+    #     # Check if employee_id is used only once in transfer
+    #     employee_id = values.get('employee_id')
+    #     if employee_id:
+    #         existing_transfer_lines = self.search([('employee_id', '=', employee_id)])
+    #         if existing_transfer_lines:
+    #             raise ValidationError("An employee can only be transferred once.")
+    #
+    #     return super(HrTransferLine, self).create(values)
+    #
+    def write(self, values):
+        # Check if expected_employees is >= 0
+        if 'dst_job_id' in values and values.get('dst_job_id'):
+            destination_job = self.env['hr.job'].browse(values['dst_job_id'])
+            new_expected_employees = values.get('new_expected_employees',
+                                                destination_job.expected_employees)
+            if new_expected_employees < 0:
+                raise ValidationError(
+                    "Expected Employees for the destination job must be greater than or equal to 0.")
+
+        # Check if employee_id is used only once in transfer
+        employee_id = values.get('employee_id', self.employee_id.id)
+        existing_transfer_lines = self.search(
+            [('employee_id', '=', employee_id), ('id', '!=', self.id)])
+        if existing_transfer_lines:
+            raise ValidationError("An employee can only be transferred once.")
+
+        return super(HrTransferLine, self).write(values)
+
+
+class HrEmployee(models.Model):
+    _inherit = 'hr.employee'
+
+    job_transfer_id = fields.Many2one(
+        comodel_name='hr.transfer',
+        compute='_compute_transfer_id',
+        string='Job Transfer',
+        readonly=True,
+        store=True,
+    )
+    job_transfer_date = fields.Date(
+        related='job_transfer_id.date',
+        string='Job Transfer Date',
+        store=True,
+    )
+
+    @api.depends('job_id')
+    def _compute_transfer_id(self):
+        for employee in self:
+            domain = [
+                ('employee_id', '=', employee.id),
+                ('state', '=', 'done'),
+            ]
+            job_transfer_id = self.env['hr.transfer.line'].search(domain, limit=1, order='date desc')
+            # _logger.warning([product.name, last_line_id])
+            employee.job_transfer_id = job_transfer_id.transfer_id
+            # employee.last_job_transfer_date = last_job_transfer_id.date if last_job_transfer_id else False
