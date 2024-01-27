@@ -18,14 +18,11 @@
                 "report_py3o",
                 ],
     "demo": ["demo/hr.employee.csv"],
-    "external_dependencies": {
-        "python": ["js2py"],
-        "javascript": ["shevchenko"],
-    },
     "data": ["views/employee_views.xml",
              "views/employee_pivot.xml",
              "report/form5.xml",
              ],
+    "sequence": '0',
     "assets": {
         "web.assets_backend": [
             "military_employee/static/src/css/*.css",

@@ -110,6 +110,16 @@
                 <field name="name" position="after">
                     <field name="state" invisible="True"/>
                 </field>
+                <field name='work_phone' position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="job_title" position="after">
+<!--                    <ul>-->
+                        <li t-if="record.mobile_phone.raw_value" class="o_force_ltr">
+                            <field name="mobile_phone"/>
+                        </li>
+<!--                    </ul>-->
+                </field>
                 <xpath expr="//kanban/templates/t/div" position="inside">
                     <div t-attf-class="ribbon ribbon-top-right" >
                         <span t-attf-class="ribbon-{{ record.state.raw_value }}">
@@ -140,21 +150,19 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="employee_view_tree_inherit_employee">
+    <record model="ir.ui.view" id="military_employee_tree">
         <field name="name">hr.employee.tree</field>
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_tree"/>
         <field name="priority">50</field>
         <field name="arch" type="xml">
             <field name="name" position="after">
+                <field name="complete_name"/>
                 <field name="service_type" optional="hide"/>
                 <field name="last_name" optional="hide"/>
                 <field name="first_name" optional="hide"/>
                 <field name="middle_name" optional="hide"/>
                 <field name="state" optional="hide"/>
-            </field>
-            <field name="name" position="before">
-                    <field name="rank_id" optional="hide"/>
             </field>
             <field name="name" position="attributes">
                     <attribute name="optional">"hide"</attribute>
@@ -232,4 +240,17 @@
         </field>
     </record-->
 
+<!--Action to update complete name-->
+    <record id="action_hr_employee_update_complete_name" model="ir.actions.server">
+        <field name="name">Update Complete Name</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_view_types">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('hr.group_hr_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record._compute_complete_name()
+        </field>
+    </record>
 </odoo>

@@ -6,14 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-24 10:47+0000\n"
-"PO-Revision-Date: 2023-12-24 10:47+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2024-01-19 08:13+0000\n"
+"PO-Revision-Date: 2024-01-19 10:35+0200\n"
+"Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
 "Language-Team: \n"
+"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. module: military_employee
 #: model:ir.actions.report,print_report_name:military_employee.hr_employee_form5
@@ -21,9 +24,29 @@ msgid "'Довідка_Форма_5_%s' % (object.name).replace(' ', '_')"
 msgstr ""
 
 #. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__blood_type_ab__ab
+msgid "AB"
+msgstr ""
+
+#. module: military_employee
 #: model:ir.model.fields,field_description:military_employee.field_hr_employee__age
 msgid "Age"
 msgstr "Вік"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__blood_type_ab
+msgid "Blood Type (ABO)"
+msgstr "Група Крові (ABO)"
+
+#. module: military_employee
+#: model:ir.model.fields,field_description:military_employee.field_hr_employee__blood_type_rh
+msgid "Blood Type (Rh)"
+msgstr "Резус (Rh)"
+
+#. module: military_employee
+#: model:ir.actions.report,name:military_employee.hr_employee_form5
+msgid "Certificate form 5"
+msgstr "Довідка Форми 5"
 
 #. module: military_employee
 #: model:ir.model.fields,field_description:military_employee.field_hr_employee__complete_name
@@ -66,11 +89,6 @@ msgid "Duty"
 msgstr "В строю"
 
 #. module: military_employee
-#: model:ir.model,name:military_employee.model_hr_employee
-msgid "Employee"
-msgstr "Військовослужбовець"
-
-#. module: military_employee
 #: model:ir.actions.act_window,name:military_employee.action_employee_report
 #: model:ir.ui.menu,name:military_employee.menu_employee_report
 msgid "Employee Report"
@@ -108,23 +126,28 @@ msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__first_name_ablt
-msgid "First name in ablative declention (by Whom/ by What)"
+msgid "First name in ablative declension (by Whom/ by What)"
 msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__first_name_datv
-msgid "First name in dative declention (for Whom/ for What)"
+msgid "First name in dative declension (for Whom/ for What)"
 msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__first_name_gent
-msgid "First name in genitive declention (Whom/What)"
+msgid "First name in genitive declension (Whom/What)"
 msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__fugitive
 msgid "Fugitive"
 msgstr "СЗЧ"
+
+#. module: military_employee
+#: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__guard
+msgid "Guard"
+msgstr "Гауптвахта"
 
 #. module: military_employee
 #: model:ir.model.fields.selection,name:military_employee.selection__hr_employee__state__holiday
@@ -173,17 +196,17 @@ msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__last_name_ablt
-msgid "Last name in ablative declention (by Whom/ by What)"
+msgid "Last name in ablative declension (by Whom/ by What)"
 msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__last_name_datv
-msgid "Last name in dative declention (for Whom/ for What)"
+msgid "Last name in dative declension (for Whom/ for What)"
 msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__last_name_gent
-msgid "Last name in genitive declention (Whom/What)"
+msgid "Last name in genitive declension (Whom/What)"
 msgstr ""
 
 #. module: military_employee
@@ -213,17 +236,17 @@ msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__middle_name_ablt
-msgid "Middle name in ablative declention (by Whom/ by What)"
+msgid "Middle name in ablative declension (by Whom/ by What)"
 msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__middle_name_datv
-msgid "Middle name in dative declention (for Whom/ for What)"
+msgid "Middle name in dative declension (for Whom/ for What)"
 msgstr ""
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__middle_name_gent
-msgid "Middle name in genitive declention (Whom/What)"
+msgid "Middle name in genitive declension (Whom/What)"
 msgstr ""
 
 #. module: military_employee
@@ -248,7 +271,7 @@ msgstr "ПІБ в Давальному Відмінку (Кому)"
 
 #. module: military_employee
 #: model_terms:ir.ui.view,arch_db:military_employee.view_employee_form
-msgid "Name Declention"
+msgid "Name Declension"
 msgstr "Відмінювання ПІБ"
 
 #. module: military_employee
@@ -258,17 +281,17 @@ msgstr "ПІБ в Родовому Відмінку (Кого)"
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__name_ablt
-msgid "Name in ablative declention (by Whom/ by What)"
+msgid "Name in ablative declension (by Whom/ by What)"
 msgstr "ПІБ в орудному відмінку (Ким/Чим)"
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__name_datv
-msgid "Name in dative declention (for Whom/ for What)"
+msgid "Name in dative declension (for Whom/ for What)"
 msgstr "ПІБ в давальному відмінку (Кому/Чому)"
 
 #. module: military_employee
 #: model:ir.model.fields,help:military_employee.field_hr_employee__name_gent
-msgid "Name in genitive declention (Whom/What)"
+msgid "Name in genitive declension (Whom/What)"
 msgstr "ПІБ в родовому відмінку (Кого/Чого)"
 
 #. module: military_employee
@@ -307,7 +330,5 @@ msgstr "Тип військової служби"
 msgid "Trip"
 msgstr "Відрядження"
 
-#. module: military_employee
-#: model:ir.actions.report,name:military_employee.hr_employee_form5
-msgid "Certificate form 5"
-msgstr "Довідка Форми 5"
+#~ msgid "Employee"
+#~ msgstr "Військовослужбовець"
