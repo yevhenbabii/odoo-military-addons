@@ -67,7 +67,7 @@ class RankTransfer(models.Model):
             number = rec.number if rec.number else ''
             partner = rec.partner_id.name if rec.partner_id else ''
             date = rec.date.strftime("%d.%m.%Y") if rec.date else ''
-            rec.complete_name = "Order from %s # %s %s" % (date, number, partner)
+            rec.complete_name = "Наказ %s від %s №%s" % (partner, date, number)
 
     def effective_date_in_future(self):
 
@@ -236,3 +236,32 @@ class RankTransferLine(models.Model):
         # else:
         #     self.src_rank = False
         #     self.dst_rank = False
+
+
+class HrEmployee(models.Model):
+    _inherit = 'hr.employee'
+
+    rank_transfer_id = fields.Many2one(
+        comodel_name='rank.transfer',
+        compute='_compute_rank_transfer_id',
+        string='Rank Transfer',
+        readonly=True,
+        store=True,
+    )
+    rank_transfer_date = fields.Date(
+        related='rank_transfer_id.date',
+        string='Rank Transfer Date',
+        store=True,
+    )
+
+    @api.depends('rank_id')
+    def _compute_rank_transfer_id(self):
+        for employee in self:
+            domain = [
+                ('employee_id', '=', employee.id),
+                ('state', '=', 'done'),
+            ]
+            rank_transfer_id = self.env['rank.transfer.line'].search(domain, limit=1, order='date desc')
+            # _logger.warning([product.name, last_line_id])
+            employee.rank_transfer_id = rank_transfer_id.transfer_id
+            # employee.last_job_transfer_date = last_job_transfer_id.date if last_job_transfer_id else False

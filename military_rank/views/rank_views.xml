@@ -77,6 +77,7 @@
                 <field name="id" invisible="1"/>
                 <xpath expr="//h1//field[@name='name']/.." position="after">
                     <field name="rank_id" placeholder="Military Rank" widget="selection" attrs="{'readonly': [('id', '!=', False)]}"/>
+                    <field name="rank_transfer_id"/>
                 </xpath>
             </field>
         </record>
@@ -92,14 +93,11 @@
                         <li t-if="record.rank_id.raw_value" class="o_text_overflow"><field name="rank_id"/></li>
                     </ul>
                 </field>
-                <field name="job_title" position="after">
-                    <ul><field name="mobile_phone"/></ul>
-                </field>
             </field>
         </record>
 
 
-        <!--record model="ir.ui.view" id="employee_view_tree_inherit_rank_id">
+        <record model="ir.ui.view" id="employee_view_tree_inherit_rank_id">
             <field name="name">hr.employee.tree</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_tree"/>
@@ -109,7 +107,7 @@
                     <field name="rank_id" optional="hide"/>
                 </field>
             </field>
-        </record-->
+        </record>
 
     </data>
 </odoo>

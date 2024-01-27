@@ -12,15 +12,15 @@ class MilitaryRank(models.Model):
     sequence = fields.Integer(string="Sequence", required=True)
     name = fields.Char(string="Name", store=True, required=True, index=True, translate=True)
     name_gent = fields.Char(string="Name Genitive",
-                            help="Name in genitive declention (Whom/What)",
+                            help="Name in genitive declension (Whom/What)",
                             store=True,
                             required=True)
     name_datv = fields.Char(string="Name Dative",
-                            help="Name in dative declention (for Whom/ for What)",
+                            help="Name in dative declension (for Whom/ for What)",
                             store=True,
                             required=True)
     name_ablt = fields.Char(string="Name Ablative",
-                            help="Name in ablative declention (by Whom/ by What)",
+                            help="Name in ablative declension (by Whom/ by What)",
                             store=True,
                             required=True)
 

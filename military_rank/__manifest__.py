@@ -16,4 +16,5 @@
         "views/rank_views.xml",
         "views/rank_transfer_view.xml"
     ],
+    "sequence": '0',
 }

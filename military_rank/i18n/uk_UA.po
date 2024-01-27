@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-25 08:09+0000\n"
-"PO-Revision-Date: 2023-12-25 10:13+0200\n"
+"POT-Creation-Date: 2024-01-19 08:13+0000\n"
+"PO-Revision-Date: 2024-01-19 10:22+0200\n"
 "Last-Translator: Yevhen Babii <eugene.babiy@gmail.com>\n"
 "Language-Team: \n"
 "Language: uk_UA\n"
@@ -98,8 +98,6 @@ msgid "Captain of the medical service"
 msgstr "капітан медичної служби"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_hr_employee__rank_category
-#: model:ir.model.fields,field_description:military_rank.field_hr_job__rank_category
 #: model:ir.model.fields,field_description:military_rank.field_military_rank__category
 msgid "Category"
 msgstr "Категорія"
@@ -119,6 +117,11 @@ msgstr "полковник"
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__company_id
 msgid "Company"
 msgstr "В/ч"
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__complete_name
+msgid "Complete Name"
+msgstr "Повна Назва"
 
 #. module: military_rank
 #: model_terms:ir.ui.view,arch_db:military_rank.rank_transfer_form_view
@@ -231,14 +234,14 @@ msgstr "генерал"
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__has_message
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Є повідомлення"
 
 #. module: military_rank
 #: model:ir.model.fields,field_description:military_rank.field_military_rank__id
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer__id
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_rank_transfer__message_needaction
@@ -420,17 +423,17 @@ msgstr "Назва в Родовому"
 
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_military_rank__name_ablt
-msgid "Name in ablative declention (by Whom/ by What)"
+msgid "Name in ablative declension (by Whom/ by What)"
 msgstr ""
 
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_military_rank__name_datv
-msgid "Name in dative declention (for Whom/ for What)"
+msgid "Name in dative declension (for Whom/ for What)"
 msgstr ""
 
 #. module: military_rank
 #: model:ir.model.fields,help:military_rank.field_military_rank__name_gent
-msgid "Name in genitive declention (Whom/What)"
+msgid "Name in genitive declension (Whom/What)"
 msgstr ""
 
 #. module: military_rank
@@ -476,6 +479,12 @@ msgstr "Номер Наказу"
 #: model:ir.model.fields,field_description:military_rank.field_military_rank__parent_id
 msgid "Parent Rank"
 msgstr "Вище Звання"
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_hr_employee__rank_category
+#: model:ir.model.fields,field_description:military_rank.field_hr_job__rank_category
+msgid "Rank Category"
+msgstr "Категорія"
 
 #. module: military_rank
 #: model:ir.model,name:military_rank.model_rank_transfer
@@ -566,8 +575,14 @@ msgid "Staff Sergeant"
 msgstr "штаб-сержант"
 
 #. module: military_rank
-#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__state
 #: model:ir.model.fields,field_description:military_rank.field_rank_transfer_line__state
+#, fuzzy
+#| msgid "Status"
+msgid "State"
+msgstr "Статус"
+
+#. module: military_rank
+#: model:ir.model.fields,field_description:military_rank.field_rank_transfer__state
 msgid "Status"
 msgstr "Статус"
 
