@@ -9,12 +9,14 @@
     "version": "1.0",
     "license": "Other proprietary",
     "depends": ["base",
-                "hr"
+                "hr",
+                "declension_ua",
     ],
     "data": [
         # "security/ir.model.access.csv",
         "views/res_company.xml"
     ],
+    "sequence": '1',
     "demo":["demo/res.company.csv"],
     "application": "False"
 }
