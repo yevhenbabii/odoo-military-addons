@@ -20,6 +20,7 @@ class Department(models.Model):
     _inherit = "hr.department"
     _order = "level asc, sequence asc, name asc"
     _display_name = "complete_name"
+    _avoid_quick_create = True
 
     sequence = fields.Integer(default=1)
     tag_ids = fields.Many2many("hr.department.tag", 'hr_department_tag_rel', string="Tags")
@@ -67,11 +68,9 @@ class Department(models.Model):
         res = []
         for dep in self:
             if dep.code:
-                name = "[%(code)s %(company)s] %(complete_name)s" % {"code": dep.code,
-                                                                     "complete_name": dep.complete_name.upper(),
-                                                                     "company": dep.company_id.code}
+                name = "[%s] %s" % (dep.code, dep.complete_name.upper())
             else:
-                name = "[%s] %s" % (dep.company_id.code, dep.complete_name.upper())
+                name = dep.name.upper()
             res.append((dep.id, name))
         return res
 
