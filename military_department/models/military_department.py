@@ -19,13 +19,31 @@ class DepartmentTag(models.Model):
 class Department(models.Model):
     _inherit = "hr.department"
     _order = "level asc, sequence asc, name asc"
-    _display_name = "complete_name"
+    # _display_name = "complete_name"
     _avoid_quick_create = True
 
     sequence = fields.Integer(default=1)
-    tag_ids = fields.Many2many("hr.department.tag", 'hr_department_tag_rel', string="Tags")
-    user_ids = fields.Many2many('res.users', 'hr_department_users_rel', 'did', 'user_id',
-                                string='Accepted Users')
+    tag_ids = fields.Many2many(comodel_name="hr.department.tag",
+                               relation='hr_department_tag_rel',
+                               string="Tags")
+    user_ids = fields.Many2many('res.users',
+                                'hr_department_users_rel',
+                                'did',
+                                'user_id',
+                                string='Accepted Users'
+                                )
+    child_ids = fields.One2many('hr.department',
+                                compute='_compute_child_ids',
+                                string='Child Departments')
+    jobs_ids = fields.One2many('hr.job',
+                               compute='_compute_jobs_ids',
+                               string='Jobs')
+    member_ids = fields.One2many(comodel_name='hr.employee',
+                                 compute='_compute_member_ids',
+                                 string='Members',
+                                 readonly=True,
+                                 recursive=True,
+                                 )
     code = fields.Char(string="Code",
                        compute="_department_code",
                        store=True,
@@ -36,7 +54,6 @@ class Department(models.Model):
         store=True,
         recursive=True
     )
-
     name_gent = fields.Char(string="Name Genitive",
                             compute="_get_declension",
                             help="Name in genitive declension (Whom/What)",
@@ -54,6 +71,36 @@ class Department(models.Model):
                                      store=True,
                                      recursive=True
                                      )
+
+    @api.depends('child_ids', 'member_ids')
+    def _compute_member_ids(self):
+        for department in self:
+            employees = self.env['hr.employee'].search([
+                '|',
+                ('department_id', '=', department.id),
+                ('department_id', 'child_of', department.id),
+            ])
+            department.member_ids = employees
+
+    @api.depends('child_ids')
+    def _compute_child_ids(self):
+        for department in self:
+            departments = self.env['hr.department'].search([
+                '|',
+                ('parent_id', '=', department.id),
+                ('parent_id', 'child_of', department.id),
+            ])
+            department.child_ids = departments
+
+    @api.depends('jobs_ids')
+    def _compute_jobs_ids(self):
+        for department in self:
+            jobs = self.env['hr.job'].search([
+                '|',
+                ('department_id', '=', department.id),
+                ('department_id', 'child_of', department.id),
+            ])
+            department.jobs_ids = jobs
 
     @api.depends("level", "parent_id.level")
     def _compute_level(self):
@@ -155,26 +202,26 @@ class Department(models.Model):
                                   recursive=True
                                   )
 
-    @api.depends('member_ids', 'child_ids.total_employee', 'jobs_ids.no_of_recruitment',
-                 'jobs_ids.expected_employees', 'child_ids.total_staff', 'child_ids.total_vacant')
+    # TODO Fix calculations
+    @api.depends('member_ids', 'child_ids', 'jobs_ids')
     def _compute_total_employee(self):
         for department in self:
             total_employee = len(department.member_ids)
             total_staff = 0
             total_vacant = 0
 
+            for job in department.jobs_ids:
+                total_staff += job.no_of_recruitment
+                total_vacant += job.expected_employees
+
             for sub_department in department.child_ids:
                 total_employee += sub_department.total_employee
                 total_staff += sub_department.total_staff
                 total_vacant += sub_department.total_vacant
 
-            for job in department.jobs_ids:
-                total_staff += job.no_of_recruitment
-                total_vacant += job.expected_employees
-
-            department.total_employee = total_employee
-            department.total_staff = total_staff
-            department.total_vacant = total_vacant
+            department.total_employee += total_employee
+            department.total_staff += total_staff
+            department.total_vacant += total_vacant
 
 
 class HrEmployee(models.Model):

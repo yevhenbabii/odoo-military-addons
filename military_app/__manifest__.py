@@ -15,9 +15,13 @@
         "military_job",
         "military_employee",
         ],
-    "data": ["data/res.country.state.csv",
+    "data": [
+        "data/res.country.state.csv",
              ],
-    "sequence": '1',
+    "demo": [
+        "data/res_users_demo.xml"
+             ],
+    "sequence": '0',
     "application": True,
     "auto_install": True,
     "installable": True,
