@@ -120,12 +120,12 @@ msgstr "Остання модифікація"
 #. module: base_location
 #: model:ir.model.fields,field_description:base_location.field_res_city_zip__write_uid
 msgid "Last Updated by"
-msgstr "Востаннє оновив"
+msgstr "Крайнім Оновив"
 
 #. module: base_location
 #: model:ir.model.fields,field_description:base_location.field_res_city_zip__write_date
 msgid "Last Updated on"
-msgstr "Останнє оновлення"
+msgstr "Крайнє Оновлення"
 
 #. module: base_location
 #: model_terms:ir.ui.view,arch_db:base_location.view_partner_form

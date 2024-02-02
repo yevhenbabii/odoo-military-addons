@@ -288,7 +288,7 @@ msgstr "0 В майбутньому"
 #: code:addons/mail/static/src/components/activity_menu_view/activity_menu_view.xml:0
 #, python-format
 msgid "0 Late"
-msgstr "0 Пізно"
+msgstr "0 Затримано"
 
 #. module: mail
 #. odoo-javascript
@@ -3128,7 +3128,7 @@ msgstr "Обговорення"
 #: model:ir.model.fields,field_description:mail.field_res_users_settings__display_name
 #: model:ir.model.fields,field_description:mail.field_res_users_settings_volumes__display_name
 msgid "Display Name"
-msgstr "Назва для відображення"
+msgstr "Відображувана Назва"
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.email_template_form
@@ -3377,7 +3377,7 @@ msgstr "Редагувати: %s"
 #: model:mail.activity.type,name:mail.mail_activity_data_email
 #: model_terms:ir.ui.view,arch_db:mail.view_mail_search
 msgid "Email"
-msgstr "Ел. пошта"
+msgstr "Email"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_compose_message__email_add_signature
@@ -3551,7 +3551,7 @@ msgstr "Шаблони електронних листів"
 #: model_terms:ir.ui.view,arch_db:mail.mail_message_schedule_view_tree
 #: model_terms:ir.ui.view,arch_db:mail.view_mail_tree
 msgid "Emails"
-msgstr "Ел. пошта"
+msgstr "Email"
 
 #. module: mail
 #. odoo-javascript
@@ -5294,7 +5294,7 @@ msgstr "Останній перегляд"
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_channel_rtc_session__write_date
 msgid "Last Updated On"
-msgstr "Останнє оновлення на"
+msgstr "Крайнє Оновлення"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_fetchmail_server__write_uid
@@ -5357,7 +5357,7 @@ msgstr "Востаннє оновив"
 #: model:ir.model.fields,field_description:mail.field_res_users_settings__write_date
 #: model:ir.model.fields,field_description:mail.field_res_users_settings_volumes__write_date
 msgid "Last Updated on"
-msgstr "Останнє оновлення"
+msgstr "Крайнє Оновлення"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_channel_member__last_seen_dt
@@ -9500,7 +9500,7 @@ msgstr "До %s: немає зв'язку"
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_template__email_to
 msgid "To (Emails)"
-msgstr "Кому (ел. пошта)"
+msgstr "Кому (Email)"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_mail_mail__recipient_ids

@@ -31,7 +31,7 @@ msgstr "Прямі та непрямі підлеглі"
 #: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
 #, python-format
 msgid "Direct subordinates"
-msgstr "Призначені підлеглі"
+msgstr "Прямі підлеглі"
 
 #. module: hr_org_chart
 #. odoo-javascript
@@ -52,7 +52,7 @@ msgstr "Пірахунок непрямих підлеглих"
 #: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
 #, python-format
 msgid "Indirect subordinates"
-msgstr "Непризначені підлеглі"
+msgstr "Непрямі підлеглі"
 
 #. module: hr_org_chart
 #. odoo-javascript
@@ -67,7 +67,7 @@ msgstr "Більше менеджерів"
 #: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
 #, python-format
 msgid "No hierarchy position."
-msgstr "Немає ієрархічної позиції."
+msgstr "Ієрархія відсутня."
 
 #. module: hr_org_chart
 #: model_terms:ir.ui.view,arch_db:hr_org_chart.hr_employee_public_view_form_inherit_org_chart
@@ -109,7 +109,7 @@ msgstr "Команда"
 #: code:addons/hr_org_chart/static/src/fields/hr_org_chart.xml:0
 #, python-format
 msgid "This employee has no manager or subordinate."
-msgstr "Цей вʼʼʼ₴ёʼʼё]]ґ]ъёъ“ не має керівника або підлеглого."
+msgstr "Цей військовослужбовець не має керівника або підлеглого."
 
 #. module: hr_org_chart
 #. odoo-javascript

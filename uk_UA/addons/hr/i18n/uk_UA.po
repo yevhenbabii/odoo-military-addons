@@ -1044,13 +1044,13 @@ msgstr "Мітки Військовослужбовців"
 #: model:ir.model.fields,field_description:hr.field_hr_job__contract_type_id
 #: model_terms:ir.ui.view,arch_db:hr.view_job_filter
 msgid "Employment Type"
-msgstr "Тип Зайнятості"
+msgstr "Вид Служби"
 
 #. module: hr
 #: model:ir.actions.act_window,name:hr.hr_contract_type_action
 #: model:ir.ui.menu,name:hr.menu_view_hr_contract_type
 msgid "Employment Types"
-msgstr "Типи Зайнятості"
+msgstr "Види Служби"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
@@ -1442,7 +1442,7 @@ msgstr "Востаннє оновив"
 #: model:ir.model.fields,field_description:hr.field_hr_plan_wizard__write_date
 #: model:ir.model.fields,field_description:hr.field_hr_work_location__write_date
 msgid "Last Updated on"
-msgstr "Останнє оновлення"
+msgstr "Крайнє Оновлення"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_filter

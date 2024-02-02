@@ -1631,7 +1631,7 @@ msgstr "Відмінити"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_stress_day__display_name
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__display_name
 msgid "Display Name"
-msgstr "Назва для відображення"
+msgstr "Відображувана Назва"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
@@ -2178,7 +2178,7 @@ msgstr "Востаннє оновив"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_stress_day__write_date
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__write_date
 msgid "Last Updated on"
-msgstr "Останнє оновлення"
+msgstr "Крайнє Оновлення"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter

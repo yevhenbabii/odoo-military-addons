@@ -47,7 +47,7 @@ msgstr "Дата створення"
 #. module: partner_company_type
 #: model:ir.model.fields,field_description:partner_company_type.field_res_partner_company_type__display_name
 msgid "Display Name"
-msgstr "Назва для відображення"
+msgstr "Відображувана Назва"
 
 #. module: partner_company_type
 #: model:ir.model.fields,field_description:partner_company_type.field_res_partner_company_type__id
@@ -67,7 +67,7 @@ msgstr "Востаннє оновив"
 #. module: partner_company_type
 #: model:ir.model.fields,field_description:partner_company_type.field_res_partner_company_type__write_date
 msgid "Last Updated on"
-msgstr "Останнє оновлення"
+msgstr "Крайнє Оновлення"
 
 #. module: partner_company_type
 #: model:ir.model.fields,field_description:partner_company_type.field_res_partner__partner_company_type_id
