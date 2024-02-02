@@ -142,11 +142,10 @@ class HrEmployee(models.Model):
                                    help="Middle name in ablative declension (by Whom/ by What)",
                                    store=True)
 
-    # TODO fix partner update on change
+    # TODO fix partner update on employee name change
     def _update_partner(self):
         for employee in self:
             partners = employee.mapped("address_home_id")
-            # partners |= employee.mapped("address_home_id")
             partners.write({"name": employee.name})
 
     @api.model
@@ -154,7 +153,7 @@ class HrEmployee(models.Model):
         job = job_title[0].lower() + job_title[1:] if job_title else ''
         return " ".join(p for p in (rank_id.name, name, job) if p)
 
-    @api.depends("rank_id", "name", "job_title")
+    @api.depends("rank_id", "name", "job_id.complete_name", "job_title")
     def _compute_complete_name(self):
         for rec in self:
             rec.complete_name = rec._get_complete_name(rec.rank_id, rec.name, rec.job_title)
@@ -183,16 +182,17 @@ class HrEmployee(models.Model):
         self.complete_name = self._get_complete_name(self.rank_id, self.name, self.job_title)
 
     def _prepare_vals(self, vals):
-        if not vals.get("name"):
+        if not vals.get("name") or not vals.get("last_name") or not vals.get("first_name") or not vals.get("middle_name"):
             last_name = vals.get("last_name", self.last_name)
             first_name = vals.get("first_name", self.first_name)
             middle_name = vals.get("middle_name", self.middle_name)
             vals["name"] = self._get_name(last_name, first_name, middle_name)
         if not vals.get("complete_name"):
-            # rank = vals.get("rank_id", self.rank_id.name)
             name = vals.get("name", self.name)
             job_title = vals.get("job_title", self.job_title)
             vals["complete_name"] = self._get_complete_name(self.rank_id, name, job_title)
+        if vals.get("parent_id"):
+            vals["parent_id"] = self.department_id.manager_id
 
     @api.model_create_multi
     def create(self, vals_list):

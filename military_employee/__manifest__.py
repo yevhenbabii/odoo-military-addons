@@ -4,7 +4,7 @@
         Military personel data
         """,
     "author": "Yevhen Babii",
-    "website": "",
+    "website": "https://github.com/yevhenbabii",
     "category": "Human Resources/Employees",
     "version": "1.0",
     "license": "Other proprietary",
