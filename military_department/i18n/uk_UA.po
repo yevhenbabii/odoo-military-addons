@@ -121,7 +121,7 @@ msgstr "Востаннє Оновив"
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department_tag__write_date
 msgid "Last Updated on"
-msgstr "Востаннє Оновлено"
+msgstr "Крайнє Оновлення"
 
 #. module: military_department
 #: model:ir.model.fields,field_description:military_department.field_hr_department__level

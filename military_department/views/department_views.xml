@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <xpath expr="/form/sheet" position="inside">
                 <notebook>
-                    <page string="Departments" name="departments">
+                    <page string="Child Departments" name="departments">
                         <field name="child_ids" nolabel="1">
                             <tree>
                                 <field name="name"/>
@@ -24,13 +24,20 @@
             </field>
             <field name="name" position="after">
                     <field name="complete_name" readonly="False"/>
-                    <field name="name_gent" readonly="False"/>
-                    <field name="name_datv" readonly="False"/>
-                    <field name="name_ablt" readonly="False"/>
-                    <field name="complete_name_gent" readonly="False"/>
+                    <field name="commandor_id" readonly="False"/>
                     <field name="code"/>
                     <field name="level" invisible="True"/>
             </field>
+            <notebook>
+                <page name="declension" string="Name Declension" groups="hr.group_hr_user">
+                    <group>
+                        <field name="name_gent" readonly="False"/>
+                        <field name="name_datv" readonly="False"/>
+                        <field name="name_ablt" readonly="False"/>
+                        <field name="complete_name_gent" readonly="False"/>
+                    </group>
+                </page>
+            </notebook>
         </field>
     </record>
 

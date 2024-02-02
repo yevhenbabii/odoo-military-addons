@@ -32,9 +32,6 @@ class Department(models.Model):
                                 'user_id',
                                 string='Accepted Users'
                                 )
-    child_ids = fields.One2many('hr.department',
-                                compute='_compute_child_ids',
-                                string='Child Departments')
     jobs_ids = fields.One2many('hr.job',
                                compute='_compute_jobs_ids',
                                string='Jobs')
@@ -54,6 +51,11 @@ class Department(models.Model):
         store=True,
         recursive=True
     )
+    commandor_id = fields.Many2one('hr.job',
+                                   string='Commandor',
+                                   required=True,
+                                   tracking=True,
+                                   domain="['|', '|', ('company_id', '=', False), ('company_id', '=', company_id), ('department_id', '=', id)]")
     name_gent = fields.Char(string="Name Genitive",
                             compute="_get_declension",
                             help="Name in genitive declension (Whom/What)",
@@ -72,7 +74,7 @@ class Department(models.Model):
                                      recursive=True
                                      )
 
-    @api.depends('child_ids', 'member_ids')
+    @api.model
     def _compute_member_ids(self):
         for department in self:
             employees = self.env['hr.employee'].search([
@@ -82,7 +84,7 @@ class Department(models.Model):
             ])
             department.member_ids = employees
 
-    @api.depends('child_ids')
+    @api.model
     def _compute_child_ids(self):
         for department in self:
             departments = self.env['hr.department'].search([
@@ -92,7 +94,7 @@ class Department(models.Model):
             ])
             department.child_ids = departments
 
-    @api.depends('jobs_ids')
+    @api.model
     def _compute_jobs_ids(self):
         for department in self:
             jobs = self.env['hr.job'].search([
@@ -188,17 +190,17 @@ class Department(models.Model):
 
     total_employee = fields.Integer(string='Total Employee',
                                     compute='_compute_total_employee',
-                                    store=True,
+                                    store=False,
                                     recursive=True
                                     )
     total_staff = fields.Integer(string='Total Staff',
                                  compute='_compute_total_employee',
-                                 store=True,
+                                 store=False,
                                  recursive=True
                                  )
     total_vacant = fields.Integer(string='Total Vacant',
                                   compute='_compute_total_employee',
-                                  store=True,
+                                  store=False,
                                   recursive=True
                                   )
 
