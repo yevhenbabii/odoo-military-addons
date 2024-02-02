@@ -43,6 +43,15 @@
             <field name="company_id" position="attributes">
                 <attribute name="optional">"hide"</attribute>
             </field>
+            <field name="no_of_recruitment" position="attributes">
+                <attribute name="sum">"Total Staff"</attribute>
+            </field>
+            <field name="no_of_employee" position="attributes">
+                <attribute name="sum">"Total Employees"</attribute>
+            </field>
+            <field name="expected_employees" position="attributes">
+                <attribute name="sum">"Total Vacancies"</attribute>
+            </field>
         </field>
     </record>
 
@@ -97,15 +106,6 @@
                                 <field name="no_of_employee" sum="Total Employees"/>
                                 <field name="expected_employees" sum="Total Vacancies"/>
                                 <field name="employee_ids" widget="many2many_tags"/>
-                            </tree>
-                        </field>
-                    </page>
-                    <page string="Employees" name="employees">
-                        <field name="member_ids" nolabel="1">
-                            <tree>
-                                <field name="name"/>
-                                <field name="rank_id"/>
-                                <field name="job_title"/>
                             </tree>
                         </field>
                     </page>
