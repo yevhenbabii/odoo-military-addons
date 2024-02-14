@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_move_default,access_hr_move_default,model_hr_move,base.group_user,1,0,0,0
+access_hr_move_officer,access_hr_move_officer,model_hr_move,hr.group_hr_user,1,1,1,1
+access_hr_move_line_officer,access_hr_move_officer,model_hr_move_line,hr.group_hr_user,1,1,1,1
+access_hr_move_approve,access_hr_move_approve,model_hr_move,group_hr_move,1,1,1,1
+access_hr_move_type,access_hr_move_type,model_hr_move_type,group_hr_move,1,1,1,1
+access_hr_move_line_approve,access_hr_move_approve,model_hr_move_line,group_hr_move,1,1,1,1

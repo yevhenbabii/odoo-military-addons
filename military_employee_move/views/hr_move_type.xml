@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_move_type_tree" model="ir.ui.view">
+        <field name="name">hr.move.type.tree</field>
+        <field name="model">hr.move.type</field>
+        <field name="arch" type="xml">
+            <tree string="Move Types">
+                <field name="name"/>
+                <field name="location_id"/>
+                <field name="code"/>
+                <field name="report_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_move_type_form" model="ir.ui.view">
+        <field name="name">hr.move.type.form</field>
+        <field name="model">hr.move.type</field>
+        <field name="arch" type="xml">
+            <form string="Move Type">
+                <sheet>
+                    <group>
+                        <field name="company_id" invisible="1"/>
+                        <field name="name"/>
+                        <field name="location_id"/>
+                        <field name="code"/>
+                        <field name="report_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="view_hr_move_type_filter" model="ir.ui.view">
+            <field name="name">hr.move.type.search</field>
+            <field name="model">hr.move.type</field>
+            <field name="arch" type="xml">
+                <search string="Move Types">
+                    <field name="name"/>
+                    <field name="location_id"/>
+                    <field name="code"/>
+                    <field name="report_ids"/>
+                    <separator/>
+<!--                    <group expand="0" string="Group By">-->
+<!--                        <filter string="State" name="state"/>-->
+<!--                        <filter string="Move Type" name="move_type_code" domain="[]" context="{'group_by': 'move_type_id'}"/>-->
+<!--                        <filter string="Location" name="location_id" context="{'group_by': 'location_id'}"/>-->
+<!--                        <filter string="Destination Location" name="location_dest_id" context="{'group_by': 'location_dest_id'}"/>-->
+<!--                    </group>-->
+                </search>
+            </field>
+        </record>
+
+        <record id="action_hr_move_type" model="ir.actions.act_window">
+            <field name="name">Move Types</field>
+            <field name="res_model">hr.move.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_hr_move_filter"/>
+            <field name="context">{"search_default_Current":1}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Ready to register personell move?
+              </p><p>
+                Let's create a personell move.
+              </p>
+            </field>
+        </record>
+
+        <record id="open_hr_move_type" model="ir.actions.act_window">
+            <field name="name">Move Types</field>
+            <field name="res_model">hr.move.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="menu_hr_move_type"
+            action="open_hr_move_type"
+            parent="hr.menu_config_employee"
+            sequence="6"
+        />
+    </data>
+</odoo>

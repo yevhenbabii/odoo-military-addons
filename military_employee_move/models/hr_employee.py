@@ -6,7 +6,7 @@ class HrEmployee(models.Model):
 
     status_id = fields.Many2one('hr.employee.status')
     location_id = fields.Many2one(
-        'generic.location',
+        'hr.work.location',
         "Employee Location",
         compute='_compute_last_move_id',
         readonly=True,
@@ -36,7 +36,7 @@ class HrEmployee(models.Model):
                 ('employee_id', '=', employee.id),
                 ('state', '=', 'done'),
             ]
-            last_move_id = self.env['hr.move'].search(domain, limit=1, order='date desc')
-            employee.last_move_id = last_move_id
+            last_move_id = self.env['hr.move.line'].search(domain, limit=1, order='date desc')
+            employee.last_move_id = last_move_id if last_move_id else False
             employee.last_move_date = last_move_id.date if last_move_id else False
-            employee.location_id = last_move_id.location_dest_id
+            employee.location_id = last_move_id.location_dest_id if last_move_id else False

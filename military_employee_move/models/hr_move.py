@@ -1,98 +1,123 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import AccessError, UserError
 
 
 class HrMove(models.Model):
     _name = "hr.move"
     _description = "Staff Move"
-    _order = "id name desc"
+    _rec_names_search = ['name', 'employee_id.name']
+    _inherit = "mail.thread"
+    _order = "id desc"
 
-    name = fields.Char('Reference', default='/',
-                       copy=False, index=True, readonly=True)
+    name = fields.Char(
+        'Reference',
+        default='/',
+        copy=False,
+        index='trigram',
+        readonly=True
+    )
     origin = fields.Char(
-        'Source Document', index=True,
+        'Source Document',
+        index=True,
         states={'done': [('readonly', True)], 'cancel': [('readonly', True)]},
-        help="Reference of the document")
+        help="Reference of the document"
+    )
     note = fields.Text('Notes')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
         ('done', 'Done'),
         ('cancel', 'Cancelled'),
-    ], string='Status', compute='_compute_state',
-        copy=False, index=True, readonly=True, store=True, tracking=True)
-    date = fields.Datetime(
-        'Creation Date',
-        default=fields.Datetime.now, 
-        index=True, 
+    ],
+        string='Status',
+        compute='_compute_state',
+        default='draft',
+        copy=False,
+        index=True,
+        readonly=True,
+        store=True,
+        tracking=True,
+    )
+    date = fields.Date(
+        'Move Date',
+        default=fields.Date.today(),
+        index=True,
         tracking=True,
         states={'done': [('readonly', True)], 'cancel': [('readonly', True)]},
-        help="Creation Date, usually the time of the order")
-    date_done = fields.Datetime('Date of Transfer', 
-                                copy=False, 
-                                readonly=True,
-                                help="Date at which the transfer has been processed or cancelled.")
+    )
     location_id = fields.Many2one(
-        'generic.location', 
-        "Source Location",
-        default=lambda self: self.env['hr.move.type'].browse(
-            self._context.get('default_move_type_id')).default_location_src_id,
-        check_company=True,
+        'hr.work.location', "Destination Location",
+        # default=lambda self: self.env['hr.move.type'].browse(
+        #     self._context.get('default_move_type_id')).location_id,
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)]})
-    location_dest_id = fields.Many2one(
-        'generic.location', "Destination Location",
-        default=lambda self: self.env['hr.move.type'].browse(
-            self._context.get('default_move_type_id')).default_location_dest_id,
-        check_company=True,
-        readonly=True,
-        required=True,
-        states={'draft': [('readonly', False)]})
-    move_line_ids = fields.One2many('hr.move.line',
-                                    'move_id',
-                                    'Operations',
-                                    copy=True)
+        states={'draft': [('readonly', False)]}
+    )
+    move_line_ids = fields.One2many(
+        'hr.move.line',
+        'move_id',
+        'Operations',
+        copy=True
+    )
     move_type_id = fields.Many2one(
         'hr.move.type',
-        'Operation Type',
-        required=True, readonly=True,
-        states={'draft': [('readonly', False)]})
+        'Move Type',
+        required=True,
+        readonly=False,
+        states={'draft': [('readonly', False)]}
+    )
     move_type_code = fields.Selection(
         related='move_type_id.code',
-        readonly=True)
+        readonly=True
+    )
     partner_id = fields.Many2one(
         'res.partner',
         'Partner',
         check_company=True,
         states={'done': [('readonly', True)],
-                'cancel': [('readonly', True)]})
+                'cancel': [('readonly', True)]}
+    )
     company_id = fields.Many2one(
-        'res.company', string='Company', related='move_type_id.company_id',
-        readonly=True, store=True, index=True)
+        'res.company',
+        string='Company',
+        default=lambda self: self.env.company,
+        readonly=True,
+        store=True,
+        index=True
+    )
     user_id = fields.Many2one(
-        'res.users', 'Responsible', tracking=True,
+        'res.users',
+        'Responsible',
+        tracking=True,
         states={'done': [('readonly', True)], 'cancel': [('readonly', True)]},
         default=lambda self: self.env.user)
     owner_id = fields.Many2one(
-        'res.partner', 'Assign Owner',
+        'res.partner',
+        'Assign Owner',
         states={'done': [('readonly', True)], 'cancel': [('readonly', True)]},
         check_company=True,
         help="When validating the transfer, the products will be assigned to this owner.")
-    employee_id = fields.Many2one('hr.employee',
-                                  'Employee',
-                                  related='move_line_ids.employee_id',
-                                  readonly=True)
+    employee_ids = fields.Many2one(
+        'hr.employee',
+        'Employee',
+        related='move_line_ids.employee_id',
+        readonly=True
+    )
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):
         for move in self:
             move_id = isinstance(move.id, int) and move.id or getattr(move, '_origin',
-                                                                               False) and move._origin.id
+                                                                      False) and move._origin.id
             if move_id:
                 moves = self.env['hr.move.line'].search([('move_id', '=', move_id)])
                 for move in moves:
                     move.write({'partner_id': move.partner_id.id})
+
+    @api.onchange('move_type_id')
+    def onchange_move_type_id(self):
+        for move in self:
+            move.location_id = move.move_type_id.location_id
 
     @api.model
     def create(self, vals):
@@ -119,7 +144,7 @@ class HrMove(models.Model):
                     if vals.get('partner_id'):
                         move[2]['partner_id'] = vals.get('partner_id')
         res = super(HrMove, self).create(vals)
-        res._autoconfirm_move()
+        # res._autoconfirm_move()
         if vals.get('move_type_id'):
             for move in res.move_lines:
                 if not move.description_move:
@@ -155,6 +180,17 @@ class HrMove(models.Model):
             'move_lines').unlink()  # Checks if moves are not done
         return super(HrMove, self).unlink()
 
+    def _check_permission_group(self, group=None):
+
+        for move in self:
+            if group and not move.user_has_groups(group):
+                raise AccessError(
+                    _("You don't have the access rights to take this action.")
+                )
+            else:
+                continue
+        return True
+
     def action_assign_partner(self):
         for move in self:
             move.move_lines.write({'partner_id': move.partner_id.id})
@@ -165,7 +201,15 @@ class HrMove(models.Model):
         self.filtered(lambda x: not x.move_lines).state = 'cancel'
         return True
 
-    def _action_done(self):
+    def action_draft(self):
+        self.ensure_one()
+        has_permission = self._check_permission_group(
+            "military_employee_move.group_hr_move"
+        )
+        if has_permission:
+            self.write({"state": "draft"})
+
+    def action_done(self):
         self._check_company()
 
         todo_moves = self.mapped('move_lines').filtered(
@@ -175,7 +219,7 @@ class HrMove(models.Model):
                 move.move_lines.write({'restrict_partner_id': move.owner_id.id})
                 move.move_line_ids.write({'owner_id': move.owner_id.id})
         todo_moves._action_done(cancel_backorder=self.env.context.get('cancel_backorder'))
-        self.write({'date_done': fields.Datetime.now(), 'priority': '0'})
+        self.write({'date': fields.Date.today(), 'priority': '0'})
 
         # if incoming moves make other confirmed/partially_available moves available, assign them
         done_incoming_moves = self.filtered(

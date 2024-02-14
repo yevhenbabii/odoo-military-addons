@@ -5,38 +5,54 @@ from odoo.tools.mail import html2plaintext, is_html_empty
 class HrMoveLine(models.Model):
     _name = "hr.move.line"
     _description = "Employee Move"
-    _order = 'sequence, id'
+    _order = 'id asc'
 
-    name = fields.Char('Description', index=True, required=True)
+    name = fields.Char('Description',
+                       index=True,
+                       required=True)
     sequence = fields.Integer('Sequence', default=10)
-    create_date = fields.Datetime('Creation Date', index=True, readonly=True)
-    date = fields.Datetime(
-        'Move Date', default=fields.Datetime.now, index=True, required=True,
-        help="Move date until move is done, then date of actual move processing")
+    create_date = fields.Datetime(
+        'Creation Date',
+        index=True,
+        readonly=True
+        )
+    date = fields.Date(
+        'Move Date',
+        related='move_id.date',
+        readonly=True,
+        index=True,
+        required=True
+        )
     end_date = fields.Datetime(
-        'Move End Date', index=True,
-        help="Move date until move is done, then date of actual move processing")
+        'Move End Date', index=True
+        )
     company_id = fields.Many2one(
-        'res.company', 'Company',
+        'res.company',
+        related='move_id.company_id',
         default=lambda self: self.env.company,
-        index=True, required=True)
+        index=True,
+        required=True)
     employee_id = fields.Many2one(
         'hr.employee', 'Employee',
         check_company=True,
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        # domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         index=True, required=True,
         states={'done': [('readonly', True)]})
     description = fields.Text('Description of Move')
     location_id = fields.Many2one(
-        'generic.location', 'Source Location',
-        auto_join=True, index=True, required=True,
-        check_company=True
+        'hr.work.location',
+        'Source Location',
+        auto_join=True,
+        index=True,
     )
     location_dest_id = fields.Many2one(
-        'generic.location', 'Destination Location',
-        auto_join=True, index=True, required=True,
-        check_company=True,
-        help="Location where the system will locate the Employee.")
+        'hr.work.location',
+        'Destination Location',
+        auto_join=True,
+        index=True,
+        required=True,
+        help="Location where the system will locate the Employee."
+    )
     partner_id = fields.Many2one(
         'res.partner', 'Source Address',
         states={'done': [('readonly', True)]},
@@ -54,7 +70,8 @@ class HrMoveLine(models.Model):
     move_partner_id = fields.Many2one(
         'res.partner',
         'Transfer Destination Address',
-        related='move_id.partner_id', readonly=False)
+        related='move_id.partner_id',
+        readonly=False)
     note = fields.Text('Notes')
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -70,18 +87,6 @@ class HrMoveLine(models.Model):
         help="* Draft: When the move is created and not yet confirmed.\n"
              "* Done: When the move is processed, the state is \'Done\'.")
     origin = fields.Char("Source Document")  # ToDo Make link to document model
-    rule_id = fields.Many2one(
-        'hr.move.rule', 'Stock Rule', ondelete='restrict',
-        help='The stock rule that created this stock move',
-        check_company=True)
-    # propagate_cancel = fields.Boolean(
-    #     'Propagate cancel and split', default=True,
-    #     help='If checked, when this move is cancelled, cancel the linked move too')
-
-    # TODO May be used to trigger holiday and vocation moves?
-    delay_alert_date = fields.Datetime('Delay Alert Date',
-                                       help='Process at this date to be on time',
-                                       compute="_compute_delay_alert_date", store=True)
     move_type_id = fields.Many2one('hr.move.type', 'Operation Type', check_company=True)
     inventory_id = fields.Many2one('hr.inventory', 'Inventory', check_company=True)
 
@@ -105,10 +110,12 @@ class HrMoveLine(models.Model):
     def onchange_employee(self):
         if self.employee_id:
             self.description = self._get_description(self.move_type_id)
+            self.location_id = self.employee_id.location_id or ''
+            self.location_dest_id = self.move_id.location_id or ''
 
     @api.onchange('employee_id')
     def _onchange_employee_id(self):
         if self.employee_id:
             if self.move_id:
-                employee = self.employee_id
-                self.description = employee._get_description(self.move_id.move_type_id)
+                # employee = self.employee_id
+                self.description = self._get_description(self.move_id.move_type_id)

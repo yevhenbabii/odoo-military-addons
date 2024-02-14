@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_military_employee_move_form" model="ir.ui.view">
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//h1//field[@name='name']/.." position="after">
+                    <field name="location_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
