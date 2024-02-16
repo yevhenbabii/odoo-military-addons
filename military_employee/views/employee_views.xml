@@ -6,18 +6,12 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <header position="inside">
-                <field
-                    name="state"
-                    widget="statusbar"
-                    options="{'clickable': '1'}"
-                />
-            </header>
             <xpath expr="//h1//field[@name='name']/.." position="after">
                 <group>
                     <field name="last_name" required="1"/>
                     <field name="first_name" required="1"/>
                     <field name="middle_name" required="1"/>
+                    <field name="callsign"/>
                     <field name="complete_name" widget="CopyClipboardChar"/>
                 </group>
             </xpath>
@@ -75,12 +69,12 @@
             <xpath expr="//div[@name='div_km_home_work']" position="attributes">
                     <attribute name="invisible">1</attribute>
             </xpath>
-            <!--xpath expr="//field[@name='study_school']/.." position="after">
+            <xpath expr="//field[@name='study_school']/.." position="after">
                 <group name="blood" string="Blod Group">
                     <field name="blood_type_ab"/>
                     <field name="blood_type_rh"/>
                 </group>
-            </xpath-->
+            </xpath>
             <notebook>
                 <page name="declension" string="Name Declension" groups="hr.group_hr_user">
                     <group>
@@ -99,7 +93,6 @@
         <field name="res_model">hr.employee</field>
         <field name="view_mode">kanban,form,tree</field>
         <field name="context">{}</field>
-        <field name="domain">[('state', '=', active_id)]</field>
     </record>
 
     <record id="hr_employee_kanban_view" model="ir.ui.view">
@@ -107,47 +100,22 @@
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
             <field name="arch" type="xml">
-                <field name="name" position="after">
-                    <field name="state" invisible="True"/>
-                </field>
                 <field name='work_phone' position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="job_title" position="after">
-<!--                    <ul>-->
                         <li t-if="record.mobile_phone.raw_value" class="o_force_ltr">
                             <field name="mobile_phone"/>
                         </li>
-<!--                    </ul>-->
                 </field>
-                <xpath expr="//kanban/templates/t/div" position="inside">
-                    <div t-attf-class="ribbon ribbon-top-right" >
-                        <span t-attf-class="ribbon-{{ record.state.raw_value }}">
-                            <t t-esc="record.state.value"/>
-                        </span>
-                    </div>
-                </xpath>
+<!--                <xpath expr="//kanban/templates/t/div" position="inside">-->
+<!--                    <div t-attf-class="ribbon ribbon-top-right" >-->
+<!--                        <span t-attf-class="ribbon-{{ record.state.raw_value }}">-->
+<!--                            <t t-esc="record.state.value"/>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                </xpath>-->
             </field>
-    </record>
-
-    <record id="view_employee_template_search_status" model="ir.ui.view">
-        <field name="name">hr.employee.search.status</field>
-        <field name="model">hr.employee</field>
-        <field name="inherit_id" ref="hr.view_employee_filter" />
-        <field name="arch" type="xml">
-            <field name="name" position="before">
-                <field name="complete_name"/>
-            </field>
-            <field name="name" position="after">
-                <field name="state"/>
-                <filter string="State"
-                    name="state"
-                    domain="[]"
-                    context="{'group_by' : 'state'}"
-                />
-            <separator/>
-            </field>
-        </field>
     </record>
 
     <record model="ir.ui.view" id="military_employee_tree">
@@ -162,7 +130,6 @@
                 <field name="last_name" optional="hide"/>
                 <field name="first_name" optional="hide"/>
                 <field name="middle_name" optional="hide"/>
-                <field name="state" optional="hide"/>
             </field>
             <field name="name" position="attributes">
                     <attribute name="optional">"hide"</attribute>
@@ -215,10 +182,6 @@
                            icon="fa-users"
                            enable_counters="1"/>
                     <field name="rank_category"
-                           select="multi"
-                           icon="fa-users"
-                           enable_counters="1"/>
-                    <field name="state"
                            select="multi"
                            icon="fa-users"
                            enable_counters="1"/>

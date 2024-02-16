@@ -5,7 +5,7 @@ from dateutil.relativedelta import relativedelta
 
 _logger = logging.getLogger(__name__)
 
-UPDATE_PARTNER_FIELDS = ["name", "user_id", "address_home_id"]
+UPDATE_PARTNER_FIELDS = ["name", "address_home_id"]
 
 
 class HrEmployee(models.Model):
@@ -13,32 +13,40 @@ class HrEmployee(models.Model):
     _rec_name = "complete_name"
     _avoid_quick_create = True
 
-    job_id = fields.Many2one('hr.job',
-                             string='Job Position',
-                             domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
-    job_title = fields.Char("Job Title",
-                            related="job_id.complete_name",
-                            store=True
-                            )
-    department_id = fields.Many2one(related="job_id.department_id",
-                                    store=True,
-                                    readonly=True
-                                    )
-    parent_id = fields.Many2one(related="department_id.manager_id",
-                                store=True,
-                                readonly=True
-                                )
-    last_name = fields.Char("Last Name",
-                            required=True,
-                            tracking=True
-                            )
-    first_name = fields.Char("First Name",
-                             required=True,
-                             tracking=True
-                             )
-    middle_name = fields.Char("Middle Name",
-                              required=True,
-                              tracking=True)
+    callsign = fields.Char()
+    job_id = fields.Many2one(
+        'hr.job',
+        string='Job Position',
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    job_title = fields.Char(
+        "Job Title",
+        related="job_id.complete_name",
+        store=True
+    )
+    department_id = fields.Many2one(
+        related="job_id.department_id",
+        store=True,
+        readonly=True
+    )
+    parent_id = fields.Many2one(
+        related="department_id.manager_id",
+        store=True,
+        readonly=True
+    )
+    last_name = fields.Char(
+        "Last Name",
+        required=True,
+        tracking=True
+    )
+    first_name = fields.Char(
+        "First Name",
+        required=True,
+        tracking=True
+    )
+    middle_name = fields.Char(
+        "Middle Name",
+        required=True,
+        tracking=True)
     service_type = fields.Selection([
         ('mobilised', 'Mobilised'),
         ('contract', 'Contract'),
@@ -48,28 +56,19 @@ class HrEmployee(models.Model):
         default='mobilised',
         required=True,
         help="The personell service type")
-    state = fields.Selection(
-        [("field", "Field"),
-         ("duty", "Duty"),
-         ("trip", "Trip"),
-         ("holiday", "Holiday"),
-         ("deserter", "Deserter"),
-         ("guard", "Guard"),
-         ("fugitive", "Fugitive"),
-         ("refusal", "Refusal"),
-         ("hospital", "Hospital"),
-         ("hostage", "Hostage"),
-         ("missing", "Missing"),
-         ("on_shield", "On Shield")],
-        required=True,
-        default="duty",
-        index=True,
-        store=True,
+    conscription_place = fields.Many2one(
+        "res.partner",
+        "Conscription Place",
         tracking=True
     )
-    conscription_place = fields.Many2one("res.partner", "Conscription Place", tracking=True)
-    conscription_date = fields.Date("Conscription Date", tracking=True)
-    age = fields.Integer(string="Age", compute='_compute_age')
+    conscription_date = fields.Date(
+        "Conscription Date",
+        tracking=True
+    )
+    age = fields.Integer(
+        string="Age",
+        compute='_compute_age'
+    )
     blood_type_ab = fields.Selection(
         string="Blood Type (ABO)",
         selection=[
@@ -86,61 +85,85 @@ class HrEmployee(models.Model):
             ("-", "-"),
         ],
     )
-    complete_name = fields.Char("Complete Name",
-                                compute="_compute_complete_name",
-                                store=True,
-                                readonly=True,
-                                default="Noname")
-    name_gent = fields.Char(string="Name Genitive",
-                            # compute="_get_declension",
-                            help="Name in genitive declension (Whom/What)",
-                            store=True)
-    name_datv = fields.Char(string="Name Dative",
-                            # compute="_get_declension",
-                            help="Name in dative declension (for Whom/ for What)",
-                            store=True)
-    name_ablt = fields.Char(string="Name Ablative",
-                            # compute="_get_declension",
-                            help="Name in ablative declension (by Whom/ by What)",
-                            store=True)
-    last_name_gent = fields.Char(string="Last Name Genitive",
-                                 # compute="_get_declension",
-                                 help="Last name in genitive declension (Whom/What)",
-                                 store=True)
-    last_name_datv = fields.Char(string="Last Name Dative",
-                                 # compute="_get_declension",
-                                 help="Last name in dative declension (for Whom/ for What)",
-                                 store=True)
-    last_name_ablt = fields.Char(string="Last Name Ablative",
-                                 # compute="_get_declension",
-                                 help="Last name in ablative declension (by Whom/ by What)",
-                                 store=True)
-
-    first_name_gent = fields.Char(string="First Name Genitive",
-                                  # compute="_get_declension",
-                                  help="First name in genitive declension (Whom/What)",
-                                  store=True)
-    first_name_datv = fields.Char(string="First Name Dative",
-                                  # compute="_get_declension",
-                                  help="First name in dative declension (for Whom/ for What)",
-                                  store=True)
-    first_name_ablt = fields.Char(string="First Name Ablative",
-                                  # compute="_get_declension",
-                                  help="First name in ablative declension (by Whom/ by What)",
-                                  store=True)
-
-    middle_name_gent = fields.Char(string="Middle Name Genitive",
-                                   # compute="_get_declension",
-                                   help="Middle name in genitive declension (Whom/What)",
-                                   store=True)
-    middle_name_datv = fields.Char(string="Middle Name Dative",
-                                   # compute="_get_declension",
-                                   help="Middle name in dative declension (for Whom/ for What)",
-                                   store=True)
-    middle_name_ablt = fields.Char(string="Middle Name Ablative",
-                                   # # compute="_get_declension",
-                                   help="Middle name in ablative declension (by Whom/ by What)",
-                                   store=True)
+    complete_name = fields.Char(
+        "Complete Name",
+        compute="_compute_complete_name",
+        store=True,
+        readonly=True,
+        default="Noname"
+    )
+    name_gent = fields.Char(
+        string="Name Genitive",
+        # compute="_get_declension",
+        help="Name in genitive declension (Whom/What)",
+        store=True
+    )
+    name_datv = fields.Char(
+        string="Name Dative",
+        # compute="_get_declension",
+        help="Name in dative declension (for Whom/ for What)",
+        store=True
+    )
+    name_ablt = fields.Char(
+        string="Name Ablative",
+        # compute="_get_declension",
+        help="Name in ablative declension (by Whom/ by What)",
+        store=True
+    )
+    last_name_gent = fields.Char(
+        string="Last Name Genitive",
+        # compute="_get_declension",
+        help="Last name in genitive declension (Whom/What)",
+        store=True
+    )
+    last_name_datv = fields.Char(
+        string="Last Name Dative",
+        # compute="_get_declension",
+        help="Last name in dative declension (for Whom/ for What)",
+        store=True
+    )
+    last_name_ablt = fields.Char(
+        string="Last Name Ablative",
+        # compute="_get_declension",
+        help="Last name in ablative declension (by Whom/ by What)",
+        store=True
+    )
+    first_name_gent = fields.Char(
+        string="First Name Genitive",
+        # compute="_get_declension",
+        help="First name in genitive declension (Whom/What)",
+        store=True
+    )
+    first_name_datv = fields.Char(
+        string="First Name Dative",
+        # compute="_get_declension",
+        help="First name in dative declension (for Whom/ for What)",
+        store=True
+    )
+    first_name_ablt = fields.Char(
+        string="First Name Ablative",
+        # compute="_get_declension",
+        help="First name in ablative declension (by Whom/ by What)",
+        store=True
+    )
+    middle_name_gent = fields.Char(
+        string="Middle Name Genitive",
+        # compute="_get_declension",
+        help="Middle name in genitive declension (Whom/What)",
+        store=True
+    )
+    middle_name_datv = fields.Char(
+        string="Middle Name Dative",
+        # compute="_get_declension",
+        help="Middle name in dative declension (for Whom/ for What)",
+        store=True
+    )
+    middle_name_ablt = fields.Char(
+        string="Middle Name Ablative",
+        # # compute="_get_declension",
+        help="Middle name in ablative declension (by Whom/ by What)",
+        store=True
+    )
 
     # TODO fix partner update on employee name change
     def _update_partner(self):
@@ -182,7 +205,8 @@ class HrEmployee(models.Model):
         self.complete_name = self._get_complete_name(self.rank_id, self.name, self.job_title)
 
     def _prepare_vals(self, vals):
-        if not vals.get("name") or not vals.get("last_name") or not vals.get("first_name") or not vals.get("middle_name"):
+        res = []
+        if not vals.get("name"):
             last_name = vals.get("last_name", self.last_name)
             first_name = vals.get("first_name", self.first_name)
             middle_name = vals.get("middle_name", self.middle_name)
@@ -191,8 +215,9 @@ class HrEmployee(models.Model):
             name = vals.get("name", self.name)
             job_title = vals.get("job_title", self.job_title)
             vals["complete_name"] = self._get_complete_name(self.rank_id, name, job_title)
-        if vals.get("parent_id"):
+        if not vals.get("parent_id"):
             vals["parent_id"] = self.department_id.manager_id
+        return res
 
     @api.model_create_multi
     def create(self, vals_list):

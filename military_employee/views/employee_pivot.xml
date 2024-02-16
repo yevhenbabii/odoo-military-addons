@@ -5,7 +5,6 @@
         <field name="model">hr.employee</field>
         <field name="arch" type="xml">
             <graph type="bar">
-                <field name="state"/>
                 <field name="department_id" domain="[('level','=',1)]"/>
                 <field name="rank_category"/>
             </graph>
@@ -17,7 +16,6 @@
         <field name="arch" type="xml">
             <pivot>
                 <field name="department_id" width="150px" type="row" domain="[('level','=',1)]"/>
-                <field name="state"/>
                 <field name="rank_id"/>
                 <field name="rank_category"/>
             </pivot>
