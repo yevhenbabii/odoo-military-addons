@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+        Resource: res.partner.category
+        -->
+        <record id="base.res_partner_category_0" model="res.partner.category">
+            <field name="name">Vendor</field>
+            <field name="color" eval="2"/>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_category_2" model="res.partner.category">
+            <field name="name">Prospects</field>
+            <field name="color" eval="3"/>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_category_3" model="res.partner.category">
+            <field name="name">Employees</field>
+            <field name="color" eval="4"/>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_category_8" model="res.partner.category">
+            <field name="name">Consulting Services</field>
+            <field name="color" eval="5"/>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_category_11" model="res.partner.category">
+            <field name="name">Services</field>
+            <field name="color" eval="7"/>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_category_12" model="res.partner.category">
+            <field name="name">Office Supplies</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_category_14" model="res.partner.category">
+            <field name="name">Desk Manufacturers</field>
+            <field name="active">0</field>
+        </record>
+
+       <!--
+        Resource: res.partner
+        -->
+        <record id="base.res_partner_1" model="res.partner">
+            <field name="name">Wood Corner</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_2" model="res.partner">
+            <field name="name">Deco Addict</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_3" model="res.partner">
+            <field name="name">Gemini Furniture</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="base.res_partner_4" model="res.partner">
+            <field name="name">Ready Mat</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="base.res_partner_10" model="res.partner">
+            <field name="name">The Jackson Group</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="base.res_partner_12" model="res.partner">
+            <field name="name">Azure Interior</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="base.res_partner_18" model="res.partner">
+            <field name="name">Lumber Inc</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="base.res_partner_address_1" model="res.partner">
+            <field name="name">Willie Burke</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_2" model="res.partner">
+            <field name="name">Ron Gibson</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_3" model="res.partner">
+            <field name="name">Douglas Fletcher</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_4" model="res.partner">
+            <field name="name">Floyd Steward</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_5" model="res.partner">
+            <field name="name">Edwin Hansen</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_7" model="res.partner">
+            <field name="name">Billy Fox</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_10" model="res.partner">
+            <field name="name">Jesse Brown</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_11" model="res.partner">
+            <field name="name">Soham Palmer</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_13" model="res.partner">
+            <field name="name">Kim Snyder</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_14" model="res.partner">
+            <field name="name">Edith Sanchez</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_15" model="res.partner">
+            <field name="name">Brandon Freeman</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_16" model="res.partner">
+            <field name="name">Nicole Ford</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_17" model="res.partner">
+            <field name="name">Toni Rhodes</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_18" model="res.partner">
+            <field name="name">Gordon Owens</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_24" model="res.partner">
+            <field name="name">Theodore Gardner</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_25" model="res.partner">
+            <field name="name">Oscar Morgan</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_27" model="res.partner">
+            <field name="name">Tom Ruiz</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_28" model="res.partner">
+            <field name="name">Colleen Diaz</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_30" model="res.partner">
+            <field name="name">Lorraine Douglas</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_31" model="res.partner">
+            <field name="name">Addison Olson</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_32" model="res.partner">
+            <field name="name">Sandra Neal</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_33" model="res.partner">
+            <field name="name">Julie Richards</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_address_34" model="res.partner">
+            <field name="name">Travis Mendoza</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_main1" model="res.partner">
+            <field name="name">Chester Reed</field>
+            <field name="active">0</field>
+        </record>
+        <record id="base.res_partner_main2" model="res.partner">
+            <field name="name">Dwayne Newman</field>
+            <field name="active">0</field>
+        </record>
+    </data>
+</odoo>

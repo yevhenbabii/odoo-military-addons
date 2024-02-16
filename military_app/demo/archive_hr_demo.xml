@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!--Department-->
+
+        <record id="hr.dep_administration" model="hr.department">
+            <field name="name">Administration</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.dep_sales" model="hr.department">
+            <field name="name">Sales</field>
+            <field name="active">0</field>
+        </record>
+
+      <record id="hr.dep_management" model="hr.department">
+          <field name="name">Management</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.dep_rd" model="hr.department">
+            <field name="name">Research &amp; Development</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.dep_rd_be" model="hr.department">
+            <field name="name">R&amp;D USA</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.dep_rd_ltp" model="hr.department">
+            <field name="name">Long Term Projects</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.dep_ps" model="hr.department">
+          <field name="name">Professional Services</field>
+      <field name="active">0</field>
+      </record>
+
+    <!--Jobs-->
+
+      <record id="hr.job_ceo" model="hr.job">
+          <field name="name">Chief Executive Officer</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.job_cto" model="hr.job">
+          <field name="name">Chief Technical Officer</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.job_consultant" model="hr.job">
+          <field name="name">Consultant</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.job_developer" model="hr.job">
+          <field name="name">Experienced Developer</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.job_hrm" model="hr.job">
+          <field name="name">Human Resources Manager</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.job_marketing" model="hr.job">
+          <field name="name">Marketing and Community Manager</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.job_trainee" model="hr.job">
+          <field name="name">Trainee</field>
+            <field name="active">0</field>
+      </record>
+
+      <!-- Work Locations -->
+
+      <record id="hr.work_location_1" model="hr.work.location">
+          <field name="name">Building 1, Second Floor</field>
+          <field name="active">0</field>
+      </record>
+
+    <!-- Employee categories -->
+
+<!--      <record id="employee_category_2" model="hr.employee.category">-->
+<!--          <field name="name">Sales</field>-->
+<!--          <field name="active">0</field>-->
+<!--      </record>-->
+
+<!--      <record id="employee_category_3" model="hr.employee.category">-->
+<!--          <field name="name">Trainer</field>-->
+<!--          <field name="active">0</field>-->
+<!--      </record>-->
+
+<!--      <record id="employee_category_4" model="hr.employee.category">-->
+<!--          <field name="name">Employee</field>-->
+<!--          <field name="active">0</field>-->
+<!--      </record>-->
+
+<!--      <record id="employee_category_5" model="hr.employee.category">-->
+<!--          <field name="name">Consultant</field>-->
+<!--          <field name="active">0</field>-->
+<!--      </record>-->
+
+      <!-- Address -->
+
+      <record id="hr.res_partner_admin_private_address" model="res.partner">
+          <field name="name">Mitchell Admin</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="res_partner_demo_private_address" model="res.partner">
+          <field name="name">Mark Demo</field>
+          <field name="active">0</field>
+      </record>
+
+    <!--Employees-->
+
+      <record id="hr.employee_admin" model="hr.employee">
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.work_contact_al" model="res.partner">
+          <field name="name">Ronnie Hart</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.employee_al" model="hr.employee">
+          <field name="name">Ronnie Hart</field>
+          <field name="active">0</field>
+      </record>
+
+        <record id="hr.work_contact_mit" model="res.partner">
+          <field name="name">Anita Oliver</field>
+          <field name="active">0</field>
+        </record>
+
+        <record id="hr.res_partner_mit_private_address" model="res.partner">
+            <field name="name">Anital Oliver</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_mit" model="hr.employee">
+            <field name="name">Anita Oliver</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_niv" model="res.partner">
+            <field name="name">Sharlene Rhodes</field>
+            <field name="active">0</field>
+        </record>
+
+      <record id="hr.employee_niv" model="hr.employee">
+          <field name="name">Sharlene Rhodes</field>
+          <field name="active">0</field>
+      </record>
+
+      <record id="hr.work_contact_stw" model="res.partner">
+            <field name="name">Randall Lewis</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.employee_stw" model="hr.employee">
+            <field name="name">Randall Lewis</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.work_contact_chs" model="res.partner">
+            <field name="name">Jennie Fletcher</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.employee_chs" model="hr.employee">
+            <field name="name">Jennie Fletcher</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.work_contact_qdp" model="res.partner">
+            <field name="name">Marc Demo</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.employee_qdp" model="hr.employee">
+            <field name="name">Marc Demo</field>
+            <field name="active">0</field>
+      </record>
+
+      <record id="hr.work_contact_fme" model="res.partner">
+          <field name="name">Keith Byrd</field>
+            <field name="active">0</field>
+      </record>
+
+        <record id="hr.employee_fme" model="hr.employee">
+            <field name="name">Keith Byrd</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.res_partner_fpi_private_address" model="res.partner">
+            <field name="name">Audrey Peterson</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_fpi" model="res.partner">
+            <field name="name">Audrey Peterson</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_fpi" model="hr.employee">
+            <field name="name">Audrey Peterson</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_jth" model="res.partner">
+            <field name="name">Toni Jimenez</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_jth" model="hr.employee">
+            <field name="name">Toni Jimenez</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_ngh" model="res.partner">
+            <field name="name">Jeffrey Kelly</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_ngh" model="hr.employee">
+            <field name="name">Jeffrey Kelly</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_vad" model="res.partner">
+            <field name="name">Tina Williamson</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_vad" model="hr.employee">
+            <field name="name">Tina Williamson</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_han" model="res.partner">
+            <field name="name">Walter Horton</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_han" model="hr.employee">
+            <field name="name">Walter Horton</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_jve" model="res.partner">
+            <field name="name">Paul Williams</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_jve" model="hr.employee">
+            <field name="name">Paul Williams</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.res_partner_jep_private_address" model="res.partner">
+            <field name="name">Doris Cole</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_jep" model="res.partner">
+            <field name="name">Doris Cole</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_jep" model="hr.employee">
+            <field name="name">Doris Cole</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_jod" model="res.partner">
+            <field name="name">Rachel Perry</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_jod" model="hr.employee">
+            <field name="name">Rachel Perry</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.res_partner_jog_private_address" model="res.partner">
+            <field name="name">Beth Evans</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_jog" model="res.partner">
+            <field name="name">Beth Evans</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_jog" model="hr.employee">
+            <field name="name">Beth Evans</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_jgo" model="res.partner">
+            <field name="name">Ernest Reed</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_jgo" model="hr.employee">
+            <field name="name">Ernest Reed</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_lur" model="res.partner">
+            <field name="name">Eli Lambert</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_lur" model="hr.employee">
+            <field name="name">Eli Lambert</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.res_partner_hne_private_address" model="res.partner">
+            <field name="name">Abigail Peterson</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.work_contact_hne" model="res.partner">
+            <field name="name">Abigail Peterson</field>
+            <field name="active">0</field>
+        </record>
+
+        <record id="hr.employee_hne" model="hr.employee">
+            <field name="name">Abigail Peterson</field>
+            <field name="active">0</field>
+      </record>
+    </data>
+</odoo>

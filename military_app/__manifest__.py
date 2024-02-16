@@ -6,7 +6,7 @@
     "author": "Yevhen Babii",
     "website": "",
     "category": "Other",
-    "version": "1.0",
+    "version": "1.0.1",
     "license": "Other proprietary",
     "depends": [
         "military_company",
@@ -19,7 +19,10 @@
         "data/res.country.state.csv",
              ],
     "demo": [
-        "data/res_users_demo.xml"
+        "demo/res_users_demo.xml",
+        "demo/archive_partner_demo.xml",
+        "demo/archive_hr_demo.xml",
+        "demo/archive_recruitment_demo.xml",
              ],
     "sequence": '0',
     "application": True,

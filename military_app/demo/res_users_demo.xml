@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="partner_demo" model="res.partner">
+            <field name="name">Демо</field>
+        </record>
+
+        <record id="main_partner" model="res.partner">
+            <field name="name">Військова частина А0000</field>
+            <field name="company_name">Військова частина А0000</field>
+            <field name="street">вул. Невідома 100</field>
+            <field name="city">Краматорськ</field>
+            <field name="zip">01234</field>
+            <field name='country_id' ref='base.ua'/>
+            <field name='state_id' ref='base.state_ua_05'/>
+            <field name="phone">+380 99 123 456</field>
+            <field name="email">info@a0000.com</field>
+            <field name="website">www.a0000.com</field>
+        </record>
+
+    </data>
+</odoo>
