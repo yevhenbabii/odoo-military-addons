@@ -1,2 +1,4 @@
 pymorphy3
 pymorphy3-dicts-uk
+py3o.template
+py3o.formats
